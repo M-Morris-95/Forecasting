@@ -117,8 +117,8 @@ for fold_num in range(1,5):
     # model.add(Dense(1, activation='linear'))
 
     model = Sequential()
-    model.add(LSTM(128, activation='relu', input_shape=x_train[1].shape[0:2]))
-    # model.add(Conv1D(32,3, input_shape = x_train[1].shape[0:2]))
+    model.add(Conv1D(32, 3, input_shape=x_train[1].shape[0:2]))
+    model.add(LSTM(128, activation='relu'))
     model.add(Dense(128, activation='relu'))
     model.add(Dense(1, activation='linear'))
 
@@ -183,11 +183,11 @@ for fold_num in range(1,5):
 
     if not 'Best_Results' in locals():
         temp = pd.DataFrame(training_stats.iloc[np.argmin(training_stats.val_loss.values)])
-        temp.rename(columns={temp.columns[0]: 'Fold'+ str(fold_num)})
+        temp = temp.rename(columns={temp.columns[0]: 'Fold'+ str(fold_num)})
         Best_Results = temp
     else:
         temp = pd.DataFrame(training_stats.iloc[np.argmin(training_stats.val_loss.values)])
-        temp.rename(columns={temp.columns[0]: 'Fold' + str(fold_num)})
+        temp = temp.rename(columns={temp.columns[0]: 'Fold' + str(fold_num)})
         Best_Results = pd.concat([Best_Results,temp], axis=1)
 
 os.chdir('/Users/michael/Documents/github/Forecasting/Logging/' + timestamp)
