@@ -53,10 +53,8 @@ def GetParser():
         description='M-Morris-95 Foprecasting')
 
     parser.add_argument('--Server', '-S',
-                        type=bool,
-                        help='is it on the server?',
-                        default=False,
-                        required = False)
+                        action = 'store_true',
+                        help='is it on the server?')
 
     return parser
 
@@ -96,7 +94,7 @@ for fold_num in range(1,5):
     if not args.Server:
         data_dir = '/Users/michael/Documents/ili_data/dataset_forecasting_lag28/eng_smoothed_14/fold'+str(fold_num) + '/'
     else:
-        date_dir = '/home/mimorris/ili_data/dataset_forecasting_lag28/eng_smoothed_14'+str(fold_num) + '/'
+        data_dir = '/home/mimorris/ili_data/dataset_forecasting_lag28/eng_smoothed_14'+str(fold_num) + '/'
 
     google_train = load_google_data(data_dir + 'google-train')
     google_train['ili'] = load_ili_data(data_dir + 'ili-train').values
