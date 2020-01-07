@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import argparse
 
 from tensorflow.keras.models import Sequential, Model
-from tensorflow.keras.layers import LSTM, Dropout, Conv1D, GRU, Attention, Dense, Input, concatenate
+from tensorflow.keras.layers import LSTM, Dropout, Conv1D, GRU, Attention, Dense, Input, concatenate, Flatten
 from scipy.stats import pearsonr
 
 class normalizer:
@@ -114,8 +114,30 @@ def build_data(fold_dir):
     google_test = load_google_data(fold_dir + 'google-test')
     google_test['ili'] = load_ili_data(fold_dir + 'ili-test').values
 
-    y_train = pd.read_csv(fold_dir + 'y-train', header=None)
-    y_test = pd.read_csv(fold_dir + 'y-test', header=None)
+    # y_train = pd.read_csv(fold_dir + 'y-train', header=None)
+    # y_train = np.asarray(y_train[1])
+    # y_test = pd.read_csv(fold_dir + 'y-test', header=None)
+    # y_test = np.asarray(y_test[1])
+
+    temp = pd.read_csv(fold_dir + 'ili-train', header=None)[27:48]
+    temp = temp.append(pd.read_csv(fold_dir + 'y-train', header=None))
+    temp = temp[1].values # first of y train is at index 20
+
+    y_train = []
+    for i in range(len(temp) - 21):
+        y_train.append(np.asarray(temp[i:i + 21]))
+    y_train = np.asarray(y_train)
+
+    temp = pd.read_csv(fold_dir + 'ili-test', header=None)[27:48]
+    temp = temp.append(pd.read_csv(fold_dir + 'y-test', header=None))
+    temp = temp[1].values # first of y test is at index 20
+
+    y_test = []
+    for i in range(len(temp) - 21):
+        y_test.append(np.asarray(temp[i:i + 21]))
+    y_test = np.asarray(y_test)
+
+
 
     n = normalizer(google_train, y_train)
     google_train = n.normalize(google_train, y_train)
@@ -131,12 +153,12 @@ def build_data(fold_dir):
     for i in range(len(google_test) - lag + 1):
         x_test.append(np.asarray(google_test[i:i + lag]))
 
-    y_train_index = y_train[0][:len(x_train)]
-    x_train, y_train = np.asarray(x_train), np.asarray(y_train[1])
+    y_train_index = pd.read_csv(fold_dir + 'y-train', header=None)[0][:len(x_train)]
+    x_train = np.asarray(x_train)
     y_train = y_train[:x_train.shape[0]]
 
-    y_test_index = y_test[0][:len(x_test)]
-    x_test, y_test = np.asarray(x_test), np.asarray(y_test[1])
+    y_test_index = pd.read_csv(fold_dir + 'y-test', header=None)[0][:len(x_test)]
+    x_test = np.asarray(x_test)
     y_test = y_test[:x_test.shape[0]]
 
     return x_train, y_train, y_train_index, x_test, y_test, y_test_index
@@ -164,17 +186,23 @@ for fold_num in range(1,5):
     x_train, y_train, y_train_index, x_test, y_test, y_test_index  = build_data(fold_dir)
 
     ili_input = Input(shape=[x_train.shape[1],1])
-    x = GRU(28, activation='relu')(ili_input)
+    x = GRU(28, activation='relu', return_sequences=True)(ili_input)
     x = Model(inputs=ili_input, outputs=x)
 
     google_input = Input(shape=[x_train.shape[1], x_train.shape[2]-1])
     y = GRU(x_train.shape[2]-1, activation='relu', return_sequences=True)(google_input)
-    y = GRU(int(0.5*(x_train.shape[2]-1)), activation='relu')(y)
+    y = GRU(int(0.5*(x_train.shape[2]-1)), activation='relu', return_sequences=True)(y)
     y = Model(inputs=google_input, outputs=y)
 
-    combined = concatenate([x.output, y.output])
-    z = Dense(combined.shape[1], activation="relu")(combined)
-    z = Dense(1, activation="linear")(z)
+    z = concatenate([x.output, y.output])
+
+    #  I think that the output needs to be recurrent, size [None, 21, 1] but I don't know how to do that. Setting the
+    #  output to that generates an error because the input is a time series with different dimensions. The goal is then
+    #  that the previous output (t-1) is put back into an attention mechanism with concatenation. The attention works
+    #  on the concatenated values which then go back into the output layer to give the prediction at time t.
+
+    z = GRU(21, activation='relu',return_sequences=False)(z)
+
 
     model = Model(inputs=[x.input, y.input], outputs=z)
 
@@ -187,7 +215,7 @@ for fold_num in range(1,5):
     model.fit(
         [x_train[:,:,-1, np.newaxis], x_train[:,:,:-1]], y_train,
         validation_data=([x_test[:,:,-1, np.newaxis], x_test[:,:,:-1]], y_test),
-        epochs=2, batch_size=64)
+        epochs=5, batch_size=64)
 
 
     model.save_weights('model.hdf5')
@@ -200,14 +228,17 @@ for fold_num in range(1,5):
     training_stats = pd.DataFrame(model.history.history)
     training_stats.to_csv(r'Fold_'+str(fold_num)+'_training_stats.csv')
 
-    train_pred = model.predict([x_train[:, :, -1, np.newaxis], x_train[:, :, :-1]])
-    test_pred = model.predict([x_test[:,:,-1, np.newaxis], x_test[:,:,:-1]])
+    train_pred = model.predict([x_train[:, :, -1, np.newaxis], x_train[:, :, :-1]])[:,20]
+    train_true = y_train[:,20]
 
-    results[str(2014) + '/' + str(14 + fold_num)] = evaluate(y_test, test_pred)
+    test_pred = model.predict([x_test[:,:,-1, np.newaxis], x_test[:,:,:-1]])[:,20]
+    test_true = y_test[:, 20]
+
+    results[str(2014) + '/' + str(14 + fold_num)] = evaluate(test_true, test_pred)
 
     fig1.plot(fold_num, training_stats.mae, training_stats.val_mae)
-    fig2.plot(fold_num, train_pred, y_train, y_train_index)
-    fig3.plot(fold_num, test_pred, y_test, y_test_index)
+    fig2.plot(fold_num, train_pred, train_true, y_train_index)
+    fig3.plot(fold_num, test_pred, test_true, y_test_index)
 
 
 os.chdir(logging_dir + timestamp)
