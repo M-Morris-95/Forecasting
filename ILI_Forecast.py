@@ -1,18 +1,14 @@
 import pandas as pd
 import os
 import numpy as np
-import datetime as dt
 import tensorflow as tf
-from tensorflow.keras.models import Sequential, Model
-from tensorflow.keras.layers import Dense, Input, concatenate
-from tensorflow.keras.layers import LSTM, Dropout, Conv1D, GRU
-from scipy.stats import pearsonr
-import tensorflow_probability as tfp
-from scipy.stats import pearsonr
-import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
 import time
-tf.random.set_seed(0)
+import matplotlib.pyplot as plt
+import argparse
+
+from tensorflow.keras.models import Sequential, Model
+from tensorflow.keras.layers import LSTM, Dropout, Conv1D, GRU, Attention, Dense, Input, concatenate
+from scipy.stats import pearsonr
 
 class normalizer:
     def __init__(self, x_train, y_train):
@@ -38,8 +34,34 @@ class normalizer:
         Y[1] = y_val
         return Y
 
-import argparse
+class plotter:
+    def __init__(self, number):
+        self.number = number
+        plt.figure(number, figsize=(8, 6), dpi=200, facecolor='w', edgecolor='k')
 
+    def plot(self, fold_num, y1, y2, x1 = False):
+        plt.figure(self.number)
+        plt.subplot(2, 2, fold_num)
+        if type(x1) != np.ndarray:
+            plt.plot(y1)
+            plt.plot(y2)
+        else:
+            plt.plot(pd.to_datetime(x1), y1)
+            plt.plot(pd.to_datetime(x1), y2)
+            plt.legend(['prediction', 'true'])
+
+        plt.grid(b=True, which='major', color='#666666', linestyle='-')
+        plt.minorticks_on()
+        plt.grid(b=True, which='minor', color='#999999', linestyle='-', alpha=0.2)
+
+    def save(self, name):
+
+        plt.figure(self.number)
+        plt.savefig(name)
+
+    def show(self):
+        plt.figure(self.number)
+        plt.show()
 
 def GetParser():
     parser = argparse.ArgumentParser(
@@ -52,10 +74,6 @@ def GetParser():
                         required = False)
 
     return parser
-
-parser = GetParser()
-args = parser.parse_args()
-
 
 def pearson(y_true, y_pred):
     y_pred = y_pred.squeeze()
@@ -79,7 +97,6 @@ def mae(y_true, y_pred):
 def evaluate(y_true, y_pred):
     return mae(y_true, y_pred).numpy(), rmse(y_true, y_pred).numpy(), pearson(y_true, y_pred)
 
-
 def load_google_data(path):
     google_data = pd.read_csv(path)
     google_data = google_data.drop(['Unnamed: 0'], axis=1)
@@ -90,33 +107,15 @@ def load_ili_data(path):
     ili_data = ili_data[1]
     return ili_data
 
+def build_data(fold_dir):
+    google_train = load_google_data(fold_dir + 'google-train')
+    google_train['ili'] = load_ili_data(fold_dir + 'ili-train').values
 
+    google_test = load_google_data(fold_dir + 'google-test')
+    google_test['ili'] = load_ili_data(fold_dir + 'ili-test').values
 
-timestamp = time.strftime('%b-%d-%Y-%H-%M', time.localtime())
-
-plt.figure(1, figsize=(8, 6), dpi=200, facecolor='w', edgecolor='k')
-plt.figure(2, figsize=(8, 6), dpi=200, facecolor='w', edgecolor='k')
-plt.figure(3, figsize=(8, 6), dpi=200, facecolor='w', edgecolor='k')
-
-
-
-
-fold_num = 1
-for fold_num in range(1,5):
-
-    if not args.Server:
-        data_dir = '/Users/michael/Documents/ili_data/dataset_forecasting_lag28/eng_smoothed_14/fold'+str(fold_num) + '/'
-    else:
-        data_dir = '/home/mimorris/ili_data/dataset_forecasting_lag28/eng_smoothed_14'+str(fold_num) + '/'
-
-    google_train = load_google_data(data_dir + 'google-train')
-    google_train['ili'] = load_ili_data(data_dir + 'ili-train').values
-
-    google_test = load_google_data(data_dir + 'google-test')
-    google_test['ili'] = load_ili_data(data_dir + 'ili-test').values
-
-    y_train = pd.read_csv(data_dir + 'y-train', header=None)
-    y_test = pd.read_csv(data_dir + 'y-test', header=None)
+    y_train = pd.read_csv(fold_dir + 'y-train', header=None)
+    y_test = pd.read_csv(fold_dir + 'y-test', header=None)
 
     n = normalizer(google_train, y_train)
     google_train = n.normalize(google_train, y_train)
@@ -126,11 +125,11 @@ for fold_num in range(1,5):
     x_test = []
     lag = 28
 
-    for i in range(len(google_train)-lag+1):
-        x_train.append(np.asarray(google_train[i:i+lag]))
+    for i in range(len(google_train) - lag + 1):
+        x_train.append(np.asarray(google_train[i:i + lag]))
 
-    for i in range(len(google_test)-lag+1):
-        x_test.append(np.asarray(google_test[i:i+lag]))
+    for i in range(len(google_test) - lag + 1):
+        x_test.append(np.asarray(google_test[i:i + lag]))
 
     y_train_index = y_train[0][:len(x_train)]
     x_train, y_train = np.asarray(x_train), np.asarray(y_train[1])
@@ -140,7 +139,29 @@ for fold_num in range(1,5):
     x_test, y_test = np.asarray(x_test), np.asarray(y_test[1])
     y_test = y_test[:x_test.shape[0]]
 
+    return x_train, y_train, y_train_index, x_test, y_test, y_test_index
 
+parser = GetParser()
+args = parser.parse_args()
+
+timestamp = time.strftime('%b-%d-%Y-%H-%M', time.localtime())
+
+fig1 = plotter(1)
+fig2 = plotter(2)
+fig3 = plotter(3)
+
+results = pd.DataFrame(index = ['MAE', 'RMSE', 'R'])
+
+if not args.Server:
+    logging_dir = '/Users/michael/Documents/github/Forecasting/Logging/'
+    data_dir = '/Users/michael/Documents/ili_data/dataset_forecasting_lag28/eng_smoothed_14/fold'
+else:
+    logging_dir = '/home/mimorris/Forecasting/Logging'
+    data_dir = '/home/mimorris/ili_data/dataset_forecasting_lag28/eng_smoothed_14/fold'
+
+for fold_num in range(1,5):
+    fold_dir = data_dir + str(fold_num) + '/'
+    x_train, y_train, y_train_index, x_test, y_test, y_test_index  = build_data(fold_dir)
 
     ili_input = Input(shape=[x_train.shape[1],1])
     x = GRU(28, activation='relu')(ili_input)
@@ -166,15 +187,11 @@ for fold_num in range(1,5):
     model.fit(
         [x_train[:,:,-1, np.newaxis], x_train[:,:,:-1]], y_train,
         validation_data=([x_test[:,:,-1, np.newaxis], x_test[:,:,:-1]], y_test),
-        epochs=2, batch_size=16)
+        epochs=2, batch_size=64)
 
 
     model.save_weights('model.hdf5')
-
-    if not args.Server:
-        save_dir = '/Users/michael/Documents/github/Forecasting/Logging/' + timestamp + '/Fold_'+str(fold_num)
-    else:
-        save_dir = '/home/mimorris/Forecasting/Logging' + timestamp + '/Fold_'+str(fold_num)
+    save_dir = logging_dir + timestamp + '/Fold_'+str(fold_num)
 
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
@@ -183,63 +200,23 @@ for fold_num in range(1,5):
     training_stats = pd.DataFrame(model.history.history)
     training_stats.to_csv(r'Fold_'+str(fold_num)+'_training_stats.csv')
 
-    plt.figure(1)
-    plt.subplot(2, 2, fold_num)
-    plt.plot(training_stats.mae)
-    plt.plot(training_stats.val_mae)
-    plt.grid(b=True, which='major', color='#666666', linestyle='-')
-    plt.minorticks_on()
-    plt.grid(b=True, which='minor', color='#999999', linestyle='-', alpha=0.2)
-
-
-    plt.figure(2)
-    plt.subplot(2, 2, fold_num)
-    train_pred = model.predict([x_train[:,:,-1, np.newaxis], x_train[:,:,:-1]])
-    plt.plot(pd.to_datetime(y_train_index), train_pred)
-    plt.plot(pd.to_datetime(y_train_index), y_train)
-    plt.legend(['prediction', 'true'])
-    plt.grid(b=True, which='major', color='#666666', linestyle='-')
-    plt.minorticks_on()
-    plt.grid(b=True, which='minor', color='#999999', linestyle='-', alpha=0.2)
-
-
-    plt.figure(3)
-    plt.subplot(2, 2, fold_num)
+    train_pred = model.predict([x_train[:, :, -1, np.newaxis], x_train[:, :, :-1]])
     test_pred = model.predict([x_test[:,:,-1, np.newaxis], x_test[:,:,:-1]])
-    plt.plot(pd.to_datetime(y_test_index), test_pred)
-    plt.plot(pd.to_datetime(y_test_index), y_test)
-    plt.gcf().autofmt_xdate()
-    plt.legend(['prediction', 'true'])
-    plt.grid(b=True, which='major', color='#666666', linestyle='-')
-    plt.minorticks_on()
-    plt.grid(b=True, which='minor', color='#999999', linestyle='-', alpha=0.2)
 
-    pd.DataFrame(data={str(2014)+'/' + str(14+fold_num):evaluate(y_test, test_pred)}, index =['MAE', 'RMSE', 'R'])
+    results[str(2014) + '/' + str(14 + fold_num)] = evaluate(y_test, test_pred)
 
-    if not 'results' in locals():
-        results = pd.DataFrame(data={str(2014)+'/' + str(14+fold_num):evaluate(y_test, test_pred)}, index =['MAE', 'RMSE', 'R'])
-    else:
-        results[str(2014)+'/' + str(14+fold_num)] = evaluate(y_test, test_pred)
+    fig1.plot(fold_num, training_stats.mae, training_stats.val_mae)
+    fig2.plot(fold_num, train_pred, y_train, y_train_index)
+    fig3.plot(fold_num, test_pred, y_test, y_test_index)
 
-if not args.Server:
-    os.chdir('/Users/michael/Documents/github/Forecasting/Logging/' + timestamp)
-else:
-    os.chdir('/home/mimorris/Forecasting/Logging' + timestamp)
 
+os.chdir(logging_dir + timestamp)
 results.to_csv(r'stats.csv')
 
-plt.figure(1)
-plt.savefig('training_stats.png')
+fig1.save('training_stats.png')
+fig2.save('training_predictions.png')
+fig3.save('validation_predictions.png')
 
-plt.figure(2)
-plt.savefig('training_predictions.png')
-
-plt.figure(3)
-plt.savefig('validation_predictions.png')
-
-plt.figure(1)
-plt.show()
-plt.figure(2)
-plt.show()
-plt.figure(3)
-plt.show()
+fig1.show()
+fig2.show()
+fig3.show()
