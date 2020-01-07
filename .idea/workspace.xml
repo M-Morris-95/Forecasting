@@ -4,18 +4,6 @@
     <list default="true" id="b389ba6e-9d91-4b6a-9f07-ea78b80758c7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ILI_Forecast.py" beforeDir="false" afterPath="$PROJECT_DIR$/ILI_Forecast.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-12-05/Fold_1/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-12-05/Fold_1/model.hdf5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-12-05/Fold_2/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-12-05/Fold_2/model.hdf5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-12-05/Fold_3/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-12-05/Fold_3/model.hdf5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-12-05/Fold_4/Fold_4_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-12-05/Fold_4_best_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-12-05/training_predictions.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-12-05/training_stats.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-12-05/validation_predictions.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model.hdf5" beforeDir="false" afterPath="$PROJECT_DIR$/model.hdf5" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -65,9 +53,6 @@
       <module name="Forecasting" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="$PROJECT_DIR$/../../Python3/tf2_env/bin/python3.7" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
@@ -158,7 +143,7 @@
       <workItem from="1576685917594" duration="237000" />
       <workItem from="1576708820794" duration="53000" />
       <workItem from="1576746902717" duration="16740000" />
-      <workItem from="1578302527314" duration="2430000" />
+      <workItem from="1578302527314" duration="3200000" />
     </task>
     <servers />
   </component>
