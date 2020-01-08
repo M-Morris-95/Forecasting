@@ -7,7 +7,12 @@ import matplotlib.pyplot as plt
 import argparse
 
 from tensorflow.keras.models import Sequential, Model
-from tensorflow.keras.layers import LSTM, Dropout, Conv1D, GRU, Attention, Dense, Input, concatenate, Flatten
+from tensorflow.keras.layers import LSTM, Dropout, Conv1D, GRU, Attention, Dense, Input, concatenate, Flatten, Layer, LayerNormalization, Embedding, Dropout
+from tensorflow.keras.optimizers.schedules import LearningRateSchedule
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.losses import SparseCategoricalCrossentropy
+from tensorflow.keras.metrics import Mean, SparseCategoricalAccuracy
+
 from scipy.stats import pearsonr
 
 class normalizer:
@@ -163,28 +168,7 @@ def build_data(fold_dir):
 
     return x_train, y_train, y_train_index, x_test, y_test, y_test_index
 
-parser = GetParser()
-args = parser.parse_args()
-
-timestamp = time.strftime('%b-%d-%Y-%H-%M', time.localtime())
-
-fig1 = plotter(1)
-fig2 = plotter(2)
-fig3 = plotter(3)
-
-results = pd.DataFrame(index = ['MAE', 'RMSE', 'R'])
-
-if not args.Server:
-    logging_dir = '/Users/michael/Documents/github/Forecasting/Logging/'
-    data_dir = '/Users/michael/Documents/ili_data/dataset_forecasting_lag28/eng_smoothed_14/fold'
-else:
-    logging_dir = '/home/mimorris/Forecasting/Logging'
-    data_dir = '/home/mimorris/ili_data/dataset_forecasting_lag28/eng_smoothed_14/fold'
-
-for fold_num in range(1,5):
-    fold_dir = data_dir + str(fold_num) + '/'
-    x_train, y_train, y_train_index, x_test, y_test, y_test_index  = build_data(fold_dir)
-
+def build_model(x_train):
     ili_input = Input(shape=[x_train.shape[1],1])
     x = GRU(28, activation='relu', return_sequences=True)(ili_input)
     x = Model(inputs=ili_input, outputs=x)
@@ -212,27 +196,305 @@ for fold_num in range(1,5):
                   loss='mae',
                   metrics=['mae', 'mse', rmse])
 
+    return model
+
+def scaled_dot_product_attention(query, key, value, mask=None):
+    # Q K MatmMul
+    matmul_qk = tf.matmul(query, key, transpose_b=True)
+
+    # Q K Scale by sqrt dk
+    dk = tf.cast(tf.shape(key)[-1], tf.float32)
+    logits = matmul_qk / tf.math.sqrt(dk)
+
+    # Do mask if included. add the mask zero out padding tokens.
+    if mask is not None:
+        logits += (mask * -1e9)
+
+    # softmax Q K
+    attention_weights = tf.nn.softmax(logits, axis=-1)
+
+    # matmul Q K with V
+    Attention = tf.matmul(attention_weights, value)
+
+    return Attention
+
+class MultiHeadAttention(tf.keras.layers.Layer):
+    def __init__(self, d_model, num_heads, name="multi_head_attention"):
+        super(MultiHeadAttention, self).__init__(name=name)
+        self.num_heads = num_heads
+        self.d_model = d_model
+
+        assert d_model % self.num_heads == 0
+        self.depth = d_model // self.num_heads
+
+        self.query_dense = tf.keras.layers.Dense(units=d_model, activation='linear')#, name = 'query_dense')
+        self.key_dense = tf.keras.layers.Dense(units=d_model, activation='linear')#, name = 'key_dense')
+        self.value_dense = tf.keras.layers.Dense(units=d_model, activation='linear')#, name = 'value_dense')
+        self.output_dense = tf.keras.layers.Dense(units=d_model, activation='linear')
+
+    def split_heads(self, inputs, batch_size):
+        inputs = tf.reshape(inputs, shape=(batch_size, -1, self.num_heads, self.depth))
+        return tf.transpose(inputs, perm=[0, 2, 1, 3])
+
+    def __call__(self, inputs):
+        query, key, value = inputs['query'], inputs['key'], inputs['value']
+        batch_size = tf.shape(query)[0]
+
+        # linear layers
+        query = self.query_dense(query)
+        key = self.key_dense(key)
+        value = self.value_dense(value)
+
+        # split heads
+        query = self.split_heads(query, batch_size)
+        key = self.split_heads(key, batch_size)
+        value = self.split_heads(value, batch_size)
+
+        # scaled dot product attention
+        scaled_attention = scaled_dot_product_attention(query, key, value)
+        scaled_attention = tf.transpose(scaled_attention, perm=[0, 2, 1, 3])
+
+        # Concat
+        concat_attention = tf.reshape(scaled_attention, (batch_size, -1, self.d_model))
+
+        # Linear
+        outputs = self.output_dense(concat_attention)
+        return outputs
+
+def encoder_layer(units, d_model, num_heads, dropout, name="encoder_layer"):
+    inputs = tf.keras.Input(shape=(None, d_model), name="inputs")
+
+    # multi head attention
+    attention = MultiHeadAttention(d_model, num_heads, name="attention")({
+        'query': inputs,
+        'key': inputs,
+        'value': inputs
+    })
+    # dropout
+    attention = tf.keras.layers.Dropout(rate=dropout)(attention)
+
+    # add and norm
+    attention = tf.keras.layers.LayerNormalization(epsilon=1e-6)(inputs + attention)
+
+    # feed forward
+    outputs = tf.keras.layers.Dense(units=units, activation='relu')(attention)
+    outputs = tf.keras.layers.Dense(units=d_model)(outputs)
+    # dropout
+    outputs = tf.keras.layers.Dropout(rate=dropout)(outputs)
+
+    # add and norm
+    outputs = tf.keras.layers.LayerNormalization(epsilon=1e-6)(attention + outputs)
+
+    # assemble layer
+    layer = tf.keras.Model(inputs=inputs, outputs=outputs, name=name)
+    return layer
+
+def encoder(num_layers, units, d_model, num_heads, dropout, name="encoder"):
+    # create input
+    inputs = tf.keras.Input(shape=(None,), name="inputs")
+
+    # no embeddings but if there were put them here.
+
+    # add dropout
+    outputs = tf.keras.layers.Dropout(rate=dropout)(inputs)
+
+    # create layers
+    for i in range(num_layers):
+        outputs = encoder_layer(
+            units=units,
+            d_model=d_model,
+            num_heads=num_heads,
+            dropout=dropout,
+            name="encoder_layer_{}".format(i),
+        )(outputs)
+
+    # assemble model
+    model = tf.keras.Model(inputs=inputs, outputs=outputs, name=name)
+
+    return model
+
+def decoder_layer(units, d_model, num_heads, dropout, name="decoder_layer"):
+    inputs = tf.keras.Input(shape=(None, d_model), name="inputs")
+    enc_outputs = tf.keras.Input(shape=(None, d_model), name="encoder_outputs")
+
+    # This is where the encoding would go.
+
+    # multi head attention on shifted output
+    attention1 = MultiHeadAttention(
+        d_model, num_heads, name="attention_1")({
+        'query': inputs,
+        'key': inputs,
+        'value': inputs
+    })
+
+    # dropout
+    attention1 = tf.keras.layers.Dropout(rate=dropout)(attention1)
+
+    # add and norm
+    attention1 = tf.keras.layers.LayerNormalization(epsilon=1e-6)(attention1 + inputs)
+
+
+
+    # second attention
+    attention2 = MultiHeadAttention(d_model, num_heads, name="attention_2")({
+        'query': attention1,
+        'key': enc_outputs,
+        'value': enc_outputs
+    })
+
+    # # dropout
+    attention2 = tf.keras.layers.Dropout(rate=dropout)(attention2)
+
+    # add and norm
+    attention2 = tf.keras.layers.LayerNormalization(epsilon=1e-6)(attention2 + attention1)
+
+    # feed forward
+    outputs = tf.keras.layers.Dense(units=units, activation='relu')(attention2)
+    outputs = tf.keras.layers.Dense(units=d_model)(outputs)
+
+    # dropout
+    outputs = tf.keras.layers.Dropout(rate=dropout)(outputs)
+
+    # add and norm
+    outputs = tf.keras.layers.LayerNormalization(epsilon=1e-6)(attention2 + outputs)
+
+    # assemble layer
+    layer = tf.keras.Model(inputs=(inputs, enc_outputs), outputs=outputs, name=name)
+
+    return layer
+
+def decoder(num_layers, units, d_model, num_heads, dropout, name='decoder'):
+    inputs = tf.keras.Input(shape=(None,), name='inputs')
+    enc_outputs = tf.keras.Input(shape=(None, d_model), name='encoder_outputs')
+
+    # This is where masks and embeddings would go.
+
+    # add dropout
+    outputs = tf.keras.layers.Dropout(rate=dropout)(inputs)
+
+    for i in range(num_layers):
+        outputs = decoder_layer(
+            units=units,
+            d_model=d_model,
+            num_heads=num_heads,
+            dropout=dropout,
+            name='decoder_layer_{}'.format(i),
+        )(inputs=[outputs, enc_outputs])
+
+    # assemble model
+    model = tf.keras.Model(inputs=[inputs, enc_outputs], outputs=outputs, name=name)
+
+    return model
+
+def transformer(output_size, num_layers, units, d_model, num_heads, dropout, name="transformer"):
+    # inputs
+    inputs = tf.keras.Input(shape=(None,), name="inputs")
+    dec_inputs = tf.keras.Input(shape=(None,), name="dec_inputs")
+
+    # encoder
+    enc_outputs = encoder(
+        num_layers=num_layers,
+        units=units,
+        d_model=d_model,
+        num_heads=num_heads,
+        dropout=dropout,
+    )(inputs=[inputs])
+
+    # decoder
+    dec_outputs = decoder(
+        num_layers=num_layers,
+        units=units,
+        d_model=d_model,
+        num_heads=num_heads,
+        dropout=dropout,
+    )(inputs=[dec_inputs, enc_outputs])
+
+    # output dense layer
+    outputs = tf.keras.layers.Dense(units=output_size, name="outputs")(dec_outputs)
+
+    # build model
+    model = tf.keras.Model(inputs=[inputs, dec_inputs], outputs=outputs, name=name)
+
+    return model
+
+parser = GetParser()
+args = parser.parse_args()
+
+timestamp = time.strftime('%b-%d-%Y-%H-%M', time.localtime())
+
+fig1 = plotter(1)
+fig2 = plotter(2)
+fig3 = plotter(3)
+
+results = pd.DataFrame(index = ['MAE', 'RMSE', 'R'])
+
+if not args.Server:
+    logging_dir = '/Users/michael/Documents/github/Forecasting/Logging/'
+    data_dir = '/Users/michael/Documents/ili_data/dataset_forecasting_lag28/eng_smoothed_14/fold'
+else:
+    logging_dir = '/home/mimorris/Forecasting/Logging'
+    data_dir = '/home/mimorris/ili_data/dataset_forecasting_lag28/eng_smoothed_14/fold'
+
+
+
+
+
+
+for fold_num in range(1,2):
+    fold_dir = data_dir + str(fold_num) + '/'
+    save_dir = logging_dir + timestamp + '/Fold_' + str(fold_num)
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
+
+    x_train, y_train, y_train_index, x_test, y_test, y_test_index  = build_data(fold_dir)
+
+    # model = transformer(
+    #     output_size=21,
+    #     num_layers=2,
+    #     units=175,
+    #     d_model=28,
+    #     num_heads=7,
+    #     dropout=0.1,
+    #     name="oof")
+    #
+    # tf.keras.utils.plot_model(
+    #     model,
+    #     to_file='model.png',
+    #     show_shapes=True,
+    #     show_layer_names=True,
+    #     rankdir='TB',
+    #     expand_nested=True,
+    #     dpi=96
+    # )
+    #
+    # optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
+    #
+    # model.compile(optimizer=optimizer,
+    #               loss='mae',
+    #               metrics=['mae', 'mse', rmse])
+    #
+    # model.fit(
+    #     [x_train[:,:,-1, np.newaxis], x_train[:,:,:-1]], y_train,
+    #     validation_data=([x_test[:,:,-1, np.newaxis], x_test[:,:,:-1]], y_test),
+    #     epochs=5, batch_size=64)
+
+    model = build_model(x_train)
     model.fit(
         [x_train[:,:,-1, np.newaxis], x_train[:,:,:-1]], y_train,
         validation_data=([x_test[:,:,-1, np.newaxis], x_test[:,:,:-1]], y_test),
         epochs=5, batch_size=64)
-
-
-    model.save_weights('model.hdf5')
-    save_dir = logging_dir + timestamp + '/Fold_'+str(fold_num)
-
-    if not os.path.exists(save_dir):
-        os.makedirs(save_dir)
-
-    os.chdir(save_dir)
-    training_stats = pd.DataFrame(model.history.history)
-    training_stats.to_csv(r'Fold_'+str(fold_num)+'_training_stats.csv')
 
     train_pred = model.predict([x_train[:, :, -1, np.newaxis], x_train[:, :, :-1]])[:,20]
     train_true = y_train[:,20]
 
     test_pred = model.predict([x_test[:,:,-1, np.newaxis], x_test[:,:,:-1]])[:,20]
     test_true = y_test[:, 20]
+
+    model.save_weights('model.hdf5')
+
+    os.chdir(save_dir)
+    training_stats = pd.DataFrame(model.history.history)
+    training_stats.to_csv(r'Fold_'+str(fold_num)+'_training_stats.csv')
 
     results[str(2014) + '/' + str(14 + fold_num)] = evaluate(test_true, test_pred)
 
@@ -251,3 +513,10 @@ fig3.save('validation_predictions.png')
 fig1.show()
 fig2.show()
 fig3.show()
+
+def challenge(kx,ky,qx,qy):
+    if (qx == kx) or (qy == ky):
+        return True
+    if np.abs(qx - kx) == np.abs(qy - ky):
+        return True
+    return False
