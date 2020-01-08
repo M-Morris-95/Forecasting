@@ -262,7 +262,7 @@ class MultiHeadAttention(tf.keras.layers.Layer):
         return outputs
 
 def encoder_layer(units, d_model, num_heads, dropout, name="encoder_layer"):
-    inputs = tf.keras.Input(shape=(None, d_model), name="inputs")
+    inputs = tf.keras.Input(shape=(units, d_model), name="inputs")
 
     # multi head attention
     attention = MultiHeadAttention(d_model, num_heads, name="attention")({
@@ -291,7 +291,7 @@ def encoder_layer(units, d_model, num_heads, dropout, name="encoder_layer"):
 
 def encoder(num_layers, units, d_model, num_heads, dropout, name="encoder"):
     # create input
-    inputs = tf.keras.Input(shape=(None,), name="inputs")
+    inputs = tf.keras.Input(shape=(units,d_model), name="inputs")
 
     # no embeddings but if there were put them here.
 
@@ -314,8 +314,8 @@ def encoder(num_layers, units, d_model, num_heads, dropout, name="encoder"):
     return model
 
 def decoder_layer(units, d_model, num_heads, dropout, name="decoder_layer"):
-    inputs = tf.keras.Input(shape=(None, d_model), name="inputs")
-    enc_outputs = tf.keras.Input(shape=(None, d_model), name="encoder_outputs")
+    inputs = tf.keras.Input(shape=(units, d_model), name="inputs")
+    enc_outputs = tf.keras.Input(shape=(units, d_model), name="encoder_outputs")
 
     # This is where the encoding would go.
 
@@ -364,8 +364,8 @@ def decoder_layer(units, d_model, num_heads, dropout, name="decoder_layer"):
     return layer
 
 def decoder(num_layers, units, d_model, num_heads, dropout, name='decoder'):
-    inputs = tf.keras.Input(shape=(None,), name='inputs')
-    enc_outputs = tf.keras.Input(shape=(None, d_model), name='encoder_outputs')
+    inputs = tf.keras.Input(shape=(units,d_model), name='inputs')
+    enc_outputs = tf.keras.Input(shape=(units, d_model), name='encoder_outputs')
 
     # This is where masks and embeddings would go.
 
@@ -388,8 +388,8 @@ def decoder(num_layers, units, d_model, num_heads, dropout, name='decoder'):
 
 def transformer(output_size, num_layers, units, d_model, num_heads, dropout, name="transformer"):
     # inputs
-    inputs = tf.keras.Input(shape=(None,), name="inputs")
-    dec_inputs = tf.keras.Input(shape=(None,), name="dec_inputs")
+    inputs = tf.keras.Input(shape=(units,d_model), name="inputs")
+    dec_inputs = tf.keras.Input(shape=(d_model), name="dec_inputs")
 
     # encoder
     enc_outputs = encoder(
@@ -411,7 +411,6 @@ def transformer(output_size, num_layers, units, d_model, num_heads, dropout, nam
 
     # output dense layer
     outputs = tf.keras.layers.Dense(units=output_size, name="outputs")(dec_outputs)
-
     # build model
     model = tf.keras.Model(inputs=[inputs, dec_inputs], outputs=outputs, name=name)
 
@@ -448,14 +447,23 @@ for fold_num in range(1,2):
 
     x_train, y_train, y_train_index, x_test, y_test, y_test_index  = build_data(fold_dir)
 
-    # model = transformer(
-    #     output_size=21,
-    #     num_layers=2,
-    #     units=175,
-    #     d_model=28,
-    #     num_heads=7,
-    #     dropout=0.1,
-    #     name="oof")
+
+    # teacher forcing
+    teacher_train = np.zeros((x_train.shape[0:2]))
+    teacher_train[:, 1:21] = y_train[:, :20]
+
+    teacher_test = np.zeros((x_test.shape[0:2]))
+    teacher_test[:, 1:21] = y_test[:, :20]
+
+
+    model = transformer(
+        output_size=y_train.shape[1],
+        num_layers=2,
+        units=x_train.shape[2],
+        d_model=x_train.shape[1],
+        num_heads=7,
+        dropout=0.1,
+        name="oof")
     #
     # tf.keras.utils.plot_model(
     #     model,
@@ -467,22 +475,30 @@ for fold_num in range(1,2):
     #     dpi=96
     # )
     #
-    # optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
-    #
-    # model.compile(optimizer=optimizer,
-    #               loss='mae',
-    #               metrics=['mae', 'mse', rmse])
-    #
+    optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
+
+    def loss(y_true, y_pred):
+
+        return y_true-y_pred
+
+    model.compile(optimizer=optimizer,
+                  loss='mae',
+                  # loss = loss,
+                  metrics=['mae', 'mse', rmse])
+    x_train = x_train.swapaxes(1, 2)
+    x_test = x_test.swapaxes(1, 2)
+    model.fit(
+        [x_train, teacher_train], y_train,
+        validation_data=([x_test, teacher_test], y_test),
+        epochs=20, batch_size=64)
+
+    model.save_weights('transformer.hdf5')
+
+    # model = build_model(x_train)
     # model.fit(
     #     [x_train[:,:,-1, np.newaxis], x_train[:,:,:-1]], y_train,
     #     validation_data=([x_test[:,:,-1, np.newaxis], x_test[:,:,:-1]], y_test),
     #     epochs=5, batch_size=64)
-
-    model = build_model(x_train)
-    model.fit(
-        [x_train[:,:,-1, np.newaxis], x_train[:,:,:-1]], y_train,
-        validation_data=([x_test[:,:,-1, np.newaxis], x_test[:,:,:-1]], y_test),
-        epochs=5, batch_size=64)
 
     train_pred = model.predict([x_train[:, :, -1, np.newaxis], x_train[:, :, :-1]])[:,20]
     train_true = y_train[:,20]
