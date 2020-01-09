@@ -434,7 +434,32 @@ else:
     logging_dir = '/home/mimorris/Forecasting/Logging'
     data_dir = '/home/mimorris/ili_data/dataset_forecasting_lag28/eng_smoothed_14/fold'
 
+def predict(series):
 
+    sentence = tf.expand_dims(START_TOKEN + tokenizer.encode(sentence) + END_TOKEN, axis=0)
+
+    output = tf.expand_dims(START_TOKEN, 0)
+
+    for i in range(MAX_LENGTH):
+        predictions = model(inputs=[sentence, output], training=False)
+
+        # select the last word from the seq_len dimension
+        predictions = predictions[:, -1:, :]
+        predicted_id = tf.cast(tf.argmax(predictions, axis=-1), tf.int32)
+
+        # return the result if the predicted_id is equal to the end token
+        if tf.equal(predicted_id, END_TOKEN[0]):
+            break
+
+        # concatenated the predicted_id to the output which is given to the decoder as its input.
+        output = tf.concat([output, predicted_id], axis=-1)
+
+    return tf.squeeze(output, axis=0)
+
+def predict(sentence):
+    prediction = evaluate(sentence)
+    predicted_sentence = tokenizer.decode([i for i in prediction if i < tokenizer.vocab_size])
+    return predicted_sentence
 
 
 
@@ -482,41 +507,50 @@ for fold_num in range(1,2):
         return y_true-y_pred
 
     model.compile(optimizer=optimizer,
-                  loss='mae',
+                  loss='mse',
                   # loss = loss,
                   metrics=['mae', 'mse', rmse])
+    model.load_weights('transformer.hdf5')
     x_train = x_train.swapaxes(1, 2)
     x_test = x_test.swapaxes(1, 2)
-    model.fit(
-        [x_train, teacher_train], y_train,
-        validation_data=([x_test, teacher_test], y_test),
-        epochs=20, batch_size=64)
-
-    model.save_weights('transformer.hdf5')
-
-    # model = build_model(x_train)
     # model.fit(
-    #     [x_train[:,:,-1, np.newaxis], x_train[:,:,:-1]], y_train,
-    #     validation_data=([x_test[:,:,-1, np.newaxis], x_test[:,:,:-1]], y_test),
-    #     epochs=5, batch_size=64)
+    #     [x_train, teacher_train], y_train,
+    #     validation_data=([x_test, teacher_test], y_test),
+    #     epochs=100, batch_size=64)
+    # model.save_weights('transformer.hdf5')
 
-    train_pred = model.predict([x_train[:, :, -1, np.newaxis], x_train[:, :, :-1]])[:,20]
-    train_true = y_train[:,20]
+    prediction = np.zeros((y_test[:, -1].shape))
+    batch_size = 64
+    for j in range(x_test.shape[0]):
+        google_in = x_test[np.newaxis, j, :,:]
+        enc_outputs = np.zeros((1,28))
+        for i in range(20):
+            output = model([google_in, enc_outputs], training=False)
+            enc_outputs[:,i+1] = output[:,0,i]
+        output = model([google_in, enc_outputs])
+        prediction[j] = output[0, 0, -1]
+        print(j)
+    y_test = y_test[:, -1]
 
-    test_pred = model.predict([x_test[:,:,-1, np.newaxis], x_test[:,:,:-1]])[:,20]
-    test_true = y_test[:, 20]
+    # model([x_test[np.newaxis, 0, :, :], teacher_test[np.newaxis, 0, :]], training=False)
+    # temp = np.zeros((28))
 
-    model.save_weights('model.hdf5')
+    # train_pred = model.predict([x_train[:, :, -1, np.newaxis], x_train[:, :, :-1]])[:,20]
+    # train_true = y_train[:,20]
+    #
+    # test_pred = model.predict([x_test[:,:,-1, np.newaxis], x_test[:,:,:-1]])[:,20]
+    # test_true = y_test[:, 20]
 
     os.chdir(save_dir)
+    np.save('prediction_fold_1.npy', prediction)
     training_stats = pd.DataFrame(model.history.history)
     training_stats.to_csv(r'Fold_'+str(fold_num)+'_training_stats.csv')
 
-    results[str(2014) + '/' + str(14 + fold_num)] = evaluate(test_true, test_pred)
+    results[str(2014) + '/' + str(14 + fold_num)] = evaluate(y_test, prediction)
 
     fig1.plot(fold_num, training_stats.mae, training_stats.val_mae)
-    fig2.plot(fold_num, train_pred, train_true, y_train_index)
-    fig3.plot(fold_num, test_pred, test_true, y_test_index)
+    # fig2.plot(fold_num, train_pred, train_true, y_train_index)
+    fig3.plot(fold_num, prediction, y_test, y_test_index)
 
 
 os.chdir(logging_dir + timestamp)
@@ -529,10 +563,3 @@ fig3.save('validation_predictions.png')
 fig1.show()
 fig2.show()
 fig3.show()
-
-def challenge(kx,ky,qx,qy):
-    if (qx == kx) or (qy == ky):
-        return True
-    if np.abs(qx - kx) == np.abs(qy - ky):
-        return True
-    return False
