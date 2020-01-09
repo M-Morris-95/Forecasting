@@ -480,13 +480,15 @@ for fold_num in range(1,5):
                   loss='mse',
                   # loss = loss,
                   metrics=['mae', 'mse', rmse])
-    model.load_weights('transformer.hdf5')
+
     x_train = x_train.swapaxes(1, 2)
     x_test = x_test.swapaxes(1, 2)
     model.fit(
         [x_train, teacher_train], y_train,
         validation_data=([x_test, teacher_test], y_test),
         epochs=100, batch_size=64)
+
+    os.chdir(save_dir)
     model.save_weights('transformer.hdf5')
 
     prediction = np.zeros((y_test[:, -1].shape))
@@ -511,7 +513,7 @@ for fold_num in range(1,5):
     # test_pred = model.predict([x_test[:,:,-1, np.newaxis], x_test[:,:,:-1]])[:,20]
     # test_true = y_test[:, 20]
 
-    os.chdir(save_dir)
+
     np.save('prediction_fold_1.npy', prediction)
     training_stats = pd.DataFrame(model.history.history)
     training_stats.to_csv(r'Fold_'+str(fold_num)+'_training_stats.csv')
