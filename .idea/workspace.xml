@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b389ba6e-9d91-4b6a-9f07-ea78b80758c7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/transformer.hdf5" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ILI_Forecast.py" beforeDir="false" afterPath="$PROJECT_DIR$/ILI_Forecast.py" afterDir="false" />
     </list>
@@ -149,7 +148,7 @@
       <workItem from="1578302527314" duration="3200000" />
       <workItem from="1578480668890" duration="584000" />
       <workItem from="1578481269879" duration="1361000" />
-      <workItem from="1578482737941" duration="18139000" />
+      <workItem from="1578482737941" duration="18274000" />
     </task>
     <task id="LOCAL-00001" summary="Added transformer model. Model compiles but a training schedule needs to be created.">
       <created>1578492487636</created>
@@ -191,12 +190,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/ILI_Forecast.py</url>
-          <line>537</line>
+          <line>507</line>
           <option name="timeStamp" value="149" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/ILI_Forecast.py</url>
-          <line>534</line>
+          <line>504</line>
           <option name="timeStamp" value="169" />
         </line-breakpoint>
       </breakpoints>
