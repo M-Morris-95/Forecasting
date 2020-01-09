@@ -524,6 +524,8 @@ for fold_num in range(1,5):
     # fig2.plot(fold_num, train_pred, train_true, y_train_index)
     fig3.plot(fold_num, prediction, y_test, y_test_index)
 
+    print(evaluate(y_test, prediction))
+
 
 os.chdir(logging_dir + timestamp)
 results.to_csv(r'stats.csv')
