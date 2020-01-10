@@ -8,10 +8,7 @@ import argparse
 
 from tensorflow.keras.models import Sequential, Model
 from tensorflow.keras.layers import LSTM, Dropout, Conv1D, GRU, Attention, Dense, Input, concatenate, Flatten, Layer, LayerNormalization, Embedding, Dropout
-from tensorflow.keras.optimizers.schedules import LearningRateSchedule
-from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.losses import SparseCategoricalCrossentropy
-from tensorflow.keras.metrics import Mean, SparseCategoricalAccuracy
+from tensorflow.keras.callbacks import EarlyStopping
 
 from scipy.stats import pearsonr
 
@@ -353,7 +350,7 @@ if not args.Server:
     logging_dir = '/Users/michael/Documents/github/Forecasting/Logging/'
     data_dir = '/Users/michael/Documents/ili_data/dataset_forecasting_lag28/eng_smoothed_14/fold'
 else:
-    logging_dir = '/home/mimorris/Forecasting/Logging'
+    logging_dir = '/home/mimorris/Forecasting/Logging/'
     data_dir = '/home/mimorris/ili_data/dataset_forecasting_lag28/eng_smoothed_14/fold'
 
 num_heads = [1,8,4,9,11]
@@ -395,8 +392,14 @@ for fold_num in range(1,5):
 
     # x_train = x_train.swapaxes(1, 2)
     # x_test = x_test.swapaxes(1, 2)
+
+    earlystop_callback = EarlyStopping(
+        monitor='val_loss', min_delta=0.0001,
+        patience=5)
+
     model.fit(
         x_train, y_train,
+        callbacks=[earlystop_callback],
         validation_data=(x_test, y_test),
         epochs=100, batch_size=64)
 
