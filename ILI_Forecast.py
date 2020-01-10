@@ -341,10 +341,10 @@ args = parser.parse_args()
 timestamp = time.strftime('%b-%d-%Y-%H-%M', time.localtime())
 
 fig1 = plotter(1)
-fig2 = plotter(2)
 fig3 = plotter(3)
 
 results = pd.DataFrame(index = ['MAE', 'RMSE', 'R'])
+test_predictions = pd.DataFrame()
 
 if not args.Server:
     logging_dir = '/Users/michael/Documents/github/Forecasting/Logging/'
@@ -359,23 +359,11 @@ num_heads = [1,8,4,9,11]
 for fold_num in range(1,5):
     fold_dir = data_dir + str(fold_num) + '/'
     save_dir = logging_dir + timestamp + '/Fold_' + str(fold_num)
-    if not os.path.exists(save_dir):
-        os.makedirs(save_dir)
 
     x_train, y_train, y_train_index, x_test, y_test, y_test_index  = build_data(fold_dir)
 
     model = build_model(x_train)
-    #
-    # tf.keras.utils.plot_model(
-    #     model,
-    #     to_file='model.png',
-    #     show_shapes=True,
-    #     show_layer_names=True,
-    #     rankdir='TB',
-    #     expand_nested=True,
-    #     dpi=96
-    # )
-    #
+
     optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
 
     model.compile(optimizer=optimizer,
@@ -393,31 +381,35 @@ for fold_num in range(1,5):
         validation_data=([x_test[:,:,-1, np.newaxis],x_test[:,:,:-1]], y_test),
         epochs=100, batch_size=64)
 
-    os.chdir(save_dir)
-    model.save_weights('transformer.hdf5')
-
     prediction = model.predict([x_test[:,:,-1, np.newaxis], x_test[:,:,:-1]])[:,20]
     y_test = y_test[:, -1]
+
+    results[str(2014) + '/' + str(14 + fold_num)] = evaluate(y_test, prediction)
+    test_predictions['prediction_'+str(2014) + '/' + str(14 + fold_num)] = prediction
+    test_predictions['truth_' + str(2014) + '/' + str(14 + fold_num)] = y_test
+
+
+    fig1.plot(fold_num, training_stats.mae, training_stats.val_mae)
+    fig3.plot(fold_num, prediction, y_test, y_test_index)
+
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
+    os.chdir(save_dir)
+
+    model.save_weights('transformer.hdf5')
 
     training_stats = pd.DataFrame(model.history.history)
     training_stats.to_csv(r'Fold_'+str(fold_num)+'_training_stats.csv')
 
-    results[str(2014) + '/' + str(14 + fold_num)] = evaluate(y_test, prediction)
 
-    fig1.plot(fold_num, training_stats.mae, training_stats.val_mae)
-    # fig2.plot(fold_num, train_pred, train_true, y_train_index)
-    fig3.plot(fold_num, prediction, y_test, y_test_index)
-
-    print(evaluate(y_test, prediction))
 
 
 os.chdir(logging_dir + timestamp)
 results.to_csv(r'stats.csv')
+test_predictions.to_csv(r'test_predictions.csv')
 
 fig1.save('training_stats.png')
-fig2.save('training_predictions.png')
 fig3.save('validation_predictions.png')
 
 fig1.show()
-fig2.show()
 fig3.show()
