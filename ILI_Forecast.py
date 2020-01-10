@@ -486,7 +486,7 @@ for fold_num in range(1,5):
     model.fit(
         [x_train, teacher_train], y_train,
         validation_data=([x_test, teacher_test], y_test),
-        epochs=100, batch_size=64)
+        epochs=1000, batch_size=64)
 
     os.chdir(save_dir)
     model.save_weights('transformer.hdf5')
