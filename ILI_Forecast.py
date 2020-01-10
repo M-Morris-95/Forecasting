@@ -385,12 +385,8 @@ for fold_num in range(1,5):
     y_test = y_test[:, -1]
 
     results[str(2014) + '/' + str(14 + fold_num)] = evaluate(y_test, prediction)
-    test_predictions['prediction_'+str(2014) + '/' + str(14 + fold_num)] = prediction
-    test_predictions['truth_' + str(2014) + '/' + str(14 + fold_num)] = y_test
-
-
-    fig1.plot(fold_num, training_stats.mae, training_stats.val_mae)
-    fig3.plot(fold_num, prediction, y_test, y_test_index)
+    test_predictions['prediction_'+str(2014) + '/' + str(14 + fold_num)] = prediction[:365]
+    test_predictions['truth_' + str(2014) + '/' + str(14 + fold_num)] = y_test[:365]
 
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
