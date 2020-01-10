@@ -345,6 +345,7 @@ fig2 = plotter(2)
 fig3 = plotter(3)
 
 results = pd.DataFrame(index = ['MAE', 'RMSE', 'R'])
+test_predictions = pd.DataFrame()
 
 if not args.Server:
     logging_dir = '/Users/michael/Documents/github/Forecasting/Logging/'
@@ -372,26 +373,13 @@ for fold_num in range(1,5):
         num_heads=num_heads[fold_num],
         dropout=0.1,
         name="encoder")
-    #
-    # tf.keras.utils.plot_model(
-    #     model,
-    #     to_file='model.png',
-    #     show_shapes=True,
-    #     show_layer_names=True,
-    #     rankdir='TB',
-    #     expand_nested=True,
-    #     dpi=96
-    # )
-    #
+
     optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
 
     model.compile(optimizer=optimizer,
                   loss='mse',
                   # loss = loss,
                   metrics=['mae', 'mse', rmse])
-
-    # x_train = x_train.swapaxes(1, 2)
-    # x_test = x_test.swapaxes(1, 2)
 
     earlystop_callback = EarlyStopping(
         monitor='val_loss', min_delta=0.0001,
@@ -406,50 +394,33 @@ for fold_num in range(1,5):
     os.chdir(save_dir)
     model.save_weights('transformer.hdf5')
 
-    # prediction = np.zeros((y_test[:, -1].shape))
-    # batch_size = 64
-    # for j in range(x_test.shape[0]):
-    #     google_in = x_test[np.newaxis, j, :,:]
-    #     enc_outputs = np.zeros((1,28))
-    #     for i in range(20):
-    #         output = model([google_in, enc_outputs], training=False)
-    #         enc_outputs[:,i+1] = output[:,0,i]
-    #     output = model([google_in, enc_outputs])
-    #     prediction[j] = output[0, 0, -1]
-    #     print(j)
-    y_test = y_test[:, -1]
     prediction = model(x_test, training=False)[:,20]
-
-    # model([x_test[np.newaxis, 0, :, :], teacher_test[np.newaxis, 0, :]], training=False)
-    # temp = np.zeros((28))
-
-    # train_pred = model.predict([x_train[:, :, -1, np.newaxis], x_train[:, :, :-1]])[:,20]
-    # train_true = y_train[:,20]
-    #
-    # test_pred = model.predict([x_test[:,:,-1, np.newaxis], x_test[:,:,:-1]])[:,20]
-    # test_true = y_test[:, 20]
-
-
-    np.save('prediction_fold_1.npy', prediction)
-    training_stats = pd.DataFrame(model.history.history)
-    training_stats.to_csv(r'Fold_'+str(fold_num)+'_training_stats.csv')
+    y_test = y_test[:, -1]
 
     results[str(2014) + '/' + str(14 + fold_num)] = evaluate(y_test, prediction)
+    test_predictions['prediction_'+str(2014) + '/' + str(14 + fold_num)] = prediction
+    test_predictions['truth_' + str(2014) + '/' + str(14 + fold_num)] = y_test
+
 
     fig1.plot(fold_num, training_stats.mae, training_stats.val_mae)
-    # fig2.plot(fold_num, train_pred, train_true, y_train_index)
     fig3.plot(fold_num, prediction, y_test, y_test_index)
 
-    print(evaluate(y_test, prediction))
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
+    os.chdir(save_dir)
+
+    model.save_weights('transformer.hdf5')
+
+    training_stats = pd.DataFrame(model.history.history)
+    training_stats.to_csv(r'Fold_'+str(fold_num)+'_training_stats.csv')
 
 
 os.chdir(logging_dir + timestamp)
 results.to_csv(r'stats.csv')
+test_predictions.to_csv(r'test_predictions.csv')
 
 fig1.save('training_stats.png')
-fig2.save('training_predictions.png')
 fig3.save('validation_predictions.png')
 
 fig1.show()
-fig2.show()
 fig3.show()
