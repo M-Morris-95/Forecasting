@@ -402,8 +402,7 @@ for fold_num in range(1,5):
     test_predictions['truth_' + str(2014) + '/' + str(14 + fold_num)] = y_test
 
 
-    fig1.plot(fold_num, training_stats.mae, training_stats.val_mae)
-    fig3.plot(fold_num, prediction, y_test, y_test_index)
+
 
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
@@ -413,6 +412,9 @@ for fold_num in range(1,5):
 
     training_stats = pd.DataFrame(model.history.history)
     training_stats.to_csv(r'Fold_'+str(fold_num)+'_training_stats.csv')
+
+    fig1.plot(fold_num, training_stats.mae, training_stats.val_mae)
+    fig3.plot(fold_num, prediction, y_test, y_test_index)
 
 
 os.chdir(logging_dir + timestamp)
