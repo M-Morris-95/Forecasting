@@ -8,10 +8,7 @@ import argparse
 
 from tensorflow.keras.models import Sequential, Model
 from tensorflow.keras.layers import LSTM, Dropout, Conv1D, GRU, Attention, Dense, Input, concatenate, Flatten, Layer, LayerNormalization, Embedding, Dropout
-from tensorflow.keras.optimizers.schedules import LearningRateSchedule
-from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.losses import SparseCategoricalCrossentropy
-from tensorflow.keras.metrics import Mean, SparseCategoricalAccuracy
+from tensorflow.keras.callbacks import EarlyStopping
 
 from scipy.stats import pearsonr
 
@@ -81,10 +78,11 @@ def GetParser():
     return parser
 
 def pearson(y_true, y_pred):
-    y_pred = y_pred.squeeze()
+    # y_pred = y_pred.squeeze()
+    y_pred = y_pred.numpy()
     y_pred = y_pred.astype('float64')
 
-    y_true = y_true.squeeze()
+    # y_true = y_true.squeeze()
     y_true = y_true.astype('float64')
     corr = pearsonr(y_true, y_pred)[0]
 
@@ -313,83 +311,9 @@ def encoder(num_layers, units, d_model, num_heads, dropout, name="encoder"):
 
     return model
 
-def decoder_layer(units, d_model, num_heads, dropout, name="decoder_layer"):
-    inputs = tf.keras.Input(shape=(units, d_model), name="inputs")
-    enc_outputs = tf.keras.Input(shape=(units, d_model), name="encoder_outputs")
-
-    # This is where the encoding would go.
-
-    # multi head attention on shifted output
-    attention1 = MultiHeadAttention(
-        d_model, num_heads, name="attention_1")({
-        'query': inputs,
-        'key': inputs,
-        'value': inputs
-    })
-
-    # dropout
-    attention1 = tf.keras.layers.Dropout(rate=dropout)(attention1)
-
-    # add and norm
-    attention1 = tf.keras.layers.LayerNormalization(epsilon=1e-6)(attention1 + inputs)
-
-
-
-    # second attention
-    attention2 = MultiHeadAttention(d_model, num_heads, name="attention_2")({
-        'query': attention1,
-        'key': enc_outputs,
-        'value': enc_outputs
-    })
-
-    # # dropout
-    attention2 = tf.keras.layers.Dropout(rate=dropout)(attention2)
-
-    # add and norm
-    attention2 = tf.keras.layers.LayerNormalization(epsilon=1e-6)(attention2 + attention1)
-
-    # feed forward
-    outputs = tf.keras.layers.Dense(units=units, activation='relu')(attention2)
-    outputs = tf.keras.layers.Dense(units=d_model)(outputs)
-
-    # dropout
-    outputs = tf.keras.layers.Dropout(rate=dropout)(outputs)
-
-    # add and norm
-    outputs = tf.keras.layers.LayerNormalization(epsilon=1e-6)(attention2 + outputs)
-
-    # assemble layer
-    layer = tf.keras.Model(inputs=(inputs, enc_outputs), outputs=outputs, name=name)
-
-    return layer
-
-def decoder(num_layers, units, d_model, num_heads, dropout, name='decoder'):
-    inputs = tf.keras.Input(shape=(units,d_model), name='inputs')
-    enc_outputs = tf.keras.Input(shape=(units, d_model), name='encoder_outputs')
-
-    # This is where masks and embeddings would go.
-
-    # add dropout
-    outputs = tf.keras.layers.Dropout(rate=dropout)(inputs)
-
-    for i in range(num_layers):
-        outputs = decoder_layer(
-            units=units,
-            d_model=d_model,
-            num_heads=num_heads,
-            dropout=dropout,
-            name='decoder_layer_{}'.format(i),
-        )(inputs=[outputs, enc_outputs])
-
-    # assemble model
-    model = tf.keras.Model(inputs=[inputs, enc_outputs], outputs=outputs, name=name)
-
-    return model
-
-def transformer(output_size, num_layers, units, d_model, num_heads, dropout, name="transformer"):
+def encoder_network(output_size, num_layers, units, d_model, num_heads, dropout, name="transformer"):
     # inputs
     inputs = tf.keras.Input(shape=(units,d_model), name="inputs")
-    dec_inputs = tf.keras.Input(shape=(d_model), name="dec_inputs")
 
     # encoder
     enc_outputs = encoder(
@@ -400,21 +324,16 @@ def transformer(output_size, num_layers, units, d_model, num_heads, dropout, nam
         dropout=dropout,
     )(inputs=[inputs])
 
-    # decoder
-    dec_outputs = decoder(
-        num_layers=num_layers,
-        units=units,
-        d_model=d_model,
-        num_heads=num_heads,
-        dropout=dropout,
-    )(inputs=[dec_inputs, enc_outputs])
-
+    outputs = tf.keras.layers.Dense(units=output_size, activation = 'relu')(enc_outputs)
     # output dense layer
-    outputs = tf.keras.layers.Dense(units=output_size, name="outputs")(dec_outputs)
+    outputs = Flatten()(outputs)
+    outputs = tf.keras.layers.Dense(units=output_size, name="outputs")(outputs)
     # build model
-    model = tf.keras.Model(inputs=[inputs, dec_inputs], outputs=outputs, name=name)
+    model = tf.keras.Model(inputs=inputs, outputs=outputs, name=name)
 
     return model
+
+
 
 parser = GetParser()
 args = parser.parse_args()
@@ -431,8 +350,11 @@ if not args.Server:
     logging_dir = '/Users/michael/Documents/github/Forecasting/Logging/'
     data_dir = '/Users/michael/Documents/ili_data/dataset_forecasting_lag28/eng_smoothed_14/fold'
 else:
-    logging_dir = '/home/mimorris/Forecasting/Logging'
+    logging_dir = '/home/mimorris/Forecasting/Logging/'
     data_dir = '/home/mimorris/ili_data/dataset_forecasting_lag28/eng_smoothed_14/fold'
+
+num_heads = [1,8,4,9,11]
+
 
 for fold_num in range(1,5):
     fold_dir = data_dir + str(fold_num) + '/'
@@ -442,23 +364,14 @@ for fold_num in range(1,5):
 
     x_train, y_train, y_train_index, x_test, y_test, y_test_index  = build_data(fold_dir)
 
-
-    # teacher forcing
-    teacher_train = np.zeros((x_train.shape[0:2]))
-    teacher_train[:, 1:21] = y_train[:, :20]
-
-    teacher_test = np.zeros((x_test.shape[0:2]))
-    teacher_test[:, 1:21] = y_test[:, :20]
-
-
-    model = transformer(
+    model = encoder_network(
         output_size=y_train.shape[1],
         num_layers=2,
-        units=x_train.shape[2],
-        d_model=x_train.shape[1],
-        num_heads=7,
+        units=x_train.shape[1],
+        d_model=x_train.shape[2],
+        num_heads=num_heads[fold_num],
         dropout=0.1,
-        name="oof")
+        name="encoder")
     #
     # tf.keras.utils.plot_model(
     #     model,
@@ -472,37 +385,40 @@ for fold_num in range(1,5):
     #
     optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
 
-    def loss(y_true, y_pred):
-
-        return y_true-y_pred
-
     model.compile(optimizer=optimizer,
                   loss='mse',
                   # loss = loss,
                   metrics=['mae', 'mse', rmse])
 
-    x_train = x_train.swapaxes(1, 2)
-    x_test = x_test.swapaxes(1, 2)
+    # x_train = x_train.swapaxes(1, 2)
+    # x_test = x_test.swapaxes(1, 2)
+
+    earlystop_callback = EarlyStopping(
+        monitor='val_loss', min_delta=0.0001,
+        patience=5)
+
     model.fit(
-        [x_train, teacher_train], y_train,
-        validation_data=([x_test, teacher_test], y_test),
-        epochs=1000, batch_size=64)
+        x_train, y_train,
+        callbacks=[earlystop_callback],
+        validation_data=(x_test, y_test),
+        epochs=100, batch_size=64)
 
     os.chdir(save_dir)
     model.save_weights('transformer.hdf5')
 
-    prediction = np.zeros((y_test[:, -1].shape))
-    batch_size = 64
-    for j in range(x_test.shape[0]):
-        google_in = x_test[np.newaxis, j, :,:]
-        enc_outputs = np.zeros((1,28))
-        for i in range(20):
-            output = model([google_in, enc_outputs], training=False)
-            enc_outputs[:,i+1] = output[:,0,i]
-        output = model([google_in, enc_outputs])
-        prediction[j] = output[0, 0, -1]
-        print(j)
+    # prediction = np.zeros((y_test[:, -1].shape))
+    # batch_size = 64
+    # for j in range(x_test.shape[0]):
+    #     google_in = x_test[np.newaxis, j, :,:]
+    #     enc_outputs = np.zeros((1,28))
+    #     for i in range(20):
+    #         output = model([google_in, enc_outputs], training=False)
+    #         enc_outputs[:,i+1] = output[:,0,i]
+    #     output = model([google_in, enc_outputs])
+    #     prediction[j] = output[0, 0, -1]
+    #     print(j)
     y_test = y_test[:, -1]
+    prediction = model(x_test, training=False)[:,20]
 
     # model([x_test[np.newaxis, 0, :, :], teacher_test[np.newaxis, 0, :]], training=False)
     # temp = np.zeros((28))
