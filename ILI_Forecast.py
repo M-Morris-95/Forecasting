@@ -78,8 +78,8 @@ def GetParser():
     return parser
 
 def pearson(y_true, y_pred):
-    # y_pred = y_pred.squeeze()
-    y_pred = y_pred.numpy()
+    if type(y_pred) != np.ndarray:
+        y_pred = y_pred.numpy()
     y_pred = y_pred.astype('float64')
 
     # y_true = y_true.squeeze()
@@ -391,7 +391,7 @@ for fold_num in range(1,5):
         [x_train[:,:,-1, np.newaxis],x_train[:,:,:-1]], y_train,
         callbacks=[earlystop_callback],
         validation_data=([x_test[:,:,-1, np.newaxis],x_test[:,:,:-1]], y_test),
-        epochs=1, batch_size=64)
+        epochs=100, batch_size=64)
 
     os.chdir(save_dir)
     model.save_weights('transformer.hdf5')
