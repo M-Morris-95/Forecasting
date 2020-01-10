@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b389ba6e-9d91-4b6a-9f07-ea78b80758c7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ILI_Forecast.py" beforeDir="false" afterPath="$PROJECT_DIR$/ILI_Forecast.py" afterDir="false" />
-    </list>
+    <list default="true" id="b389ba6e-9d91-4b6a-9f07-ea78b80758c7" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,7 +146,7 @@
       <workItem from="1578480668890" duration="584000" />
       <workItem from="1578481269879" duration="1361000" />
       <workItem from="1578482737941" duration="18670000" />
-      <workItem from="1578663048972" duration="2269000" />
+      <workItem from="1578663048972" duration="2457000" />
     </task>
     <task id="LOCAL-00001" summary="Added transformer model. Model compiles but a training schedule needs to be created.">
       <created>1578492487636</created>
