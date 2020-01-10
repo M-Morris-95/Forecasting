@@ -364,14 +364,7 @@ for fold_num in range(1,5):
 
     x_train, y_train, y_train_index, x_test, y_test, y_test_index  = build_data(fold_dir)
 
-    model = encoder_network(
-        output_size=y_train.shape[1],
-        num_layers=2,
-        units=x_train.shape[1],
-        d_model=x_train.shape[2],
-        num_heads=num_heads[fold_num],
-        dropout=0.1,
-        name="encoder")
+    model = build_model(x_train)
     #
     # tf.keras.utils.plot_model(
     #     model,
@@ -390,47 +383,22 @@ for fold_num in range(1,5):
                   # loss = loss,
                   metrics=['mae', 'mse', rmse])
 
-    # x_train = x_train.swapaxes(1, 2)
-    # x_test = x_test.swapaxes(1, 2)
-
     earlystop_callback = EarlyStopping(
         monitor='val_loss', min_delta=0.0001,
         patience=5)
 
     model.fit(
-        x_train, y_train,
+        [x_train[:,:,-1, np.newaxis],x_train[:,:,:-1]], y_train,
         callbacks=[earlystop_callback],
-        validation_data=(x_test, y_test),
-        epochs=100, batch_size=64)
+        validation_data=([x_test[:,:,-1, np.newaxis],x_test[:,:,:-1]], y_test),
+        epochs=1, batch_size=64)
 
     os.chdir(save_dir)
     model.save_weights('transformer.hdf5')
 
-    # prediction = np.zeros((y_test[:, -1].shape))
-    # batch_size = 64
-    # for j in range(x_test.shape[0]):
-    #     google_in = x_test[np.newaxis, j, :,:]
-    #     enc_outputs = np.zeros((1,28))
-    #     for i in range(20):
-    #         output = model([google_in, enc_outputs], training=False)
-    #         enc_outputs[:,i+1] = output[:,0,i]
-    #     output = model([google_in, enc_outputs])
-    #     prediction[j] = output[0, 0, -1]
-    #     print(j)
+    prediction = model.predict([x_test[:,:,-1, np.newaxis], x_test[:,:,:-1]])[:,20]
     y_test = y_test[:, -1]
-    prediction = model(x_test, training=False)[:,20]
 
-    # model([x_test[np.newaxis, 0, :, :], teacher_test[np.newaxis, 0, :]], training=False)
-    # temp = np.zeros((28))
-
-    # train_pred = model.predict([x_train[:, :, -1, np.newaxis], x_train[:, :, :-1]])[:,20]
-    # train_true = y_train[:,20]
-    #
-    # test_pred = model.predict([x_test[:,:,-1, np.newaxis], x_test[:,:,:-1]])[:,20]
-    # test_true = y_test[:, 20]
-
-
-    np.save('prediction_fold_1.npy', prediction)
     training_stats = pd.DataFrame(model.history.history)
     training_stats.to_csv(r'Fold_'+str(fold_num)+'_training_stats.csv')
 
