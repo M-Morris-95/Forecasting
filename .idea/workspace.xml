@@ -2,7 +2,219 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b389ba6e-9d91-4b6a-9f07-ea78b80758c7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Functions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parser.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tranformer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ILI_Forecast.py" beforeDir="false" afterPath="$PROJECT_DIR$/ILI_Forecast.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-14-49/Fold_1/Fold_1_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-14-49/Fold_1/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-14-49/Fold_2/Fold_2_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-14-49/Fold_2/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-14-49/Fold_3/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-14-49/Fold_3/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-14-49/Fold_4/Fold_4_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-14-49/Fold_4_best_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-14-49/Notes.rtf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-14-49/training_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-14-49/training_stats.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-14-49/validation_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-15-04/Fold_1/Fold_1_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-15-04/Fold_1/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-15-04/Fold_2/Fold_2_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-15-04/Fold_2/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-15-04/Fold_3/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-15-04/Fold_3/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-15-04/Fold_4/Fold_4_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-15-04/Notes.rtf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-15-04/best_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-15-04/training_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-15-04/training_stats.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-15-04/validation_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-15-18/Fold_1/Fold_1_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-15-18/Fold_1/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-15-18/Fold_2/Fold_2_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-15-18/Fold_2/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-15-18/Fold_3/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-15-18/Fold_3/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-15-18/Fold_4/Fold_4_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-15-18/Fold_4_best_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-15-18/notes.rtf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-15-18/training_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-15-18/training_stats.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-12-2019-15-18/validation_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-08/Fold_1/Fold_1_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-08/Fold_1/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-08/Fold_2/Fold_2_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-08/Fold_2/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-08/Fold_3/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-08/Fold_3/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-08/Fold_4/Fold_4_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-08/Fold_4_best_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-08/notes.rtf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-08/training_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-08/training_stats.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-08/validation_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-13/Fold_1/Fold_1_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-13/Fold_1/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-13/Fold_2/Fold_2_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-13/Fold_2/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-13/Fold_3/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-13/Fold_3/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-13/Fold_4/Fold_4_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-13/Fold_4_best_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-13/notes.rtf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-13/training_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-13/training_stats.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-13/validation_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-55/Fold_1/Fold_1_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-55/Fold_1/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-55/Fold_2/Fold_2_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-55/Fold_2/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-55/Fold_3/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-55/Fold_3/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-55/Fold_4/Fold_4_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-55/Fold_4_best_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-55/notes.rtf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-55/training_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-55/training_stats.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-11-55/validation_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-28/Fold_1/Fold_1_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-28/Fold_1/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-28/Fold_2/Fold_2_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-28/Fold_2/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-28/Fold_3/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-28/Fold_3/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-28/Fold_4/Fold_4_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-28/Fold_4_best_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-28/training_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-28/training_stats.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-28/validation_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-32/Fold_1/Fold_1_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-32/Fold_1/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-32/Fold_2/Fold_2_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-32/Fold_2/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-32/Fold_3/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-32/Fold_3/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-32/Fold_4/Fold_4_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-32/Fold_4_best_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-32/training_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-32/training_stats.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-32/validation_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-49/Fold_1/Fold_1_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-49/Fold_1/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-49/Fold_2/Fold_2_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-49/Fold_2/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-49/Fold_3/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-49/Fold_3/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-49/Fold_4/Fold_4_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-49/Fold_4_best_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-49/training_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-49/training_stats.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-16-2019-15-49/validation_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-11-59/Fold_1/Fold_1_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-11-59/Fold_1/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-11-59/Fold_2/Fold_2_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-11-59/Fold_2/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-11-59/Fold_3/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-11-59/Fold_3/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-11-59/Fold_4/Fold_4_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-11-59/Fold_4_best_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-11-59/training_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-11-59/training_stats.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-11-59/validation_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-12-48/Fold_1/Fold_1_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-12-50/Fold_1/Fold_1_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-12-50/Fold_1/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-12-50/Fold_2/Fold_2_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-12-50/Fold_2/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-12-50/Fold_3/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-12-50/Fold_3/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-12-50/Fold_4/Fold_4_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-12-50/Fold_4_best_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-12-50/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-12-50/training_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-12-50/training_stats.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-12-50/validation_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-14-24/Fold_1/Fold_1_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-14-42/Fold_1/Fold_1_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-14-42/Fold_1/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-14-42/Fold_2/Fold_2_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-14-42/Fold_2/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-14-42/Fold_3/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-14-42/Fold_3/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-14-42/Fold_4/Fold_4_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-14-42/Fold_4_best_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-14-42/training_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-14-42/training_stats.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-14-42/validation_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-14-54/Fold_1/Fold_1_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-14-54/Fold_1/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-14-54/Fold_2/Fold_2_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-14-54/Fold_2/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-14-54/Fold_3/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-14-54/Fold_3/model.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-14-54/Fold_4/Fold_4_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-14-54/Fold_4_best_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-14-54/training_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-14-54/training_stats.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Dec-19-2019-14-54/validation_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-14-39     Encoder with early stopping/Fold_1/Fold_1_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-14-39     Encoder with early stopping/Fold_1/prediction_fold_1.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-14-39     Encoder with early stopping/Fold_1/transformer.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-14-39     Encoder with early stopping/Fold_2/Fold_2_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-14-39     Encoder with early stopping/Fold_2/prediction_fold_1.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-14-39     Encoder with early stopping/Fold_2/transformer.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-14-39     Encoder with early stopping/Fold_3/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-14-39     Encoder with early stopping/Fold_3/prediction_fold_1.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-14-39     Encoder with early stopping/Fold_3/transformer.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-14-39     Encoder with early stopping/Fold_4/Fold_4_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-14-39     Encoder with early stopping/Fold_4/prediction_fold_1.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-14-39     Encoder with early stopping/Fold_4/transformer.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-14-39     Encoder with early stopping/stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-14-39     Encoder with early stopping/training_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-14-39     Encoder with early stopping/training_stats.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-14-39     Encoder with early stopping/validation_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-15-00 GRU with early stopping/Fold_1/Fold_1_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-15-00 GRU with early stopping/Fold_1/transformer.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-15-00 GRU with early stopping/Fold_2/Fold_2_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-15-00 GRU with early stopping/Fold_2/transformer.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-15-00 GRU with early stopping/Fold_3/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-15-00 GRU with early stopping/Fold_3/transformer.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-15-00 GRU with early stopping/Fold_4/Fold_4_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-15-00 GRU with early stopping/Fold_4/transformer.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-15-00 GRU with early stopping/stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-15-00 GRU with early stopping/training_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-15-00 GRU with early stopping/training_stats.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-15-00 GRU with early stopping/validation_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-15-31/Fold_1/Fold_1_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-15-31/Fold_1/transformer.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-15-47/Fold_1/Fold_1_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-15-47/Fold_1/transformer.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-15-47/Fold_2/Fold_2_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-15-47/Fold_2/transformer.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-15-47/Fold_3/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-15-47/Fold_3/transformer.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-15-47/Fold_4/Fold_4_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-15-47/Fold_4/transformer.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-15-47/stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-15-47/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-15-47/training_stats.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-15-47/validation_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-16-11/Fold_1/Fold_1_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-16-11/Fold_1/transformer.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-16-11/Fold_2/Fold_2_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-16-11/Fold_2/transformer.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-16-11/Fold_3/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-16-11/Fold_3/transformer.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-16-11/Fold_4/Fold_4_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-16-11/Fold_4/transformer.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-16-11/stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-16-11/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-16-11/training_stats.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Jan-10-2020-16-11/validation_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction_fold_1.npy" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,7 +267,7 @@
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="--Model " value=" 'ENCODER'" />
       </envs>
       <option name="SDK_HOME" value="$PROJECT_DIR$/../../Python3/tf2_env/bin/python3.7" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -153,6 +365,7 @@
       <workItem from="1578482737941" duration="18670000" />
       <workItem from="1578663048972" duration="2457000" />
       <workItem from="1578670063146" duration="6000" />
+      <workItem from="1578672619068" duration="2309000" />
     </task>
     <task id="LOCAL-00001" summary="Added transformer model. Model compiles but a training schedule needs to be created.">
       <created>1578492487636</created>
@@ -186,23 +399,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/ILI_Forecast.py</url>
-          <line>45</line>
-          <option name="timeStamp" value="137" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/ILI_Forecast.py</url>
-          <line>82</line>
-          <option name="timeStamp" value="176" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/ILI_Forecast.py</url>
-          <line>81</line>
-          <option name="timeStamp" value="183" />
-        </line-breakpoint>
-      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -215,6 +411,6 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Forecasting$Load_Data.coverage" NAME="Forecast Coverage Results" MODIFIED="1576095768553" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Forecasting$data_formatting.coverage" NAME="data_formatting Coverage Results" MODIFIED="1576492782984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Forecasting$Forecast.coverage" NAME="Forecast Coverage Results" MODIFIED="1578668230462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Forecasting$Forecast.coverage" NAME="Forecast Coverage Results" MODIFIED="1578907261317" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
