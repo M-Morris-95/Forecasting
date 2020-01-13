@@ -98,8 +98,8 @@ for fold_num in range(1,5):
             callbacks=[earlystop_callback],
             validation_data=(x_test, y_test),
             epochs=EPOCHS, batch_size=BATCH_SIZE)
+        prediction = model.predict(x_test)[:, 20]
 
-        prediction = model(x_test, training=False)[:, 20]
     y_test = y_test[:, -1]
 
     results[str(2014) + '/' + str(14 + fold_num)] = evaluate(y_test, prediction)
@@ -107,7 +107,7 @@ for fold_num in range(1,5):
     test_predictions['truth_' + str(2014) + '/' + str(14 + fold_num)] = y_test[:365]
 
 
-    model.save_weights('Fold_'+str(fold_num)+'network.hdf5')
+    # model.save_weights('Fold_'+str(fold_num)+'network.hdf5')
 
     training_stats = pd.DataFrame(model.history.history)
     training_stats.to_csv(r'Fold_'+str(fold_num)+'_training_stats.csv')
