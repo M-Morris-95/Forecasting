@@ -73,6 +73,9 @@ for fold_num in range(1,5):
             dropout=0.1,
             name="encoder")
 
+        model.compile(optimizer=optimizer,
+                      loss='mse',
+                      metrics=['mae', 'mse', rmse])
 
         model.fit(
             x_train, y_train,
