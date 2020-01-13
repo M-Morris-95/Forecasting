@@ -1,8 +1,8 @@
 root_dir = pwd;
-relative_dir = 'GRUJan-13-10-13/test_predictions.csv';
 
 gru_pred = readtable(fullfile(root_dir, 'GRUJan-13-10-13/test_predictions.csv'));
-encoder_pred = readtable(fullfile(root_dir, 'ENCODERJan-13-10-09/test_predictions.csv'));
+encoder_pred = readtable(fullfile(root_dir, 'ENCODERJan-13-11-03/test_predictions.csv'));
+% encoder_pred = readtable(fullfile(root_dir, 'ENCODERJan-13-10-09/test_predictions.csv'));
 
 % Define Colours
 color(1,:) = [188,63,69]/255;
@@ -16,7 +16,7 @@ color(8,:) = [1,1,1];
 color(9,:) = [223,220,202]/255;
 
 
-figure(1)
+figure(2)
 clf
 subplot(2,2,1);
 hold on

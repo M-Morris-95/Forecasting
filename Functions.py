@@ -8,6 +8,7 @@ import tensorflow as tf
 import time
 import matplotlib.pyplot as plt
 import argparse
+from Tranformer import MultiHeadAttention
 
 from scipy.stats import pearsonr
 
@@ -117,6 +118,34 @@ def build_model(x_train):
 
 
     model = Model(inputs=[x.input, y.input], outputs=z)
+
+    optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
+
+    model.compile(optimizer=optimizer,
+                  loss='mae',
+                  metrics=['mae', 'mse', rmse])
+
+    return model
+
+def build_attention(x_train, fold_num = 1):
+    num_heads = [1, 8, 4, 9, 11]
+    num_heads = num_heads[fold_num]
+    d_model = x_train.shape[2]
+
+    ili_input = Input(shape=[x_train.shape[1],x_train.shape[2]])
+    attention = MultiHeadAttention(d_model, num_heads, name="attention")({
+        'query': ili_input,
+        'key': ili_input,
+        'value': ili_input
+    })
+
+
+    x = GRU(x_train.shape[2], activation='relu', return_sequences=True)(attention)
+    y = GRU(int(0.5*(x_train.shape[2]-1)), activation='relu', return_sequences=True)(x)
+    z = GRU(21, activation='relu',return_sequences=False)(y)
+
+
+    model = Model(inputs=ili_input, outputs=z)
 
     optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
 

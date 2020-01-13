@@ -7,7 +7,7 @@ import time
 from tensorflow.keras.callbacks import EarlyStopping
 
 from Parser import GetParser
-from Functions import plotter, build_model, rmse, evaluate, build_data
+from Functions import plotter, build_model, rmse, evaluate, build_data, build_attention
 from Tranformer import encoder_network
 
 
@@ -85,6 +85,21 @@ for fold_num in range(1,5):
 
         prediction = model(x_test, training=False)[:, 20]
 
+    elif args.Model == 'ATTENTION':
+
+        model = build_attention(x_train, fold_num)
+
+        model.compile(optimizer=optimizer,
+                      loss='mse',
+                      metrics=['mae', 'mse', rmse])
+
+        model.fit(
+            x_train, y_train,
+            callbacks=[earlystop_callback],
+            validation_data=(x_test, y_test),
+            epochs=EPOCHS, batch_size=BATCH_SIZE)
+
+        prediction = model(x_test, training=False)[:, 20]
     y_test = y_test[:, -1]
 
     results[str(2014) + '/' + str(14 + fold_num)] = evaluate(y_test, prediction)
