@@ -1,9 +1,10 @@
+clear all
 root_dir = pwd;
 
 gru_pred = readtable(fullfile(root_dir, 'GRUJan-13-10-13/test_predictions.csv'));
 encoder_pred = readtable(fullfile(root_dir, 'ENCODERJan-13-11-03/test_predictions.csv'));
-attention_pred = readtable(fullfile(root_dir, 'ATTENTIONJan-13-11-36/test_predictions.csv'));
-% encoder_pred = readtable(fullfile(root_dir, 'ENCODERJan-13-10-09/test_predictions.csv'));
+attention_pred = readtable(fullfile(root_dir, 'ATTENTIONJan-13-12-54/test_predictions.csv'));
+
 
 % Define Colours
 color(1,:) = [188,63,69]/255;
@@ -17,7 +18,7 @@ color(8,:) = [1,1,1];
 color(9,:) = [223,220,202]/255;
 
 
-figure(2)
+figure(1)
 clf
 subplot(2,2,1);
 hold on
@@ -36,6 +37,7 @@ set(gca,'color',color(8,:));
 set(gcf,'color',color(8,:));
 hold off
 xlim([0,365]);
+ylim([0,60]);
 legend('encoder', 'GRU', 'Attention','truth')
 
 subplot(2,2,2);
@@ -53,8 +55,10 @@ grid minor
 set(gca,'color',color(8,:));
 set(gcf,'color',color(8,:));
 hold off
+ylim([0,60]);
 xlim([0,365]);
 legend('encoder', 'GRU', 'Attention','truth')
+
 subplot(2,2,3);
 hold on
 plot(encoder_pred.prediction_2014_17, '--','color',color(1,:),'linewidth',1.4);
@@ -71,6 +75,7 @@ set(gca,'color',color(8,:));
 set(gcf,'color',color(8,:));
 hold off
 xlim([0,365]);
+ylim([0,60]);
 legend('encoder', 'GRU', 'Attention','truth')
 
 subplot(2,2,4);
@@ -89,4 +94,64 @@ set(gca,'color',color(8,:));
 set(gcf,'color',color(8,:));
 hold off
 xlim([0,365]);
+ylim([0,60]);
 legend('encoder', 'GRU', 'Attention','truth')
+
+
+
+% second figure
+
+encoder = [encoder_pred.prediction_2014_15; encoder_pred.prediction_2014_16; encoder_pred.prediction_2014_17; encoder_pred.prediction_2014_18];
+gru = [gru_pred.prediction_2014_15; gru_pred.prediction_2014_16; gru_pred.prediction_2014_17; gru_pred.prediction_2014_18];
+attention = [attention_pred.prediction_2014_15; attention_pred.prediction_2014_16; attention_pred.prediction_2014_17; attention_pred.prediction_2014_18];
+truth = [encoder_pred.truth_2014_15; encoder_pred.truth_2014_16; encoder_pred.truth_2014_17; encoder_pred.truth_2014_18];
+
+figure(2)
+subplot(2,1,1)
+hold on
+plot(encoder, '--','color',color(1,:),'linewidth',1.4);
+plot(gru, '-.','color',color(2,:),'linewidth',1.4);
+plot(attention, ':','color',color(4,:),'linewidth',2);
+plot(truth,'color',color(3,:),'linewidth',1.4);
+title('2014/19')
+xlabel('day')
+ylabel('ILI rate')
+xticks(0:365:365*4)
+set(gca,'XMinorTick','on')
+box on
+grid on
+grid minor
+set(gca,'color',color(8,:));
+set(gcf,'color',color(8,:));
+hold off
+xlim([0,365*4]);
+ylim([0,60]);
+legend('encoder', 'GRU', 'Attention','truth')
+
+subplot(2,1,2)
+hold on
+plot(encoder-truth, '--','color',color(1,:),'linewidth',1.4);
+plot(gru-truth, '-.','color',color(2,:),'linewidth',1.4);
+plot(attention-truth, ':','color',color(4,:),'linewidth',2);
+
+plot(truth,'color',color(3,:),'linewidth',1.4);
+title('2014/19')
+xlabel('day')
+ylabel('ILI error rate')
+xticks(0:365:365*4)
+set(gca,'XMinorTick','on')
+box on
+grid on
+grid minor
+set(gca,'color',color(8,:));
+set(gcf,'color',color(8,:));
+hold off
+xlim([0,365*4]);
+legend('encoder', 'GRU', 'Attention','truth')
+
+
+
+
+
+
+

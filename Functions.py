@@ -9,6 +9,7 @@ import time
 import matplotlib.pyplot as plt
 import argparse
 from Tranformer import MultiHeadAttention
+import datetime
 
 from scipy.stats import pearsonr
 
@@ -47,13 +48,32 @@ def load_ili_data(path):
     ili_data = ili_data[1]
     return ili_data
 
-def build_data(fold_dir):
+def build_data(fold_dir, day_of_the_year=True):
     google_train = load_google_data(fold_dir + 'google-train')
     google_train['ili'] = load_ili_data(fold_dir + 'ili-train').values
 
     google_test = load_google_data(fold_dir + 'google-test')
     google_test['ili'] = load_ili_data(fold_dir + 'ili-test').values
 
+
+    y_train_index = pd.read_csv(fold_dir + 'y-train', header=None)[0]
+    y_test_index = pd.read_csv(fold_dir + 'y-test', header=None)[0]
+
+
+
+    if day_of_the_year:
+        train_days = pd.read_csv(fold_dir + 'google-train')['Unnamed: 0']
+        train_day_num = np.zeros((train_days.shape))
+        for i, val in enumerate(train_days):
+            train_day_num[i] = datetime.datetime.strptime(val, '%Y-%m-%d').timetuple().tm_yday
+        google_train['day_of_the_year'] = train_day_num
+
+
+        test_days = pd.read_csv(fold_dir + 'google-test')['Unnamed: 0']
+        test_day_num = np.zeros((test_days.shape))
+        for i, val in enumerate(y_test_index):
+            test_day_num[i] = datetime.datetime.strptime(val, '%Y-%m-%d').timetuple().tm_yday
+        google_test['day_of_the_year'] = test_day_num
     # y_train = pd.read_csv(fold_dir + 'y-train', header=None)
     # y_train = np.asarray(y_train[1])
     # y_test = pd.read_csv(fold_dir + 'y-test', header=None)
@@ -93,11 +113,11 @@ def build_data(fold_dir):
     for i in range(len(google_test) - lag + 1):
         x_test.append(np.asarray(google_test[i:i + lag]))
 
-    y_train_index = pd.read_csv(fold_dir + 'y-train', header=None)[0][:len(x_train)]
+
     x_train = np.asarray(x_train)
     y_train = y_train[:x_train.shape[0]]
 
-    y_test_index = pd.read_csv(fold_dir + 'y-test', header=None)[0][:len(x_test)]
+
     x_test = np.asarray(x_test)
     y_test = y_test[:x_test.shape[0]]
 
@@ -127,18 +147,10 @@ def build_model(x_train):
 
     return model
 
-def build_attention(x_train, fold_num = 1):
-    num_heads = [1, 8, 4, 9, 11]
-    num_heads = num_heads[fold_num]
+def build_attention(x_train, num_heads = 1):
     d_model = x_train.shape[2]
 
     ili_input = Input(shape=[x_train.shape[1],x_train.shape[2]])
-    x = MultiHeadAttention(d_model, num_heads, name="attention")({
-        'query': ili_input,
-        'key': ili_input,
-        'value': ili_input
-    })
-
 
     x = GRU(x_train.shape[2], activation='relu', return_sequences=True)(ili_input)
 

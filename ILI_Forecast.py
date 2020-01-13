@@ -39,8 +39,12 @@ if not os.path.exists(save_dir):
     os.makedirs(save_dir)
 os.chdir(save_dir)
 
-for fold_num in range(1,5):
-    x_train, y_train, y_train_index, x_test, y_test, y_test_index  = build_data(data_dir + str(fold_num) + '/')
+use_day_of_the_year = True
+if use_day_of_the_year:
+    num_heads = [1,3,1,4,2]
+
+for fold_num in range(4,5):
+    x_train, y_train, y_train_index, x_test, y_test, y_test_index  = build_data(data_dir + str(fold_num) + '/', day_of_the_year=use_day_of_the_year)
 
     optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
     earlystop_callback = EarlyStopping(
@@ -87,7 +91,7 @@ for fold_num in range(1,5):
 
     elif args.Model == 'ATTENTION':
 
-        model = build_attention(x_train, fold_num)
+        model = build_attention(x_train, num_heads=num_heads[fold_num])
 
         model.compile(optimizer=optimizer,
                       loss='mse',
