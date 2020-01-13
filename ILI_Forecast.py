@@ -66,7 +66,7 @@ for fold_num in range(1,5):
 
         model = encoder_network(
             output_size=y_train.shape[1],
-            num_layers=2,
+            num_layers=3,
             units=x_train.shape[1],
             d_model=x_train.shape[2],
             num_heads=num_heads[fold_num],
