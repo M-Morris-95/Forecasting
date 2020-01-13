@@ -133,14 +133,21 @@ def build_attention(x_train, fold_num = 1):
     d_model = x_train.shape[2]
 
     ili_input = Input(shape=[x_train.shape[1],x_train.shape[2]])
-    attention = MultiHeadAttention(d_model, num_heads, name="attention")({
+    x = MultiHeadAttention(d_model, num_heads, name="attention")({
         'query': ili_input,
         'key': ili_input,
         'value': ili_input
     })
 
 
-    x = GRU(x_train.shape[2], activation='relu', return_sequences=True)(attention)
+    x = GRU(x_train.shape[2], activation='relu', return_sequences=True)(ili_input)
+
+    x = MultiHeadAttention(d_model, num_heads, name="attention")({
+        'query': x,
+        'key': x,
+        'value': x
+    })
+
     y = GRU(int(0.5*(x_train.shape[2]-1)), activation='relu', return_sequences=True)(x)
     z = GRU(21, activation='relu',return_sequences=False)(y)
 

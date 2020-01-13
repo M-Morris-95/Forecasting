@@ -3,7 +3,23 @@
   <component name="ChangeListManager">
     <list default="true" id="b389ba6e-9d91-4b6a-9f07-ea78b80758c7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ILI_Forecast.py" beforeDir="false" afterPath="$PROJECT_DIR$/ILI_Forecast.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Functions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-11-29/Fold_1network.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-11-32/Fold_1_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-11-35/Fold_1_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-13-10-09/Fold_1_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-13-10-09/Fold_1network.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-13-10-09/Fold_2_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-13-10-09/Fold_2network.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-13-10-09/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-13-10-09/Fold_3network.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-13-10-09/Fold_4_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-13-10-09/Fold_4network.hdf5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-13-10-09/stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-13-10-09/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-13-10-09/training_stats.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-13-10-09/validation_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/plotter.m" beforeDir="false" afterPath="$PROJECT_DIR$/Logging/plotter.m" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -152,6 +168,7 @@
       <workItem from="1578663048972" duration="2457000" />
       <workItem from="1578670063146" duration="6000" />
       <workItem from="1578672619068" duration="2309000" />
+      <workItem from="1578918711340" duration="245000" />
     </task>
     <task id="LOCAL-00001" summary="Added transformer model. Model compiles but a training schedule needs to be created.">
       <created>1578492487636</created>
