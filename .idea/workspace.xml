@@ -2,17 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b389ba6e-9d91-4b6a-9f07-ea78b80758c7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_day_of_the_year_Jan-13-15-48/Fold_1_training_stats.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_day_of_the_year_Jan-13-15-48/Fold_2_training_stats.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_day_of_the_year_Jan-13-15-48/Fold_3_training_stats.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_day_of_the_year_Jan-13-15-48/Fold_4_training_stats.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_day_of_the_year_Jan-13-15-48/stats.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_day_of_the_year_Jan-13-15-48/test_predictions.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_day_of_the_year_Jan-13-15-48/training_stats.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_day_of_the_year_Jan-13-15-48/validation_predictions.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/Results_Summary.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ILI_Forecast.py" beforeDir="false" afterPath="$PROJECT_DIR$/ILI_Forecast.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-12-43/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-12-43/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-12-43/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-12-43/Fold_4_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-12-43/stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-12-43/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-12-43/training_stats.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-12-43/validation_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-15-43/Fold_4_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-15-43/stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-15-43/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-15-43/training_stats.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-15-43/validation_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-15-48/Fold_1_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-15-48/Fold_2_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-15-48/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-15-48/Fold_4_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-15-48/stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-15-48/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-15-48/training_stats.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-15-48/validation_predictions.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Logging/plotter.m" beforeDir="false" afterPath="$PROJECT_DIR$/Logging/plotter.m" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -65,6 +78,9 @@
       <module name="Forecasting" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="$PROJECT_DIR$/../../Python3/tf2_env/bin/python3.7" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
@@ -162,7 +178,8 @@
       <workItem from="1578663048972" duration="2457000" />
       <workItem from="1578670063146" duration="6000" />
       <workItem from="1578672619068" duration="2309000" />
-      <workItem from="1578918711340" duration="3894000" />
+      <workItem from="1578918711340" duration="4225000" />
+      <workItem from="1578994405965" duration="1326000" />
     </task>
     <task id="LOCAL-00001" summary="Added transformer model. Model compiles but a training schedule needs to be created.">
       <created>1578492487636</created>

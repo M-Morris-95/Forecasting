@@ -7,7 +7,7 @@ import time
 from tensorflow.keras.callbacks import EarlyStopping
 
 from Parser import GetParser
-from Functions import plotter, build_model, rmse, evaluate, build_data, build_attention
+from Functions import plotter, build_model, rmse, evaluate, build_data, build_attention, rse
 from Tranformer import encoder_network
 
 
@@ -94,7 +94,7 @@ for fold_num in range(1,5):
         model = build_attention(x_train, num_heads=num_heads[fold_num])
 
         model.compile(optimizer=optimizer,
-                      loss='mse',
+                      loss=rse,
                       metrics=['mae', 'mse', rmse])
 
         model.fit(

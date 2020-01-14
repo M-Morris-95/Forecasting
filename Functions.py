@@ -29,6 +29,11 @@ def pearson(y_true, y_pred):
 def rmse(y_true, y_pred):
     return tf.sqrt(tf.reduce_mean(tf.square(y_true-y_pred)))
 
+def rse(y_true, y_pred):
+    num = tf.sqrt(tf.reduce_mean(tf.square(y_true-y_pred)))
+    den = tf.std(y_true)
+    return num/den
+
 def mse(y_true, y_pred):
     return tf.reduce_mean(tf.square(y_true-y_pred))
 
@@ -151,7 +156,6 @@ def build_attention(x_train, num_heads = 1):
     d_model = x_train.shape[2]
 
     ili_input = Input(shape=[x_train.shape[1],x_train.shape[2]])
-
     x = GRU(x_train.shape[2], activation='relu', return_sequences=True)(ili_input)
 
     x = MultiHeadAttention(d_model, num_heads, name="attention")({
