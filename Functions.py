@@ -31,7 +31,7 @@ def rmse(y_true, y_pred):
 
 def rse(y_true, y_pred):
     num = tf.sqrt(tf.reduce_mean(tf.square(y_true-y_pred)))
-    den = tf.std(y_true)
+    den = tf.math.reduce_std(y_true)
     return num/den
 
 def mse(y_true, y_pred):
