@@ -1,0 +1,5 @@
+#!/bin/bash
+
+python3 run.py  --Model=ATTENTION --Server=True
+python3 run.py  --Model=ENCODER --Server=True
+python3 run.py  --Model=GRU --Server=True
