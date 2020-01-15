@@ -1,134 +1,79 @@
 from tensorflow.keras.models import Sequential, Model
 from tensorflow.keras.layers import LSTM, Dropout, Conv1D, GRU, Attention, Dense, Input, concatenate, Flatten, Layer, LayerNormalization, Embedding, Dropout
-from tensorflow.keras.callbacks import EarlyStopping
 import pandas as pd
-import os
 import numpy as np
-import tensorflow as tf
-import time
 import matplotlib.pyplot as plt
-import argparse
+import metrics
 from Tranformer import MultiHeadAttention
 import datetime
 
-from scipy.stats import pearsonr
+
 
 import tensorflow as tf
 
-def pearson(y_true, y_pred):
-    if type(y_pred) != np.ndarray:
-        y_pred = y_pred.numpy()
-    y_pred = y_pred.astype('float64')
 
-    # y_true = y_true.squeeze()
-    y_true = y_true.astype('float64')
-    corr = pearsonr(y_true, y_pred)[0]
+class data_builder():
+    def __init__(self, args, fold, look_ahead=14, lag = 28, country = 'eng', day_of_the_year=True):
+        self.look_ahead = look_ahead
+        self.lag = lag
+        self.doty = day_of_the_year
 
-    return corr
-
-def rmse(y_true, y_pred):
-    return tf.sqrt(tf.reduce_mean(tf.square(y_true-y_pred)))
-
-def rse(y_true, y_pred):
-    num = tf.sqrt(tf.reduce_mean(tf.square(y_true-y_pred)))
-    den = tf.math.reduce_std(y_true)
-    return num/den
-
-def mse(y_true, y_pred):
-    return tf.reduce_mean(tf.square(y_true-y_pred))
-
-def mae(y_true, y_pred):
-    return tf.reduce_mean(tf.math.abs(y_true-y_pred))
-
-def evaluate(y_true, y_pred):
-    return mae(y_true, y_pred).numpy(), rmse(y_true, y_pred).numpy(), pearson(y_true, y_pred)
-
-def load_google_data(path):
-    google_data = pd.read_csv(path)
-    google_data = google_data.drop(['Unnamed: 0'], axis=1)
-    return google_data
-
-def load_ili_data(path):
-    ili_data = pd.read_csv(path, header=None)
-    ili_data = ili_data[1]
-    return ili_data
-
-def build_data(fold_dir, day_of_the_year=True):
-    google_train = load_google_data(fold_dir + 'google-train')
-    google_train['ili'] = load_ili_data(fold_dir + 'ili-train').values
-
-    google_test = load_google_data(fold_dir + 'google-test')
-    google_test['ili'] = load_ili_data(fold_dir + 'ili-test').values
+        assert country == 'eng' or country == 'us'
+        if not args.Server:
+            self.directory = '/Users/michael/Documents/ili_data/dataset_forecasting_lag' + str(
+                lag) + '/' + country + '_smoothed_' + str(look_ahead) + '/fold' + str(fold) + '/'
+        else:
+            self.directory = '/home/mimorris/ili_data/dataset_forecasting_lag' + str(
+                lag) + '/' + country + '_smoothed_' + str(look_ahead) + '/fold' + str(fold) + '/'
 
 
-    y_train_index = pd.read_csv(fold_dir + 'y-train', header=None)[0]
-    y_test_index = pd.read_csv(fold_dir + 'y-test', header=None)[0]
+    def load_ili_data(self, path):
+        ili_data = pd.read_csv(path, header = None)
+        return ili_data[1]
 
+    def load_google_data(self, path):
+        google_data = pd.read_csv(path)
+        if self.doty:
+            temp = google_data['Unnamed: 0'].values
+            google_data['Unnamed: 0'] = np.asarray([datetime.datetime.strptime(val, '%Y-%m-%d').timetuple().tm_yday for val in temp])
+        else:
+            google_data = google_data.drop(['Unnamed: 0'], axis=1)
+        return google_data
 
+    def build(self):
+        google_train = self.load_google_data(self.directory + 'google-train')
+        google_train['ili'] = self.load_ili_data(self.directory + 'ili-train').values
 
-    if day_of_the_year:
-        train_days = pd.read_csv(fold_dir + 'google-train')['Unnamed: 0']
-        train_day_num = np.zeros((train_days.shape))
-        for i, val in enumerate(train_days):
-            train_day_num[i] = datetime.datetime.strptime(val, '%Y-%m-%d').timetuple().tm_yday
-        google_train['day_of_the_year'] = train_day_num
+        google_test = self.load_google_data(self.directory + 'google-test')
+        google_test['ili'] = self.load_ili_data(self.directory + 'ili-test').values
 
+        y_train_index = pd.read_csv(self.directory + 'y-train', header=None)[0]
+        y_test_index = pd.read_csv(self.directory + 'y-test', header=None)[0]
 
-        test_days = pd.read_csv(fold_dir + 'google-test')['Unnamed: 0']
-        test_day_num = np.zeros((test_days.shape))
-        for i, val in enumerate(y_test_index):
-            test_day_num[i] = datetime.datetime.strptime(val, '%Y-%m-%d').timetuple().tm_yday
-        google_test['day_of_the_year'] = test_day_num
-    # y_train = pd.read_csv(fold_dir + 'y-train', header=None)
-    # y_train = np.asarray(y_train[1])
-    # y_test = pd.read_csv(fold_dir + 'y-test', header=None)
-    # y_test = np.asarray(y_test[1])
+        y_ahead = self.look_ahead + 7
 
-    temp = pd.read_csv(fold_dir + 'ili-train', header=None)[27:48]
-    temp = temp.append(pd.read_csv(fold_dir + 'y-train', header=None))
-    temp = temp[1].values # first of y train is at index 20
+        temp = pd.read_csv(self.directory + 'ili-train', header=None)[self.lag-1:self.lag+self.look_ahead+6]
+        temp = temp.append(pd.read_csv(self.directory + 'y-train', header=None))[1].values
 
-    y_train = []
-    for i in range(len(temp) - 21):
-        y_train.append(np.asarray(temp[i:i + 21]))
-    y_train = np.asarray(y_train)
+        y_train = np.asarray([np.asarray(temp[i:i + y_ahead]) for i in range(len(temp) - y_ahead)])
 
-    temp = pd.read_csv(fold_dir + 'ili-test', header=None)[27:48]
-    temp = temp.append(pd.read_csv(fold_dir + 'y-test', header=None))
-    temp = temp[1].values # first of y test is at index 20
+        temp = pd.read_csv(self.directory + 'ili-test', header=None)[self.lag-1:self.lag+self.look_ahead+6]
+        temp = temp.append(pd.read_csv(self.directory + 'y-test', header=None))[1].values
+        y_test = np.asarray([np.asarray(temp[i:i + y_ahead]) for i in range(len(temp) - y_ahead)])
 
-    y_test = []
-    for i in range(len(temp) - 21):
-        y_test.append(np.asarray(temp[i:i + 21]))
-    y_test = np.asarray(y_test)
+        n = normalizer(google_train, y_train)
+        google_train = n.normalize(google_train, y_train)
+        google_test = n.normalize(google_test, y_test)
 
+        x_train = np.asarray([google_train[i:i + self.lag].values for i in range(len(google_train) - self.lag + 1)])
+        x_test = np.asarray([google_test[i:i + self.lag].values for i in range(len(google_test) - self.lag + 1)])
 
+        assert(x_train.shape[0] == y_train.shape[0] == y_train_index.shape[0])
+        assert(x_test.shape[0] == y_test.shape[0] == y_test_index.shape[0])
 
-    n = normalizer(google_train, y_train)
-    google_train = n.normalize(google_train, y_train)
-    google_test = n.normalize(google_test, y_test)
+        return x_train, y_train, y_train_index, x_test, y_test, y_test_index
 
-    x_train = []
-    x_test = []
-    lag = 28
-
-    for i in range(len(google_train) - lag + 1):
-        x_train.append(np.asarray(google_train[i:i + lag]))
-
-    for i in range(len(google_test) - lag + 1):
-        x_test.append(np.asarray(google_test[i:i + lag]))
-
-
-    x_train = np.asarray(x_train)
-    y_train = y_train[:x_train.shape[0]]
-
-
-    x_test = np.asarray(x_test)
-    y_test = y_test[:x_test.shape[0]]
-
-    return x_train, y_train, y_train_index, x_test, y_test, y_test_index
-
-def build_model(x_train):
+def build_model(x_train, y_train):
     ili_input = Input(shape=[x_train.shape[1],1])
     x = GRU(28, activation='relu', return_sequences=True)(ili_input)
     x = Model(inputs=ili_input, outputs=x)
@@ -139,7 +84,7 @@ def build_model(x_train):
     y = Model(inputs=google_input, outputs=y)
 
     z = concatenate([x.output, y.output])
-    z = GRU(21, activation='relu',return_sequences=False)(z)
+    z = GRU(y_train.shape[1], activation='relu',return_sequences=False)(z)
 
 
     model = Model(inputs=[x.input, y.input], outputs=z)
@@ -148,11 +93,11 @@ def build_model(x_train):
 
     model.compile(optimizer=optimizer,
                   loss='mae',
-                  metrics=['mae', 'mse', rmse])
+                  metrics=['mae', 'mse', metrics.rmse])
 
     return model
 
-def build_attention(x_train, num_heads = 1):
+def build_attention(x_train, y_train, num_heads = 1):
     d_model = x_train.shape[2]
 
     ili_input = Input(shape=[x_train.shape[1],x_train.shape[2]])
@@ -165,7 +110,7 @@ def build_attention(x_train, num_heads = 1):
     })
 
     y = GRU(int(0.5*(x_train.shape[2]-1)), activation='relu', return_sequences=True)(x)
-    z = GRU(21, activation='relu',return_sequences=False)(y)
+    z = GRU(y_train.shape[1], activation='relu',return_sequences=False)(y)
 
 
     model = Model(inputs=ili_input, outputs=z)
@@ -174,7 +119,7 @@ def build_attention(x_train, num_heads = 1):
 
     model.compile(optimizer=optimizer,
                   loss='mae',
-                  metrics=['mae', 'mse', rmse])
+                  metrics=['mae', 'mse', metrics.rmse])
 
     return model
 

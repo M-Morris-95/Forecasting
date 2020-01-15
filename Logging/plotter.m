@@ -4,7 +4,7 @@ root_dir = pwd;
 gru_pred = readtable(fullfile(root_dir, 'GRUJan-13-10-13/test_predictions.csv'));
 encoder_pred = readtable(fullfile(root_dir, 'ENCODERJan-13-11-03/test_predictions.csv'));
 attention_pred = readtable(fullfile(root_dir, 'ATTENTION_day_of_the_year_Jan-13-15-48/test_predictions.csv'));
-attention2_pred = readtable(fullfile(root_dir, 'ATTENTIONJan-14-10-56/test_predictions.csv'));
+attention2_pred = readtable(fullfile(root_dir, 'ATTENTIONJan-14-11-11/test_predictions.csv'));
 
 
 % Define Colours
@@ -118,7 +118,7 @@ hold on
 plot(encoder, '--','color',color(1,:),'linewidth',1.4);
 plot(gru, '-.','color',color(2,:),'linewidth',1.4);
 plot(attention, ':','color',color(4,:),'linewidth',2);
-plot(attention2,'color',color(5,:),'linewidth',1.4);
+% plot(attention2,'color',color(5,:),'linewidth',1.4);
 plot(truth,'color',color(3,:),'linewidth',1.4);
 title('2014/19')
 xlabel('day')
@@ -140,7 +140,7 @@ hold on
 plot(encoder-truth, '--','color',color(1,:),'linewidth',1.4);
 plot(gru-truth, '-.','color',color(2,:),'linewidth',1.4);
 plot(attention-truth, ':','color',color(4,:),'linewidth',2);
-plot(attention2-truth,'color',color(5,:),'linewidth',1.4);
+% plot(attention2-truth,'color',color(5,:),'linewidth',1.4);
 
 plot(truth,'color',color(3,:),'linewidth',1.4);
 title('2014/19 Error Rate')
