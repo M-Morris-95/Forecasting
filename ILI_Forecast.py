@@ -25,7 +25,7 @@ test_predictions = pd.DataFrame()
 
 
 EPOCHS = 100
-BATCH_SIZE = 64
+BATCH_SIZE = 128
 
 use_day_of_the_year = True
 if use_day_of_the_year:
@@ -63,7 +63,7 @@ for Model in ['GRU', 'ATTENTION','ENCODER']:
 
                 model.fit(
                     [x_train[:,:,-1, np.newaxis],x_train[:,:,:-1]], y_train,
-                    callbacks=[earlystop_callback],
+                    # callbacks=[earlystop_callback],
                     validation_data=([x_test[:,:,-1, np.newaxis],x_test[:,:,:-1]], y_test),
                     epochs=EPOCHS, batch_size=BATCH_SIZE)
 
@@ -85,7 +85,7 @@ for Model in ['GRU', 'ATTENTION','ENCODER']:
 
                 model.fit(
                     x_train, y_train,
-                    callbacks=[earlystop_callback],
+                    # callbacks=[earlystop_callback],
                     validation_data=(x_test, y_test),
                     epochs=EPOCHS, batch_size=BATCH_SIZE)
 
@@ -100,7 +100,7 @@ for Model in ['GRU', 'ATTENTION','ENCODER']:
 
                 model.fit(
                     x_train, y_train,
-                    callbacks=[earlystop_callback],
+                    # callbacks=[earlystop_callback],
                     validation_data=(x_test, y_test),
                     epochs=EPOCHS, batch_size=BATCH_SIZE)
                 prediction = model.predict(x_test)[:, -1]
@@ -110,6 +110,7 @@ for Model in ['GRU', 'ATTENTION','ENCODER']:
             results[str(Model) +'_' + str(look_ahead) + '_' + str(2014) + '/' + str(14 + fold_num)] = metrics.evaluate(y_test, prediction)
             test_predictions[str(Model) +'_' + str(look_ahead) + '_' + 'prediction_'+str(2014) + '/' + str(14 + fold_num)] = prediction[:365]
             test_predictions['truth_' + str(2014) + '/' + str(14 + fold_num)] = y_test[:365]
+
 
             training_stats = pd.DataFrame(model.history.history)
             training_stats.to_csv(r'Fold_'+str(fold_num)+'_training_stats.csv')
