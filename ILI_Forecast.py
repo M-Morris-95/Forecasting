@@ -108,8 +108,8 @@ for Model in ['GRU', 'ATTENTION','ENCODER']:
             y_test = y_test[:, -1]
 
             results[str(Model) +'_' + str(look_ahead) + '_' + str(2014) + '/' + str(14 + fold_num)] = metrics.evaluate(y_test, prediction)
-            test_predictions[str(Model) +'_' + str(look_ahead) + '_' + 'prediction_'+str(2014) + '/' + str(14 + fold_num)] = prediction[:-1]
-            test_predictions['truth_' + str(2014) + '/' + str(14 + fold_num)] = y_test[:-1]
+            test_predictions[str(Model) +'_' + str(look_ahead) + '_' + 'prediction_'+str(2014) + '/' + str(14 + fold_num)] = prediction[:365]
+            test_predictions['truth_' + str(2014) + '/' + str(14 + fold_num)] = y_test[:365]
 
             training_stats = pd.DataFrame(model.history.history)
             training_stats.to_csv(r'Fold_'+str(fold_num)+'_training_stats.csv')
