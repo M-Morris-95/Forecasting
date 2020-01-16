@@ -16,4 +16,10 @@ def GetParser():
                         default='GRU',
                         required=False)
 
+    parser.add_argument('--Lag',
+                        type=int,
+                        help='how much lag should be in the data, 28 or 112?',
+                        default=28,
+                        required=False)
+
     return parser

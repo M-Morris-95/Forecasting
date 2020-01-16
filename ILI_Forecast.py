@@ -48,7 +48,7 @@ Model = args.Model
 for Model in ['GRU', 'ATTENTION','ENCODER']:
     for look_ahead in [7, 14, 21]:
         for fold_num in range(1,5):
-            data = data_builder(args, fold=fold_num, look_ahead=21)
+            data = data_builder(args, fold=fold_num, look_ahead=look_ahead, lag = args.Lag)
             x_train, y_train, y_train_index, x_test, y_test, y_test_index  = data.build()
 
             optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
@@ -67,7 +67,7 @@ for Model in ['GRU', 'ATTENTION','ENCODER']:
                     validation_data=([x_test[:,:,-1, np.newaxis],x_test[:,:,:-1]], y_test),
                     epochs=EPOCHS, batch_size=BATCH_SIZE)
 
-                prediction = model.predict([x_test[:, :, -1, np.newaxis], x_test[:, :, :-1]])[:, 20]
+                prediction = model.predict([x_test[:, :, -1, np.newaxis], x_test[:, :, :-1]])[:, -1]
 
             elif Model == 'ENCODER':
                 model = encoder_network(
@@ -89,7 +89,7 @@ for Model in ['GRU', 'ATTENTION','ENCODER']:
                     validation_data=(x_test, y_test),
                     epochs=EPOCHS, batch_size=BATCH_SIZE)
 
-                prediction = model(x_test, training=False)[:, 20]
+                prediction = model(x_test, training=False)[:, -1]
 
             elif Model == 'ATTENTION':
                 model = build_attention(x_train, y_train, num_heads=num_heads[fold_num])
@@ -103,13 +103,13 @@ for Model in ['GRU', 'ATTENTION','ENCODER']:
                     callbacks=[earlystop_callback],
                     validation_data=(x_test, y_test),
                     epochs=EPOCHS, batch_size=BATCH_SIZE)
-                prediction = model.predict(x_test)[:, 20]
+                prediction = model.predict(x_test)[:, -1]
 
             y_test = y_test[:, -1]
 
             results[str(Model) +'_' + str(look_ahead) + '_' + str(2014) + '/' + str(14 + fold_num)] = metrics.evaluate(y_test, prediction)
-            test_predictions[str(Model) +'_' + str(look_ahead) + '_' + 'prediction_'+str(2014) + '/' + str(14 + fold_num)] = prediction[:365]
-            test_predictions['truth_' + str(2014) + '/' + str(14 + fold_num)] = y_test[:365]
+            test_predictions[str(Model) +'_' + str(look_ahead) + '_' + 'prediction_'+str(2014) + '/' + str(14 + fold_num)] = prediction[:-1]
+            test_predictions['truth_' + str(2014) + '/' + str(14 + fold_num)] = y_test[:-1]
 
             training_stats = pd.DataFrame(model.history.history)
             training_stats.to_csv(r'Fold_'+str(fold_num)+'_training_stats.csv')
