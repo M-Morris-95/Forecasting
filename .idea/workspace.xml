@@ -2,68 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b389ba6e-9d91-4b6a-9f07-ea78b80758c7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/metrics.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Functions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ILI_Forecast.py" beforeDir="false" afterPath="$PROJECT_DIR$/ILI_Forecast.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-11-36/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-11-36/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-11-36/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-11-36/Fold_4_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-11-36/stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-11-36/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-11-36/training_stats.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-11-36/validation_predictions.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-12-54/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-12-54/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-12-54/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-12-54/Fold_4_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-12-54/stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-12-54/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-12-54/training_stats.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-13-12-54/validation_predictions.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-14-11-11/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-14-11-11/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-14-11-11/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-14-11-11/Fold_4_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-14-11-11/stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-14-11-11/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-14-11-11/training_stats.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-14-11-11/validation_predictions.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTION_day_of_the_year_Jan-13-15-48/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTION_day_of_the_year_Jan-13-15-48/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTION_day_of_the_year_Jan-13-15-48/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTION_day_of_the_year_Jan-13-15-48/Fold_4_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTION_day_of_the_year_Jan-13-15-48/stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTION_day_of_the_year_Jan-13-15-48/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTION_day_of_the_year_Jan-13-15-48/training_stats.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTION_day_of_the_year_Jan-13-15-48/validation_predictions.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-13-11-03/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-13-11-03/Fold_1network.hdf5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-13-11-03/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-13-11-03/Fold_2network.hdf5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-13-11-03/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-13-11-03/Fold_3network.hdf5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-13-11-03/Fold_4_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-13-11-03/Fold_4network.hdf5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-13-11-03/stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-13-11-03/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-13-11-03/training_stats.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-13-11-03/validation_predictions.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/GRUJan-13-10-13/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/GRUJan-13-10-13/Fold_1network.hdf5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/GRUJan-13-10-13/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/GRUJan-13-10-13/Fold_2network.hdf5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/GRUJan-13-10-13/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/GRUJan-13-10-13/Fold_3network.hdf5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/GRUJan-13-10-13/Fold_4_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/GRUJan-13-10-13/Fold_4network.hdf5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/GRUJan-13-10-13/stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/GRUJan-13-10-13/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/GRUJan-13-10-13/training_stats.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/GRUJan-13-10-13/validation_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-15-16-28/Fold_1_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-15-16-28/Fold_2_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-15-16-28/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-15-16-28/Fold_4_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-15-16-28/stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-15-16-28/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-15-16-28/training_stats.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-15-16-28/validation_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-15-16-37/Fold_1_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-15-16-37/Fold_2_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-15-16-37/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-15-16-37/Fold_4_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-15-16-37/stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-15-16-37/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-15-16-37/training_stats.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ENCODERJan-15-16-37/validation_predictions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRUJan-15-16-40/Fold_1_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRUJan-15-16-40/Fold_2_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRUJan-15-16-40/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRUJan-15-16-40/Fold_4_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRUJan-15-16-40/stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRUJan-15-16-40/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRUJan-15-16-40/training_stats.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRUJan-15-16-40/validation_predictions.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Logging/Results_Summary.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Logging/Results_Summary.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/plotter.m" beforeDir="false" afterPath="$PROJECT_DIR$/Logging/plotter.m" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -115,6 +80,9 @@
       <module name="Forecasting" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="$PROJECT_DIR$/../../Python3/tf2_env/bin/python3.7" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
@@ -214,7 +182,8 @@
       <workItem from="1578672619068" duration="2309000" />
       <workItem from="1578918711340" duration="4225000" />
       <workItem from="1578994405965" duration="1977000" />
-      <workItem from="1579087136581" duration="10846000" />
+      <workItem from="1579087136581" duration="11074000" />
+      <workItem from="1579171089610" duration="1161000" />
     </task>
     <task id="LOCAL-00001" summary="Added transformer model. Model compiles but a training schedule needs to be created.">
       <created>1578492487636</created>
@@ -254,6 +223,11 @@
           <line>112</line>
           <option name="timeStamp" value="54" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ILI_Forecast.py</url>
+          <line>56</line>
+          <option name="timeStamp" value="55" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -267,6 +241,6 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Forecasting$Load_Data.coverage" NAME="Forecast Coverage Results" MODIFIED="1576095768553" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Forecasting$data_formatting.coverage" NAME="data_formatting Coverage Results" MODIFIED="1576492782984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Forecasting$Forecast.coverage" NAME="Forecast Coverage Results" MODIFIED="1579102785883" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Forecasting$Forecast.coverage" NAME="Forecast Coverage Results" MODIFIED="1579171206126" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
