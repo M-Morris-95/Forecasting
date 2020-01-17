@@ -22,4 +22,16 @@ def GetParser():
                         default=28,
                         required=False)
 
+    parser.add_argument('--Look_Ahead',
+                        type=int,
+                        help='how much far ahead should it forcast? 7, 14, 21, All?',
+                        default=14,
+                        required=False)
+
+    parser.add_argument('--Country',
+                        type=str,
+                        help='which country? eng, or us?',
+                        default='eng',
+                        required=False)
+
     return parser

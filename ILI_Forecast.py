@@ -24,7 +24,7 @@ results = pd.DataFrame(index = ['MAE', 'RMSE', 'R'])
 test_predictions = pd.DataFrame()
 
 
-EPOCHS = 100
+EPOCHS = 50
 BATCH_SIZE = 128
 
 use_day_of_the_year = True
@@ -43,12 +43,20 @@ if not os.path.exists(save_dir):
     os.makedirs(save_dir)
 os.chdir(save_dir)
 
-Model = args.Model
+if args.Model == 'ALL':
+    Model = ['GRU', 'ATTENTION','ENCODER']
+else:
+    Model = [args.Model]
 
-for Model in ['GRU', 'ATTENTION','ENCODER']:
-    for look_ahead in [7, 14, 21]:
+if args.Look_Ahead == 'ALL':
+    look_ahead = [7, 14, 21]
+else:
+    look_ahead = [args.Look_Ahead]
+
+for Model in Model:
+    for look_ahead in look_ahead:
         for fold_num in range(1,5):
-            data = data_builder(args, fold=fold_num, look_ahead=look_ahead, lag = args.Lag)
+            data = data_builder(args, fold=fold_num, look_ahead=look_ahead, lag = args.Lag, country = args.country)
             x_train, y_train, y_train_index, x_test, y_test, y_test_index  = data.build()
 
             optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
@@ -70,6 +78,7 @@ for Model in ['GRU', 'ATTENTION','ENCODER']:
                 prediction = model.predict([x_test[:, :, -1, np.newaxis], x_test[:, :, :-1]])[:, -1]
 
             elif Model == 'ENCODER':
+                num_heads = 7
                 model = encoder_network(
                     output_size=y_train.shape[1],
                     num_layers=3,
@@ -92,7 +101,7 @@ for Model in ['GRU', 'ATTENTION','ENCODER']:
                 prediction = model(x_test, training=False)[:, -1]
 
             elif Model == 'ATTENTION':
-                model = build_attention(x_train, y_train, num_heads=num_heads[fold_num])
+                model = build_attention(x_train, y_train, num_heads=7) #num_heads=num_heads[fold_num])
 
                 model.compile(optimizer=optimizer,
                               loss='mse',

@@ -98,10 +98,10 @@ def build_model(x_train, y_train):
     return model
 
 def build_attention(x_train, y_train, num_heads = 1):
-    d_model = x_train.shape[2]
+    d_model = x_train.shape[1]
 
     ili_input = Input(shape=[x_train.shape[1],x_train.shape[2]])
-    x = GRU(x_train.shape[2], activation='relu', return_sequences=True)(ili_input)
+    x = GRU(x_train.shape[1], activation='relu', return_sequences=True)(ili_input)
 
     x = MultiHeadAttention(d_model, num_heads, name="attention")({
         'query': x,
