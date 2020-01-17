@@ -56,7 +56,7 @@ else:
 for Model in Model:
     for look_ahead in look_ahead:
         for fold_num in range(1,5):
-            data = data_builder(args, fold=fold_num, look_ahead=look_ahead, lag = args.Lag, country = args.country)
+            data = data_builder(args, fold=fold_num, look_ahead=look_ahead, lag = args.Lag, country = args.Country)
             x_train, y_train, y_train_index, x_test, y_test, y_test_index  = data.build()
 
             optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
