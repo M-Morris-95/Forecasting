@@ -48,10 +48,10 @@ if args.Model == 'ALL':
 else:
     Model = [args.Model]
 
-if args.Look_Ahead == 'ALL':
+if args.Look_Ahead == 0:
     look_ahead = [7, 14, 21]
 else:
-    look_ahead = [args.Look_Ahead]
+    look_ahead = np.asarray([args.Look_Ahead])
 
 for Model in Model:
     for look_ahead in look_ahead:
