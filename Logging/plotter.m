@@ -1,10 +1,10 @@
 clear all
 root_dir = pwd;
 
-gru_pred = readtable(fullfile(root_dir, 'GRUJan-13-10-13/test_predictions.csv'));
-encoder_pred = readtable(fullfile(root_dir, 'ENCODERJan-13-11-03/test_predictions.csv'));
-attention_pred = readtable(fullfile(root_dir, 'ATTENTION_day_of_the_year_Jan-13-15-48/test_predictions.csv'));
-attention2_pred = readtable(fullfile(root_dir, 'ATTENTIONJan-14-11-11/test_predictions.csv'));
+gru_pred = readtable(fullfile(root_dir, '14 days ahead/GRUJan-13-10-13/test_predictions.csv'));
+encoder_pred = readtable(fullfile(root_dir, '14 days ahead/ENCODERJan-13-11-03/test_predictions.csv'));
+attention_pred = readtable(fullfile(root_dir, '14 days ahead/ATTENTION_day_of_the_year_Jan-13-15-48/test_predictions.csv'));
+attention2_pred = readtable(fullfile(root_dir, '14 days ahead/ATTENTIONJan-14-11-11/test_predictions.csv'));
 
 
 % Define Colours

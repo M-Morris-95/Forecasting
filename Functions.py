@@ -108,8 +108,8 @@ def build_attention(x_train, y_train, num_heads = 1):
         'key': x,
         'value': x
     })
-
-    y = GRU(int(0.5*(x_train.shape[2]-1)), activation='relu', return_sequences=True)(x)
+    x = GRU(int((x_train.shape[2] - 1)), activation='relu', return_sequences=True)(x)
+    y = GRU(int(0.75*(x_train.shape[2]-1)), activation='relu', return_sequences=True)(x)
     z = GRU(y_train.shape[1], activation='relu',return_sequences=False)(y)
 
 

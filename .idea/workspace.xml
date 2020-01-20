@@ -3,16 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="b389ba6e-9d91-4b6a-9f07-ea78b80758c7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Functions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ILI_Forecast.py" beforeDir="false" afterPath="$PROJECT_DIR$/ILI_Forecast.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-16-21-48/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-16-21-48/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-16-21-48/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-16-21-48/Fold_4_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-16-21-48/stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-16-21-48/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-09-26/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-09-26/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-09-26/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Results_Summary.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Logging/Results_Summary.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/plotter.m" beforeDir="false" afterPath="$PROJECT_DIR$/Logging/plotter.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/~$Results_Summary.xlsx" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -74,7 +69,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ILI_Forecast.py" />
-      <option name="PARAMETERS" value="--Model=ATTENTION --Look_Ahead=14 --Lag=28" />
+      <option name="PARAMETERS" value="--Model=ATTENTION --Look_Ahead=14 --Lag=28 --Country=eng" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -169,7 +164,9 @@
       <workItem from="1579087136581" duration="11074000" />
       <workItem from="1579171089610" duration="5467000" />
       <workItem from="1579251508726" duration="3606000" />
-      <workItem from="1579260496670" duration="170000" />
+      <workItem from="1579260496670" duration="763000" />
+      <workItem from="1579267537541" duration="4775000" />
+      <workItem from="1579511923627" duration="418000" />
     </task>
     <task id="LOCAL-00001" summary="Added transformer model. Model compiles but a training schedule needs to be created.">
       <created>1578492487636</created>
@@ -205,24 +202,19 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Functions.py</url>
-          <line>112</line>
-          <option name="timeStamp" value="54" />
+          <url>file://$PROJECT_DIR$/ILI_Forecast.py</url>
+          <line>95</line>
+          <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/ILI_Forecast.py</url>
-          <line>119</line>
-          <option name="timeStamp" value="61" />
+          <line>73</line>
+          <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Tranformer.py</url>
-          <line>31</line>
-          <option name="timeStamp" value="62" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Functions.py</url>
-          <line>99</line>
-          <option name="timeStamp" value="63" />
+          <url>file://$PROJECT_DIR$/ILI_Forecast.py</url>
+          <line>110</line>
+          <option name="timeStamp" value="66" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -237,6 +229,6 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Forecasting$Load_Data.coverage" NAME="Forecast Coverage Results" MODIFIED="1576095768553" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Forecasting$data_formatting.coverage" NAME="data_formatting Coverage Results" MODIFIED="1576492782984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Forecasting$Forecast.coverage" NAME="Forecast Coverage Results" MODIFIED="1579254206138" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Forecasting$Forecast.coverage" NAME="Forecast Coverage Results" MODIFIED="1579270132352" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
