@@ -97,20 +97,21 @@ def build_model(x_train, y_train):
 
     return model
 
-def build_attention(x_train, y_train, num_heads = 1):
+def build_attention(x_train, y_train, num_heads = 1, regularizer = None):
+
     d_model = x_train.shape[1]
 
     ili_input = Input(shape=[x_train.shape[1],x_train.shape[2]])
-    x = GRU(x_train.shape[1], activation='relu', return_sequences=True)(ili_input)
+    x = GRU(x_train.shape[1], activation='relu', return_sequences=True, kernel_regularizer=regularizer)(ili_input)
 
-    x = MultiHeadAttention(d_model, num_heads, name="attention")({
+    x = MultiHeadAttention(d_model, num_heads, name="attention", regularizer=regularizer)({
         'query': x,
         'key': x,
         'value': x
     })
-    x = GRU(int((x_train.shape[2] - 1)), activation='relu', return_sequences=True)(x)
-    y = GRU(int(0.75*(x_train.shape[2]-1)), activation='relu', return_sequences=True)(x)
-    z = GRU(y_train.shape[1], activation='relu',return_sequences=False)(y)
+    x = GRU(int((x_train.shape[2] - 1)), activation='relu', return_sequences=True, kernel_regularizer=regularizer)(x)
+    y = GRU(int(0.75*(x_train.shape[2]-1)), activation='relu', return_sequences=True, kernel_regularizer=regularizer)(x)
+    z = GRU(y_train.shape[1], activation='relu',return_sequences=False, kernel_regularizer=regularizer)(y)
 
 
     model = Model(inputs=ili_input, outputs=z)

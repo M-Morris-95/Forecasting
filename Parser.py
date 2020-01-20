@@ -10,6 +10,12 @@ def GetParser():
                         default=False,
                         required = False)
 
+    parser.add_argument('--Regularizer', '-R',
+                        type=bool,
+                        help='Does it use l2 norm?',
+                        default=False,
+                        required = False)
+
     parser.add_argument('--Model',
                         type=str,
                         help='which model use? Encoder, GRU etc.',

@@ -5,6 +5,7 @@ import tensorflow as tf
 import time
 
 from tensorflow.keras.callbacks import EarlyStopping
+from tensorflow.keras.regularizers import l2
 import metrics
 from Parser import GetParser
 from Functions import plotter, data_builder, build_attention, build_model
@@ -22,9 +23,10 @@ fig3 = plotter(3)
 
 results = pd.DataFrame(index = ['MAE', 'RMSE', 'R'])
 test_predictions = pd.DataFrame()
+test_predictions100 = pd.DataFrame()
 
 
-EPOCHS = 50
+EPOCHS = 100
 BATCH_SIZE = 128
 
 use_day_of_the_year = True
@@ -56,13 +58,15 @@ else:
 for Model in Models:
     for look_ahead in look_aheads:
         for k in range(10):
-            for fold_num in range(1,5):
+            for fold_num in range(3,4):
+
                 tf.random.set_seed(k)
                 data = data_builder(args, fold=fold_num, look_ahead=look_ahead, lag = args.Lag, country = args.Country)
                 x_train, y_train, y_train_index, x_test, y_test, y_test_index  = data.build()
 
                 optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
                 earlystop_callback = EarlyStopping(monitor='val_loss', min_delta=0.0001, patience=5)
+                y_test = y_test[:, -1]
 
                 if Model == 'GRU':
                     model = build_model(x_train, y_train)
@@ -100,9 +104,13 @@ for Model in Models:
                         epochs=EPOCHS, batch_size=BATCH_SIZE)
 
                     prediction = model(x_test, training=False)[:, -1]
-
+                #
                 elif Model == 'ATTENTION':
-                    model = build_attention(x_train, y_train, num_heads=7) #num_heads=num_heads[fold_num])
+                    if args.Regularizer:
+                        regularizer = tf.keras.regularizers.l1(0.01)
+                    else:
+                        regularizer = None
+                    model = build_attention(x_train, y_train, num_heads=7, regularizer = regularizer) #num_heads=num_heads[fold_num])
 
                     model.compile(optimizer=optimizer,
                                   loss='mse',
@@ -111,18 +119,28 @@ for Model in Models:
                     model.fit(
                         x_train, y_train,
                         # callbacks=[earlystop_callback],
-                        validation_data=(x_test, y_test),
+                        # validation_data=(x_test, y_test),
                         epochs=EPOCHS, batch_size=BATCH_SIZE)
+
                     prediction = model.predict(x_test)[:, -1]
+                    results[str(Model) + '_' + str(look_ahead) + '_' + str(2014) + '/' + str(14 + fold_num) + '_100_' + str(
+                        k)] = metrics.evaluate(y_test, prediction)
+
+                    test_predictions100[str(Model) + '_' + str(look_ahead) + '_' + 'prediction_' + str(2014) + '/' + str(
+                        14 + fold_num) + '_100_' + str(k)] = prediction[:365]
+                    test_predictions100['truth_' + str(2014) + '/' + str(14 + fold_num)] = y_test[:365]
+
+                    model.fit(
+                        x_train, y_train,
+                        epochs=EPOCHS, batch_size=BATCH_SIZE)
 
 
-                y_test = y_test[:, -1]
                 model_dir = str(Model) +'_' + str(look_ahead) +'_' +str(2014) + '_' + str(14 + fold_num) + '_' + str(k)
 
 
                 results[str(Model) +'_' + str(look_ahead) + '_' + str(2014) + '/' + str(14 + fold_num) + '_' + str(k)] = metrics.evaluate(y_test, prediction)
 
-                test_predictions[str(Model) +'_' + str(look_ahead) + '_' + 'prediction_'+str(2014) + '/' + str(14 + fold_num) + '_' + str(k)] = prediction[:365]
+                test_predictions[str(Model) +'_' + str(look_ahead) + '_' + 'prediction_'+str(2014) + '/' + str(14 + fold_num) + '_100_' + str(k)] = prediction[:365]
                 test_predictions['truth_' + str(2014) + '/' + str(14 + fold_num)] = y_test[:365]
 
                 curr_dir = os.getcwd()

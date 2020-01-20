@@ -24,7 +24,7 @@ def scaled_dot_product_attention(query, key, value, mask=None):
     return Attention
 
 class MultiHeadAttention(tf.keras.layers.Layer):
-    def __init__(self, d_model, num_heads, name="multi_head_attention"):
+    def __init__(self, d_model, num_heads, name="multi_head_attention", regularizer = None):
         super(MultiHeadAttention, self).__init__(name=name)
         self.num_heads = num_heads
         self.d_model = d_model
@@ -32,10 +32,10 @@ class MultiHeadAttention(tf.keras.layers.Layer):
         assert d_model % self.num_heads == 0
         self.depth = d_model // self.num_heads
 
-        self.query_dense = tf.keras.layers.Dense(units=d_model, activation='linear')
-        self.key_dense = tf.keras.layers.Dense(units=d_model, activation='linear')
-        self.value_dense = tf.keras.layers.Dense(units=d_model, activation='linear')
-        self.output_dense = tf.keras.layers.Dense(units=d_model, activation='linear')
+        self.query_dense = tf.keras.layers.Dense(units=d_model, activation='linear', kernel_regularizer=regularizer)
+        self.key_dense = tf.keras.layers.Dense(units=d_model, activation='linear', kernel_regularizer=regularizer)
+        self.value_dense = tf.keras.layers.Dense(units=d_model, activation='linear', kernel_regularizer=regularizer)
+        self.output_dense = tf.keras.layers.Dense(units=d_model, activation='linear', kernel_regularizer=regularizer)
 
     def split_heads(self, inputs, batch_size):
         inputs = tf.reshape(inputs, shape=(batch_size, -1, self.num_heads, self.depth))
