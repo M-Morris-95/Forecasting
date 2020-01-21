@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 import metrics
 from Tranformer import MultiHeadAttention
 import datetime
+import os
+import time
 
 
 
@@ -13,18 +15,19 @@ import tensorflow as tf
 
 
 class data_builder():
-    def __init__(self, args, fold, look_ahead=14, lag = 28, country = 'eng', day_of_the_year=True):
+    def __init__(self, args, fold, look_ahead=14, day_of_the_year=True):
+        country = args.Country
         self.look_ahead = look_ahead
-        self.lag = lag
+        self.lag = args.Lag
         self.doty = day_of_the_year
 
         assert country == 'eng' or country == 'us'
         if not args.Server:
             self.directory = '/Users/michael/Documents/ili_data/dataset_forecasting_lag' + str(
-                lag) + '/' + country + '_smoothed_' + str(look_ahead) + '/fold' + str(fold) + '/'
+                self.lag) + '/' + country + '_smoothed_' + str(look_ahead) + '/fold' + str(fold) + '/'
         else:
             self.directory = '/home/mimorris/ili_data/dataset_forecasting_lag' + str(
-                lag) + '/' + country + '_smoothed_' + str(look_ahead) + '/fold' + str(fold) + '/'
+                self.lag) + '/' + country + '_smoothed_' + str(look_ahead) + '/fold' + str(fold) + '/'
 
 
     def load_ili_data(self, path):
@@ -97,7 +100,11 @@ def build_model(x_train, y_train):
 
     return model
 
-def build_attention(x_train, y_train, num_heads = 1, regularizer = None):
+def build_attention(x_train, y_train, num_heads = 1, regularizer = False):
+    if regularizer:
+        regularizer = tf.keras.regularizers.l1(0.01)
+    else:
+        regularizer = None
 
     d_model = x_train.shape[1]
 
@@ -176,3 +183,113 @@ class plotter:
     def show(self):
         plt.figure(self.number)
         plt.show()
+
+class logger:
+    def __init__(self, args):
+        timestamp = time.strftime('_%b_%d_%H_%M', time.localtime())
+        self.root_directory = os.getcwd()
+        self.ret_max_k = args.K
+        if args.K != 1:
+            self.iter = True
+        if args.Model == 'ALL':
+            self.indvidual_models = True
+            self.ret_model = ['GRU', 'ATTENTION', 'ENCODER']
+        else:
+            self.indvidual_models = False
+            self.model = args.Model
+            self.ret_model = [args.Model]
+
+        if args.Look_Ahead == 0:
+            self.indvidual_look_ahead = True
+            self.ret_look_ahead = [7, 14, 21]
+            look_ahead_str = ''
+        else:
+            self.indvidual_look_ahead = False
+            self.look_ahead = args.Look_Ahead
+            self.ret_look_ahead = np.asarray([args.Look_Ahead])
+            look_ahead_str = '_' + str(args.Look_Ahead) +'LA'
+            
+        if not args.Server:
+            self.logging_directory = '/Users/michael/Documents/github/Forecasting/Logging/'
+        else:
+            self.logging_directory = '/home/mimorris/Forecasting/Logging/'
+        self.save_directory = self.logging_directory + args.Model + look_ahead_str + timestamp
+
+        self.train_stats = pd.DataFrame(index=['MAE', 'RMSE', 'R'])
+        self.test_predictions = pd.DataFrame()
+        self.test_ground_truth = pd.DataFrame()
+        self.cleanup()
+
+
+    def get_inputs(self):
+        return self.ret_model, self.ret_look_ahead, self.ret_max_k
+
+
+    def update_details(self, fold_num, model=None, look_ahead=None, k=None, epochs = None):
+        self.fold_num = fold_num
+        fold_str = str(2013 + fold_num) + '/' + str(14 + fold_num)
+
+        if self.indvidual_models:
+            model_str = str(model)
+        else:
+            model_str = ''
+
+        if self.indvidual_look_ahead:
+            look_ahead_str = '_' + str(look_ahead) + '_'
+        else:
+            look_ahead_str = ''
+
+        if self.iter:
+            iter_str = '_' + str(k)
+        else:
+            iter_str = ''
+
+        if epochs:
+            epochs_str = '_' + str(epochs)
+        else:
+            epochs_str = ''
+
+        self.save_name = model_str + look_ahead_str + fold_str + iter_str + epochs_str
+
+    def log(self, y_pred, y_true, history, save=False):
+
+        self.model_history = pd.DataFrame(history)
+
+        y_true = y_true[:365, -1]
+        y_pred = y_pred[:365, -1]
+
+        self.train_stats[str(self.save_name)] = metrics.evaluate(y_true, y_pred)
+        self.test_ground_truth[str(self.save_name)] = y_true
+        self.test_predictions[str(self.save_name)] = y_pred
+
+        if save:
+            self.save()
+
+    def cleanup(self):
+        root = self.logging_directory
+        folders = list(os.walk(root))[1:]
+
+        for folder in folders:
+            folder[1]
+            # folder example: ('FOLDER/3', [], ['file'])
+            if (len(folder[2]) == 0) and (len(folder[1]) == 0):
+                os.rmdir(folder[0])
+
+    def save(self):
+        if not os.path.exists(self.save_directory):
+            os.makedirs(self.save_directory)
+        os.chdir(self.save_directory)
+
+        if not os.path.exists(self.save_directory+'/model_history'):
+            os.makedirs(self.save_directory+'/model_history')
+        os.chdir(self.save_directory+'/model_history')
+
+        self.model_history.to_csv(r''+self.save_name.replace('/', '_') + '.csv')
+        os.chdir(self.save_directory)
+
+        self.train_stats.to_csv(r'train_stats.csv')
+        self.test_predictions.to_csv(r'test_predictions.csv')
+        self.test_ground_truth.to_csv(r'test_ground_truth.csv')
+        os.chdir(self.root_directory)
+
+

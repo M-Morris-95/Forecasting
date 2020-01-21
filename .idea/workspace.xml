@@ -2,55 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b389ba6e-9d91-4b6a-9f07-ea78b80758c7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_0/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_0/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_1/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_1/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_2/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_2/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_3/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_3/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_4/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_4/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_5/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_5/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_6/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_6/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_7/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_7/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_8/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_8/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_9/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_9/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/GRUJan-20-11-12/GRU_14_2014_17_0/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/GRUJan-20-11-12/GRU_14_2014_17_0/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/GRUJan-20-11-12/GRU_14_2014_17_1/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/GRUJan-20-11-12/GRU_14_2014_17_1/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/GRUJan-20-11-12/GRU_14_2014_17_2/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/GRUJan-20-11-12/GRU_14_2014_17_2/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/GRUJan-20-11-12/GRU_14_2014_17_3/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/GRUJan-20-11-12/GRU_14_2014_17_3/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/GRUJan-20-11-12/GRU_14_2014_17_4/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/GRUJan-20-11-12/GRU_14_2014_17_4/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/GRUJan-20-11-12/GRU_14_2014_17_5/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/GRUJan-20-11-12/GRU_14_2014_17_5/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/GRUJan-20-11-12/GRU_14_2014_17_6/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/GRUJan-20-11-12/GRU_14_2014_17_6/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/GRUJan-20-11-12/GRU_14_2014_17_7/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/GRUJan-20-11-12/GRU_14_2014_17_7/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/GRUJan-20-11-12/GRU_14_2014_17_8/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/GRUJan-20-11-12/GRU_14_2014_17_8/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/GRUJan-20-11-12/GRU_14_2014_17_9/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/GRUJan-20-11-12/GRU_14_2014_17_9/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/GRUJan-20-11-12/stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/~$Results_Summary.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Functions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ILI_Forecast.py" beforeDir="false" afterPath="$PROJECT_DIR$/ILI_Forecast.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/temp.m" beforeDir="false" afterPath="$PROJECT_DIR$/Logging/temp.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Results_Summary.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/four_graphs.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/plotter.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/temp.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/~$Results_Summary.xlsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/Parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tranformer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tranformer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metrics.py" beforeDir="false" afterPath="$PROJECT_DIR$/metrics.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -102,9 +63,6 @@
       <module name="Forecasting" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="$PROJECT_DIR$/../../Python3/tf2_env/bin/python3.7" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
@@ -112,7 +70,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ILI_Forecast.py" />
-      <option name="PARAMETERS" value="--Model=GRU --Look_Ahead=14 --Lag=28 --Country=eng -R=False" />
+      <option name="PARAMETERS" value="--Model=ALL --Look_Ahead=14 --E=1 --Lag=28 --K=2 --Country=eng -R=False" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -209,7 +167,8 @@
       <workItem from="1579251508726" duration="3606000" />
       <workItem from="1579260496670" duration="763000" />
       <workItem from="1579267537541" duration="4775000" />
-      <workItem from="1579511923627" duration="5617000" />
+      <workItem from="1579511923627" duration="6075000" />
+      <workItem from="1579598163077" duration="11153000" />
     </task>
     <task id="LOCAL-00001" summary="Added transformer model. Model compiles but a training schedule needs to be created.">
       <created>1578492487636</created>
@@ -246,23 +205,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/ILI_Forecast.py</url>
-          <line>99</line>
+          <line>63</line>
           <option name="timeStamp" value="64" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/ILI_Forecast.py</url>
-          <line>77</line>
-          <option name="timeStamp" value="65" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/ILI_Forecast.py</url>
-          <line>118</line>
-          <option name="timeStamp" value="66" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/ILI_Forecast.py</url>
-          <line>114</line>
-          <option name="timeStamp" value="68" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -277,6 +221,6 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Forecasting$Load_Data.coverage" NAME="Forecast Coverage Results" MODIFIED="1576095768553" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Forecasting$data_formatting.coverage" NAME="data_formatting Coverage Results" MODIFIED="1576492782984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Forecasting$Forecast.coverage" NAME="Forecast Coverage Results" MODIFIED="1579513746332" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Forecasting$Forecast.coverage" NAME="Forecast Coverage Results" MODIFIED="1579610317959" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

@@ -7,10 +7,8 @@ def pearson(y_true, y_pred):
         y_pred = y_pred.numpy()
     y_pred = y_pred.astype('float64')
 
-    # y_true = y_true.squeeze()
     y_true = y_true.astype('float64')
     corr = pearsonr(y_true, y_pred)[0]
-
     return corr
 
 def rmse(y_true, y_pred):

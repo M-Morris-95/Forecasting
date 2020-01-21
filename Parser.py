@@ -16,6 +16,24 @@ def GetParser():
                         default=False,
                         required = False)
 
+    parser.add_argument('--K',
+                        type=int,
+                        help='number of iterations',
+                        default=1,
+                        required=False)
+
+    parser.add_argument('--Epochs', '--E',
+                        type=int,
+                        help='number of epochs',
+                        default=50,
+                        required=False)
+
+    parser.add_argument('--Batch_Size', '--B',
+                        type=int,
+                        help='Batch_Size',
+                        default=128,
+                        required=False)
+
     parser.add_argument('--Model',
                         type=str,
                         help='which model use? Encoder, GRU etc.',
