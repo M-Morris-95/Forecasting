@@ -2,7 +2,7 @@ import numpy as np
 import tensorflow as tf
 import metrics
 from Parser import GetParser
-from Functions import data_builder, build_attention, build_model, logger
+from Functions import data_builder, build_attention, build_model, recurrent_attention, logger
 from Tranformer import encoder_network
 
 parser = GetParser()
@@ -73,7 +73,23 @@ for Model in models:
                         x_train, y_train,
                         validation_data=(x_test, y_test),
                         epochs=EPOCHS, batch_size=BATCH_SIZE)
-                        # callbacks=[tensorboard_callback])
+
+                    prediction = model.predict(x_test)
+
+                elif Model == 'R_ATTN':
+                    model = recurrent_attention(x_train, y_train, num_heads=7, regularizer = args.Regularizer)
+
+
+                    model.compile(optimizer=optimizer,
+                                  loss='mse',
+                                  metrics=['mae', 'mse', metrics.rmse])
+
+                    tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=logging.logging_directory, histogram_freq=1)
+
+                    model.fit(
+                        x_train, y_train[:,:,np.newaxis],
+                        validation_data=(x_test, y_test[:,:,np.newaxis]),
+                        epochs=EPOCHS, batch_size=BATCH_SIZE)
 
                     prediction = model.predict(x_test)
 

@@ -34,6 +34,36 @@ def build_model(x_train, y_train):
 
     return model
 
+def recurrent_attention(x_train, y_train, num_heads = 1, regularizer = False):
+    if regularizer:
+        regularizer = tf.keras.regularizers.l1(0.01)
+    else:
+        regularizer = None
+
+    d_model = x_train.shape[1]
+
+    ili_input = Input(shape=[x_train.shape[1],x_train.shape[2]])
+    x = GRU(x_train.shape[1], activation='relu', return_sequences=True, kernel_regularizer=regularizer)(ili_input)
+
+    x = MultiHeadAttention(d_model, num_heads, name="attention", regularizer=regularizer)({
+        'query': x,
+        'key': x,
+        'value': x
+    })
+    x = GRU(int((x_train.shape[2] - 1)), activation='relu', return_sequences=True, kernel_regularizer=regularizer)(x)
+    y = GRU(int(0.75*(x_train.shape[2]-1)), activation='relu', return_sequences=False, kernel_regularizer=regularizer)(x)
+    y = tf.keras.layers.RepeatVector((y_train.shape[1]))(y)
+    z = GRU(1,activation='relu', return_sequences=True, kernel_regularizer=regularizer)(y)
+    model = Model(inputs=ili_input, outputs=z)
+
+    optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
+
+    model.compile(optimizer=optimizer,
+                  loss='mae',
+                  metrics=['mae', 'mse', metrics.rmse])
+
+    return model
+
 def build_attention(x_train, y_train, num_heads = 1, regularizer = False):
     if regularizer:
         regularizer = tf.keras.regularizers.l1(0.01)
@@ -249,7 +279,10 @@ class logger:
     def log(self, y_pred, y_true, model, save=False):
 
         self.model_history = pd.DataFrame(model.history.history)
-
+        if y_pred.ndim == 3:
+            y_pred = np.squeeze(y_pred)
+        if y_true.ndim == 3:
+            y_true = np.squeeze(y_true)
         y_true = y_true[:365, -1]
         y_pred = y_pred[:365, -1]
 
@@ -275,12 +308,12 @@ class logger:
             os.makedirs(self.save_directory)
         os.chdir(self.save_directory)
 
-        if not os.path.exists(self.save_directory+'/model'):
+        if not os.path.exists(self.save_directory+'/models'):
             os.makedirs(self.save_directory+'/models')
-        os.chdir(self.save_directory+'/model')
+        os.chdir(self.save_directory+'/models')
 
         self.model_history.to_csv(r''+self.save_name.replace('/', '_') + '.csv')
-        model.save_weights(self.save_name.replace('/', '_') + '.hdf5')
+        model.save(self.save_name.replace('/', '_'), save_format='tf')
         os.chdir(self.save_directory)
 
         self.train_stats.to_csv(r'train_stats.csv')
