@@ -5,13 +5,61 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Functions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ILI_Forecast.py" beforeDir="false" afterPath="$PROJECT_DIR$/ILI_Forecast.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/Results_Summary.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/four_graphs.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/plotter.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/temp.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/~$Results_Summary.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/Parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metrics.py" beforeDir="false" afterPath="$PROJECT_DIR$/metrics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ALL_14LA_Jan_21_12_24/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ALL_14LA_Jan_21_12_24/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ALL_14LA_Jan_21_12_24/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ALL_14LA_Jan_21_12_38/model_history/GRU2014_15_0.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ALL_14LA_Jan_21_12_38/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ALL_14LA_Jan_21_12_38/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ALL_14LA_Jan_21_12_38/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_0/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_0/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_1/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_1/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_2/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_2/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_3/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_3/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_4/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_4/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_5/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_5/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_6/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_6/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_7/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_7/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_8/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_8/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_9/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/ATTENTION_14_2014_17_9/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-10-27/stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-16-01/ATTENTION_14_2014_17_0/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-16-01/ATTENTION_14_2014_17_0/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-16-01/ATTENTION_14_2014_17_1/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-16-01/ATTENTION_14_2014_17_1/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-16-01/ATTENTION_14_2014_17_2/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-16-01/ATTENTION_14_2014_17_2/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-16-01/ATTENTION_14_2014_17_3/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-16-01/ATTENTION_14_2014_17_3/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-16-01/ATTENTION_14_2014_17_4/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-16-01/ATTENTION_14_2014_17_4/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-16-01/ATTENTION_14_2014_17_5/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-16-01/ATTENTION_14_2014_17_5/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-16-01/ATTENTION_14_2014_17_6/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-16-01/ATTENTION_14_2014_17_6/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-16-01/ATTENTION_14_2014_17_7/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-16-01/ATTENTION_14_2014_17_7/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-16-01/ATTENTION_14_2014_17_8/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-16-01/ATTENTION_14_2014_17_8/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-16-01/ATTENTION_14_2014_17_9/Fold_3_training_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-16-01/ATTENTION_14_2014_17_9/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-16-01/stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_21_12_06/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_21_12_06/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_21_12_06/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_21_12_08/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_21_12_08/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_21_12_08/train_stats.csv" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -70,7 +118,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ILI_Forecast.py" />
-      <option name="PARAMETERS" value="--Model=ALL --Look_Ahead=14 --E=1 --Lag=28 --K=2 --Country=eng -R=False" />
+      <option name="PARAMETERS" value="--Model=ATTENTION --Look_Ahead=14 --Epochs=100 --Lag=28 --K=10 --Country=eng" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -168,7 +216,7 @@
       <workItem from="1579260496670" duration="763000" />
       <workItem from="1579267537541" duration="4775000" />
       <workItem from="1579511923627" duration="6075000" />
-      <workItem from="1579598163077" duration="11153000" />
+      <workItem from="1579598163077" duration="12831000" />
     </task>
     <task id="LOCAL-00001" summary="Added transformer model. Model compiles but a training schedule needs to be created.">
       <created>1578492487636</created>
@@ -205,7 +253,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/ILI_Forecast.py</url>
-          <line>63</line>
+          <line>53</line>
           <option name="timeStamp" value="64" />
         </line-breakpoint>
       </breakpoints>

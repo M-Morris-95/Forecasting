@@ -8,11 +8,62 @@ from Tranformer import MultiHeadAttention
 import datetime
 import os
 import time
-
-
-
 import tensorflow as tf
 
+def build_model(x_train, y_train):
+    ili_input = Input(shape=[x_train.shape[1],1])
+    x = GRU(28, activation='relu', return_sequences=True)(ili_input)
+    x = Model(inputs=ili_input, outputs=x)
+
+    google_input = Input(shape=[x_train.shape[1], x_train.shape[2]-1])
+    y = GRU(x_train.shape[2]-1, activation='relu', return_sequences=True)(google_input)
+    y = GRU(int(0.5*(x_train.shape[2]-1)), activation='relu', return_sequences=True)(y)
+    y = Model(inputs=google_input, outputs=y)
+
+    z = concatenate([x.output, y.output])
+    z = GRU(y_train.shape[1], activation='relu',return_sequences=False)(z)
+
+
+    model = Model(inputs=[x.input, y.input], outputs=z)
+
+    optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
+
+    model.compile(optimizer=optimizer,
+                  loss='mae',
+                  metrics=['mae', 'mse', metrics.rmse])
+
+    return model
+
+def build_attention(x_train, y_train, num_heads = 1, regularizer = False):
+    if regularizer:
+        regularizer = tf.keras.regularizers.l1(0.01)
+    else:
+        regularizer = None
+
+    d_model = x_train.shape[1]
+
+    ili_input = Input(shape=[x_train.shape[1],x_train.shape[2]])
+    x = GRU(x_train.shape[1], activation='relu', return_sequences=True, kernel_regularizer=regularizer)(ili_input)
+
+    x = MultiHeadAttention(d_model, num_heads, name="attention", regularizer=regularizer)({
+        'query': x,
+        'key': x,
+        'value': x
+    })
+    x = GRU(int((x_train.shape[2] - 1)), activation='relu', return_sequences=True, kernel_regularizer=regularizer)(x)
+    y = GRU(int(0.75*(x_train.shape[2]-1)), activation='relu', return_sequences=True, kernel_regularizer=regularizer)(x)
+    z = GRU(y_train.shape[1], activation='relu',return_sequences=False, kernel_regularizer=regularizer)(y)
+
+
+    model = Model(inputs=ili_input, outputs=z)
+
+    optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
+
+    model.compile(optimizer=optimizer,
+                  loss='mae',
+                  metrics=['mae', 'mse', metrics.rmse])
+
+    return model
 
 class data_builder():
     def __init__(self, args, fold, look_ahead=14, day_of_the_year=True):
@@ -75,61 +126,6 @@ class data_builder():
         assert(x_test.shape[0] == y_test.shape[0] == y_test_index.shape[0])
 
         return x_train, y_train, y_train_index, x_test, y_test, y_test_index
-
-def build_model(x_train, y_train):
-    ili_input = Input(shape=[x_train.shape[1],1])
-    x = GRU(28, activation='relu', return_sequences=True)(ili_input)
-    x = Model(inputs=ili_input, outputs=x)
-
-    google_input = Input(shape=[x_train.shape[1], x_train.shape[2]-1])
-    y = GRU(x_train.shape[2]-1, activation='relu', return_sequences=True)(google_input)
-    y = GRU(int(0.5*(x_train.shape[2]-1)), activation='relu', return_sequences=True)(y)
-    y = Model(inputs=google_input, outputs=y)
-
-    z = concatenate([x.output, y.output])
-    z = GRU(y_train.shape[1], activation='relu',return_sequences=False)(z)
-
-
-    model = Model(inputs=[x.input, y.input], outputs=z)
-
-    optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
-
-    model.compile(optimizer=optimizer,
-                  loss='mae',
-                  metrics=['mae', 'mse', metrics.rmse])
-
-    return model
-
-def build_attention(x_train, y_train, num_heads = 1, regularizer = False):
-    if regularizer:
-        regularizer = tf.keras.regularizers.l1(0.01)
-    else:
-        regularizer = None
-
-    d_model = x_train.shape[1]
-
-    ili_input = Input(shape=[x_train.shape[1],x_train.shape[2]])
-    x = GRU(x_train.shape[1], activation='relu', return_sequences=True, kernel_regularizer=regularizer)(ili_input)
-
-    x = MultiHeadAttention(d_model, num_heads, name="attention", regularizer=regularizer)({
-        'query': x,
-        'key': x,
-        'value': x
-    })
-    x = GRU(int((x_train.shape[2] - 1)), activation='relu', return_sequences=True, kernel_regularizer=regularizer)(x)
-    y = GRU(int(0.75*(x_train.shape[2]-1)), activation='relu', return_sequences=True, kernel_regularizer=regularizer)(x)
-    z = GRU(y_train.shape[1], activation='relu',return_sequences=False, kernel_regularizer=regularizer)(y)
-
-
-    model = Model(inputs=ili_input, outputs=z)
-
-    optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
-
-    model.compile(optimizer=optimizer,
-                  loss='mae',
-                  metrics=['mae', 'mse', metrics.rmse])
-
-    return model
 
 class normalizer:
     def __init__(self, x_train, y_train):
@@ -220,7 +216,6 @@ class logger:
         self.test_ground_truth = pd.DataFrame()
         self.cleanup()
 
-
     def get_inputs(self):
         return self.ret_model, self.ret_look_ahead, self.ret_max_k
 
@@ -251,9 +246,9 @@ class logger:
 
         self.save_name = model_str + look_ahead_str + fold_str + iter_str + epochs_str
 
-    def log(self, y_pred, y_true, history, save=False):
+    def log(self, y_pred, y_true, model, save=False):
 
-        self.model_history = pd.DataFrame(history)
+        self.model_history = pd.DataFrame(model.history.history)
 
         y_true = y_true[:365, -1]
         y_pred = y_pred[:365, -1]
@@ -263,7 +258,7 @@ class logger:
         self.test_predictions[str(self.save_name)] = y_pred
 
         if save:
-            self.save()
+            self.save(model)
 
     def cleanup(self):
         root = self.logging_directory
@@ -275,16 +270,17 @@ class logger:
             if (len(folder[2]) == 0) and (len(folder[1]) == 0):
                 os.rmdir(folder[0])
 
-    def save(self):
+    def save(self, model):
         if not os.path.exists(self.save_directory):
             os.makedirs(self.save_directory)
         os.chdir(self.save_directory)
 
-        if not os.path.exists(self.save_directory+'/model_history'):
-            os.makedirs(self.save_directory+'/model_history')
-        os.chdir(self.save_directory+'/model_history')
+        if not os.path.exists(self.save_directory+'/model'):
+            os.makedirs(self.save_directory+'/models')
+        os.chdir(self.save_directory+'/model')
 
         self.model_history.to_csv(r''+self.save_name.replace('/', '_') + '.csv')
+        model.save_weights(self.save_name.replace('/', '_') + '.hdf5')
         os.chdir(self.save_directory)
 
         self.train_stats.to_csv(r'train_stats.csv')

@@ -1,25 +1,18 @@
-import pandas as pd
-import os
 import numpy as np
 import tensorflow as tf
-import time
 import metrics
 from Parser import GetParser
-from Functions import plotter, data_builder, build_attention, build_model, logger
+from Functions import data_builder, build_attention, build_model, logger
 from Tranformer import encoder_network
-
 
 parser = GetParser()
 args = parser.parse_args()
 
-fig1 = plotter(1)
-fig3 = plotter(3)
-
-EPOCHS = args.Epochs
-BATCH_SIZE = args.Batch_Size
+EPOCHS, BATCH_SIZE = args.Epochs, args.Batch_Size
 
 logging = logger(args)
 models, look_aheads, max_k = logging.get_inputs()
+optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
 
 for Model in models:
     for look_ahead in look_aheads:
@@ -27,11 +20,8 @@ for Model in models:
             for fold_num in range(1,5):
                 tf.random.set_seed(k)
                 logging.update_details(fold_num=fold_num, k=k, model=Model, look_ahead=look_ahead)
-
                 data = data_builder(args, fold=fold_num, look_ahead=look_ahead)
                 x_train, y_train, y_train_index, x_test, y_test, y_test_index = data.build()
-
-                optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
 
                 if Model == 'GRU':
                     model = build_model(x_train, y_train)
@@ -86,7 +76,5 @@ for Model in models:
                         # callbacks=[tensorboard_callback])
 
                     prediction = model.predict(x_test)
-                logging.log(prediction, y_test, model.history.history, save=True)
 
-
-
+                logging.log(prediction, y_test, model, save=True)
