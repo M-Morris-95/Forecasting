@@ -1,6 +1,8 @@
 clear all
 root_dir = pwd;
+root_dir = root_dir(1:end-6)
 cd 'ATTENTIONJan-20-09-35';
+
 figure(4)
 
 clf

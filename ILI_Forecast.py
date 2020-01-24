@@ -20,7 +20,7 @@ for Model in models:
             for fold_num in range(1,5):
                 tf.random.set_seed(k)
                 logging.update_details(fold_num=fold_num, k=k, model=Model, look_ahead=look_ahead)
-                data = data_builder(args, fold=fold_num, look_ahead=look_ahead)
+                data = data_builder(args, fold=fold_num, look_ahead=look_ahead, day_of_the_year=args.DOTY)
                 x_train, y_train, y_train_index, x_test, y_test, y_test_index = data.build()
 
                 if Model == 'GRU':
@@ -38,6 +38,8 @@ for Model in models:
                     prediction = model.predict([x_test[:, :, -1, np.newaxis], x_test[:, :, :-1]])
 
                 elif Model == 'ENCODER':
+                    x_train = np.swapaxes(x_train, 1, 2)
+                    x_test = np.swapaxes(x_test, 1, 2)
                     model = encoder_network(
                         output_size=y_train.shape[1],
                         num_layers=2,
@@ -53,7 +55,6 @@ for Model in models:
 
                     model.fit(
                         x_train, y_train,
-                        # callbacks=[earlystop_callback],
                         validation_data=(x_test, y_test),
                         epochs=EPOCHS, batch_size=BATCH_SIZE)
 
@@ -61,7 +62,6 @@ for Model in models:
 
                 elif Model == 'ATTENTION':
                     model = build_attention(x_train, y_train, num_heads=7, regularizer = args.Regularizer)
-
 
                     model.compile(optimizer=optimizer,
                                   loss='mse',
@@ -78,7 +78,6 @@ for Model in models:
 
                 elif Model == 'R_ATTN':
                     model = recurrent_attention(x_train, y_train, num_heads=7, regularizer = args.Regularizer)
-
 
                     model.compile(optimizer=optimizer,
                                   loss='mse',

@@ -12,6 +12,7 @@ import tensorflow as tf
 
 def build_model(x_train, y_train):
     ili_input = Input(shape=[x_train.shape[1],1])
+
     x = GRU(28, activation='relu', return_sequences=True)(ili_input)
     x = Model(inputs=ili_input, outputs=x)
 
@@ -36,7 +37,7 @@ def build_model(x_train, y_train):
 
 def recurrent_attention(x_train, y_train, num_heads = 1, regularizer = False):
     if regularizer:
-        regularizer = tf.keras.regularizers.l1(0.01)
+        regularizer = tf.keras.regularizers.l2(0.01)
     else:
         regularizer = None
 
@@ -66,7 +67,7 @@ def recurrent_attention(x_train, y_train, num_heads = 1, regularizer = False):
 
 def build_attention(x_train, y_train, num_heads = 1, regularizer = False):
     if regularizer:
-        regularizer = tf.keras.regularizers.l1(0.01)
+        regularizer = tf.keras.regularizers.l2(0.01)
     else:
         regularizer = None
 
@@ -217,6 +218,8 @@ class logger:
         self.ret_max_k = args.K
         if args.K != 1:
             self.iter = True
+        else:
+            self.iter = False
         if args.Model == 'ALL':
             self.indvidual_models = True
             self.ret_model = ['GRU', 'ATTENTION', 'ENCODER']

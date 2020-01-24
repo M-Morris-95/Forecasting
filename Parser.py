@@ -16,6 +16,14 @@ def GetParser():
                         default=False,
                         required = False)
 
+
+    parser.add_argument('--DOTY',
+                        type=bool,
+                        help='day of the year data?',
+                        default=True,
+                        required = False)
+
+
     parser.add_argument('--K',
                         type=int,
                         help='number of iterations',
