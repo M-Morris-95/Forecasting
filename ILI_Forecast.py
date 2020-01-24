@@ -58,7 +58,7 @@ for Model in models:
                         validation_data=(x_test, y_test),
                         epochs=EPOCHS, batch_size=BATCH_SIZE)
 
-                    prediction = model(x_test, training=False)[:, -1]
+                    prediction = model(x_test, training=False)
 
                 elif Model == 'ATTENTION':
                     model = build_attention(x_train, y_train, num_heads=7, regularizer = args.Regularizer)
