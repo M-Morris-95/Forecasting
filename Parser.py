@@ -19,7 +19,13 @@ def GetParser():
 
     parser.add_argument('--DOTY',
                         type=bool,
-                        help='day of the year data?',
+                        help='use day of the year data?',
+                        default=True,
+                        required = False)
+
+    parser.add_argument('--Weather',
+                        type=bool,
+                        help='use weather data?',
                         default=True,
                         required = False)
 

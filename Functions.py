@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import metrics
-from Tranformer import MultiHeadAttention
+from Transformer import MultiHeadAttention
 import datetime
 import os
 import time
@@ -83,7 +83,8 @@ def build_attention(x_train, y_train, num_heads = 1, regularizer = False):
     })
     x = GRU(int((x_train.shape[2] - 1)), activation='relu', return_sequences=True, kernel_regularizer=regularizer)(x)
     y = GRU(int(0.75*(x_train.shape[2]-1)), activation='relu', return_sequences=True, kernel_regularizer=regularizer)(x)
-    z = GRU(y_train.shape[1], activation='relu',return_sequences=False, kernel_regularizer=regularizer)(y)
+    # changed GRU output to 'linear' from ReLU but don't know if it works yet.
+    z = GRU(y_train.shape[1], activation='linear',return_sequences=False, kernel_regularizer=regularizer)(y)
 
 
     model = Model(inputs=ili_input, outputs=z)
@@ -96,18 +97,21 @@ def build_attention(x_train, y_train, num_heads = 1, regularizer = False):
 
     return model
 
-class data_builder():
-    def __init__(self, args, fold, look_ahead=14, day_of_the_year=True):
+class data_builder:
+    def __init__(self, args, fold, look_ahead=14):
         country = args.Country
         self.look_ahead = look_ahead
         self.lag = args.Lag
-        self.doty = day_of_the_year
+        self.weather = args.Weather
+        self.doty = args.DOTY
 
         assert country == 'eng' or country == 'us'
         if not args.Server:
+            self.weather_directory = '/home/mimorris/ili_data/Weather/all_weather_data.csv'
             self.directory = '/Users/michael/Documents/ili_data/dataset_forecasting_lag' + str(
                 self.lag) + '/' + country + '_smoothed_' + str(look_ahead) + '/fold' + str(fold) + '/'
         else:
+            self.weather_directory = '/Users/michael/Documents/ili_data/Weather/all_weather_data.csv'
             self.directory = '/home/mimorris/ili_data/dataset_forecasting_lag' + str(
                 self.lag) + '/' + country + '_smoothed_' + str(look_ahead) + '/fold' + str(fold) + '/'
 
@@ -118,8 +122,23 @@ class data_builder():
 
     def load_google_data(self, path):
         google_data = pd.read_csv(path)
+        weather = pd.read_csv(self.weather_directory)
+        temp = google_data['Unnamed: 0'].values
+        for idx, val in enumerate(weather['0']):
+            if val == temp[0]:
+                weather = weather[idx:]
+        for idx, val in enumerate(weather['0']):
+            if val == temp[-1]:
+                weather = weather[:idx+1]
+        if self.weather:
+            weather = weather.reset_index(drop = True)
+            google_data['mean'] = weather['mean']
+            google_data['min'] = weather['min']
+            google_data['max'] = weather['max']
+
+
+
         if self.doty:
-            temp = google_data['Unnamed: 0'].values
             google_data['Unnamed: 0'] = np.asarray([datetime.datetime.strptime(val, '%Y-%m-%d').timetuple().tm_yday for val in temp])
         else:
             google_data = google_data.drop(['Unnamed: 0'], axis=1)

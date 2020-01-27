@@ -2,687 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b389ba6e-9d91-4b6a-9f07-ea78b80758c7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_0.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_0/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_0/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_0/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_1/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_1/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_1/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_2/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_2/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_2/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_3.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_3/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_3/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_3/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_4.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_4/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_4/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_4/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_5.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_5/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_5/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_5/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_6.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_6/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_6/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_6/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_7.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_7/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_7/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_7/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_8.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_8/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_8/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_8/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_9.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_9/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_9/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2014_15_9/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_0.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_0/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_0/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_0/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_1/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_1/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_1/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_2/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_2/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_2/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_3.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_3/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_3/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_3/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_4.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_4/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_4/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_4/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_5.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_5/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_5/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_5/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_6.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_6/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_6/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_6/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_7.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_7/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_7/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_7/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_8.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_8/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_8/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_8/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_9.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_9/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_9/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2015_16_9/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_0.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_0/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_0/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_0/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_1/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_1/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_1/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_2/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_2/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_2/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_3.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_3/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_3/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_3/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_4.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_4/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_4/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_4/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_5.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_5/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_5/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_5/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_6.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_6/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_6/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_6/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_7.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_7/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_7/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_7/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_8.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_8/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_8/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_8/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_9.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_9/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_9/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2016_17_9/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_0.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_0/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_0/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_0/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_1/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_1/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_1/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_2/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_2/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_2/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_3.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_3/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_3/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_3/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_4.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_4/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_4/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_4/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_5.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_5/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_5/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_5/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_6.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_6/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_6/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_6/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_7.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_7/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_7/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_7/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_8.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_8/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_8/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_8/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_9.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_9/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_9/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/models/2017_18_9/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/test_ground_truth.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_15_10/train_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2014_15_0.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2014_15_0/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2014_15_0/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2014_15_0/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2014_15_1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2014_15_1/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2014_15_1/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2014_15_1/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2014_15_2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2014_15_2/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2014_15_2/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2014_15_2/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2014_15_3.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2014_15_3/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2014_15_3/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2014_15_3/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2014_15_4.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2014_15_4/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2014_15_4/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2014_15_4/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2015_16_0.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2015_16_0/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2015_16_0/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2015_16_0/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2015_16_1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2015_16_1/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2015_16_1/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2015_16_1/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2015_16_2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2015_16_2/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2015_16_2/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2015_16_2/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2015_16_3.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2015_16_3/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2015_16_3/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2015_16_3/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2015_16_4.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2015_16_4/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2015_16_4/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2015_16_4/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2016_17_0.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2016_17_0/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2016_17_0/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2016_17_0/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2016_17_1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2016_17_1/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2016_17_1/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2016_17_1/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2016_17_2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2016_17_2/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2016_17_2/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2016_17_2/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2016_17_3.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2016_17_3/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2016_17_3/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2016_17_3/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2016_17_4.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2016_17_4/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2016_17_4/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2016_17_4/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2017_18_0.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2017_18_0/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2017_18_0/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2017_18_0/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2017_18_1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2017_18_1/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2017_18_1/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2017_18_1/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2017_18_2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2017_18_2/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2017_18_2/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2017_18_2/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2017_18_3.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2017_18_3/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2017_18_3/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2017_18_3/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2017_18_4.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2017_18_4/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2017_18_4/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/models/2017_18_4/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/test_ground_truth.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_22_16_45/train_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-16-12-15/Fold_1_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-16-12-15/Fold_2_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-16-12-15/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-16-12-15/Fold_4_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-16-12-15/stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-16-12-15/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-16-14-07/Fold_1_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-16-14-07/Fold_2_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-16-14-07/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-16-14-07/Fold_4_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-16-14-07/stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-16-14-07/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-09-43/Fold_1_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-09-43/Fold_2_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-09-43/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-09-43/Fold_4_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-09-43/stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-09-43/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-10-04/Fold_1_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-10-04/Fold_2_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-10-04/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-10-04/Fold_4_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-10-04/stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-10-04/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-11-08/Fold_1_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-11-08/Fold_2_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-11-08/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-11-08/Fold_4_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-11-08/stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-11-08/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-11-31/Fold_1_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-11-31/Fold_2_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-11-31/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-11-31/Fold_4_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-11-31/stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-11-31/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-12-30/Fold_1_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-12-30/Fold_2_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-12-30/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-12-30/Fold_4_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-12-30/stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/All networks/ALLJan-17-12-30/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/R_ATTN_14LA_Jan_21_14_31/models/2014_15.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/R_ATTN_14LA_Jan_21_14_31/models/2014_15/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/R_ATTN_14LA_Jan_21_14_31/models/2014_15/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/R_ATTN_14LA_Jan_21_14_31/models/2014_15/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/R_ATTN_14LA_Jan_21_14_31/models/2015_16.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/R_ATTN_14LA_Jan_21_14_31/models/2015_16/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/R_ATTN_14LA_Jan_21_14_31/models/2015_16/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/R_ATTN_14LA_Jan_21_14_31/models/2015_16/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/R_ATTN_14LA_Jan_21_14_31/models/2016_17.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/R_ATTN_14LA_Jan_21_14_31/models/2016_17/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/R_ATTN_14LA_Jan_21_14_31/models/2016_17/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/R_ATTN_14LA_Jan_21_14_31/models/2016_17/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/R_ATTN_14LA_Jan_21_14_31/models/2017_18.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/R_ATTN_14LA_Jan_21_14_31/models/2017_18/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/R_ATTN_14LA_Jan_21_14_31/models/2017_18/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/R_ATTN_14LA_Jan_21_14_31/models/2017_18/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/R_ATTN_14LA_Jan_21_14_31/test_ground_truth.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/R_ATTN_14LA_Jan_21_14_31/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/R_ATTN_14LA_Jan_21_14_31/train_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_0/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_0/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_1/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_1/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_2/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_2/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_3/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_3/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_4/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_4/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_5/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_5/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_6/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_6/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_7/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_7/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_8/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_8/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_9/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_9/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-14-33/stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_0/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_0/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_1/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_1/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_2/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_2/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_3/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_3/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_4/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_4/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_5/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_5/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_6/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_6/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_7/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_7/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_8/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_8/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_9/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_9/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-17-15-25/stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_0/Fold_1_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_0/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_1/Fold_1_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_1/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_2/Fold_1_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_2/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_3/Fold_1_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_3/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_4/Fold_1_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_4/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_5/Fold_1_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_5/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_6/Fold_1_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_6/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_7/Fold_1_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_7/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_8/Fold_1_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_8/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_9/Fold_1_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_9/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_0/Fold_2_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_0/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_1/Fold_2_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_1/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_2/Fold_2_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_2/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_3/Fold_2_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_3/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_4/Fold_2_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_4/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_5/Fold_2_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_5/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_6/Fold_2_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_6/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_7/Fold_2_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_7/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_8/Fold_2_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_8/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_9/Fold_2_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_9/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_0/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_0/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_1/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_1/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_2/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_2/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_3/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_3/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_4/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_4/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_5/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_5/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_6/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_6/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_7/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_7/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_8/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_8/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_9/Fold_3_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_9/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_0/Fold_4_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_0/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_1/Fold_4_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_1/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_2/Fold_4_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_2/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_3/Fold_4_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_3/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_4/Fold_4_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_4/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_5/Fold_4_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_5/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_6/Fold_4_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_6/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_7/Fold_4_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_7/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_8/Fold_4_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_8/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_9/Fold_4_training_stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_9/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logging/consistency/ATTENTIONJan-20-09-35/stats.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Weather_Data_Organiser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Functions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ILI_Forecast.py" beforeDir="false" afterPath="$PROJECT_DIR$/ILI_Forecast.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/14 days ahead/GRUJan-13-10-13/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/14 days ahead/GRUJan-13-10-13/Fold_1network.hdf5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/14 days ahead/GRUJan-13-10-13/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/14 days ahead/GRUJan-13-10-13/Fold_2network.hdf5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/14 days ahead/GRUJan-13-10-13/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/14 days ahead/GRUJan-13-10-13/Fold_3network.hdf5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/14 days ahead/GRUJan-13-10-13/Fold_4_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/14 days ahead/GRUJan-13-10-13/Fold_4network.hdf5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/14 days ahead/GRUJan-13-10-13/stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/14 days ahead/GRUJan-13-10-13/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/14 days ahead/GRUJan-13-10-13/training_stats.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/14 days ahead/GRUJan-13-10-13/validation_predictions.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/14 days ahead/GRUJan-15-13-12/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/14 days ahead/GRUJan-15-13-12/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/14 days ahead/GRUJan-15-13-12/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/14 days ahead/GRUJan-15-13-12/Fold_4_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/14 days ahead/GRUJan-15-13-12/stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/14 days ahead/GRUJan-15-13-12/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/14 days ahead/GRUJan-15-13-12/training_stats.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/14 days ahead/GRUJan-15-13-12/validation_predictions.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/2019/Dec-12-2019-14-49/validation_predictions.png" beforeDir="false" afterPath="$PROJECT_DIR$/Logging/2019/Dec-12-2019-14-49/validation_predictions.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/2019/Dec-19-2019-12-48/Fold_1/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/2019/Dec-19-2019-14-24/Fold_1/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-16-12-15/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-16-12-15/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-16-12-15/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-16-12-15/Fold_4_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-16-12-15/stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-16-12-15/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-16-14-07/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-16-14-07/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-16-14-07/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-16-14-07/Fold_4_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-16-14-07/stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-16-14-07/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-09-43/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-09-43/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-09-43/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-09-43/Fold_4_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-09-43/stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-09-43/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-10-04/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-10-04/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-10-04/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-10-04/Fold_4_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-10-04/stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-10-04/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-11-08/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-11-08/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-11-08/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-11-08/Fold_4_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-11-08/stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-11-08/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-11-31/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-11-31/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-11-31/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-11-31/Fold_4_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-11-31/stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-11-31/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-12-30/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-12-30/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-12-30/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-12-30/Fold_4_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-12-30/stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ALLJan-17-12-30/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_0/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_0/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_1/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_1/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_2/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_2/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_3/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_3/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_4/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_4/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_5/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_5/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_6/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_6/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_7/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_7/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_8/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_8/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_9/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-14-33/ATTENTION_14_2014_17_9/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-14-33/stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_0/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_0/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_1/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_1/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_2/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_2/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_3/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_3/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_4/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_4/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_5/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_5/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_6/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_6/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_7/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_7/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_8/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_8/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_9/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-15-25/ATTENTION_14_2014_17_9/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-17-15-25/stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_0/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_0/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_1/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_1/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_2/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_2/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_3/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_3/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_4/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_4/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_5/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_5/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_6/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_6/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_7/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_7/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_8/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_8/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_9/Fold_1_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_15_9/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_0/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_0/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_1/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_1/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_2/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_2/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_3/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_3/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_4/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_4/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_5/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_5/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_6/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_6/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_7/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_7/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_8/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_8/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_9/Fold_2_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_16_9/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_0/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_0/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_1/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_1/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_2/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_2/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_3/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_3/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_4/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_4/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_5/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_5/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_6/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_6/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_7/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_7/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_8/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_8/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_9/Fold_3_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_17_9/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_0/Fold_4_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_0/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_1/Fold_4_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_1/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_2/Fold_4_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_2/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_3/Fold_4_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_3/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_4/Fold_4_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_4/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_5/Fold_4_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_5/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_6/Fold_4_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_6/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_7/Fold_4_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_7/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_8/Fold_4_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_8/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_9/Fold_4_training_stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/ATTENTION_14_2014_18_9/test_predictions.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTIONJan-20-09-35/stats.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_21_14_23/models/2014_15_0.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/ATTENTION_14LA_Jan_21_14_23/models/2014_15_0.hdf5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/R_ATTN_14LA_Jan_21_14_26/models/2014_15_0.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/R_ATTN_14LA_Jan_21_14_26/models/2014_15_0.hdf5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/R_ATTN_14LA_Jan_21_14_28/models/2014_15_0.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/R_ATTN_14LA_Jan_21_14_28/models/2014_15_0/saved_model.pb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/R_ATTN_14LA_Jan_21_14_28/models/2014_15_0/variables/variables.data-00000-of-00001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/R_ATTN_14LA_Jan_21_14_28/models/2014_15_0/variables/variables.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/Tools/four_graphs.m" beforeDir="false" afterPath="$PROJECT_DIR$/Logging/Tools/four_graphs.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/events.out.tfevents.1579608361.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2061.1932.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/events.out.tfevents.1579608367.eduroam-int-dhcp-97-246-249.ucl.ac.uk.profile-empty" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/events.out.tfevents.1579608374.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2061.14584.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/events.out.tfevents.1579608387.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2061.27251.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/events.out.tfevents.1579608401.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2061.39933.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/events.out.tfevents.1579608520.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2085.1932.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/events.out.tfevents.1579608534.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2085.14584.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/events.out.tfevents.1579608547.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2085.27251.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/events.out.tfevents.1579608561.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2085.39933.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/events.out.tfevents.1579608575.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2085.52625.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/events.out.tfevents.1579608588.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2085.65277.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/events.out.tfevents.1579608601.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2085.77944.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/events.out.tfevents.1579608615.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2085.90626.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/events.out.tfevents.1579608629.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2085.103318.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/events.out.tfevents.1579608643.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2085.115970.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/events.out.tfevents.1579608657.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2085.128637.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/events.out.tfevents.1579608670.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2085.141319.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/plugins/profile/2020-01-21_12-06-07/local.trace" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/plugins/profile/2020-01-21_12-06-20/local.trace" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/plugins/profile/2020-01-21_12-06-34/local.trace" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/plugins/profile/2020-01-21_12-06-47/local.trace" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/plugins/profile/2020-01-21_12-08-47/local.trace" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/plugins/profile/2020-01-21_12-08-59/local.trace" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/plugins/profile/2020-01-21_12-09-13/local.trace" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/plugins/profile/2020-01-21_12-09-27/local.trace" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/plugins/profile/2020-01-21_12-09-41/local.trace" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/plugins/profile/2020-01-21_12-09-54/local.trace" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/plugins/profile/2020-01-21_12-10-08/local.trace" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/plugins/profile/2020-01-21_12-10-22/local.trace" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/plugins/profile/2020-01-21_12-10-36/local.trace" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/plugins/profile/2020-01-21_12-10-49/local.trace" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/plugins/profile/2020-01-21_12-11-03/local.trace" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/train/plugins/profile/2020-01-21_12-11-17/local.trace" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/validation/events.out.tfevents.1579608372.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2061.11426.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/validation/events.out.tfevents.1579608385.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2061.24093.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/validation/events.out.tfevents.1579608399.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2061.36775.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/validation/events.out.tfevents.1579608413.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2061.49467.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/validation/events.out.tfevents.1579608531.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2085.11426.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/validation/events.out.tfevents.1579608545.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2085.24093.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/validation/events.out.tfevents.1579608559.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2085.36775.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/validation/events.out.tfevents.1579608573.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2085.49467.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/validation/events.out.tfevents.1579608586.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2085.62119.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/validation/events.out.tfevents.1579608599.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2085.74786.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/validation/events.out.tfevents.1579608613.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2085.87468.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/validation/events.out.tfevents.1579608627.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2085.100160.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/validation/events.out.tfevents.1579608640.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2085.112812.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/validation/events.out.tfevents.1579608654.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2085.125479.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/validation/events.out.tfevents.1579608668.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2085.138161.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/validation/events.out.tfevents.1579608683.eduroam-int-dhcp-97-246-249.ucl.ac.uk.2085.150853.v2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Tools/consistency_plotter.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Tools/four_ghraph_plotter.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Tools/four_graphs.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Tools/temp.m" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/Parser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tranformer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Transformer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Weather_Data_Organiser.py" beforeDir="false" afterPath="$PROJECT_DIR$/Weather_Data_Organiser.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -741,7 +70,48 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ILI_Forecast.py" />
-      <option name="PARAMETERS" value="--Model=ENCODER --Look_Ahead=14 --Batch_Size=28 --Epochs=50 --Lag=28 --DOTY=True --K=1 --Country=eng -R=False" />
+      <option name="PARAMETERS" value="--Model=GRU --Look_Ahead=14 --Batch_Size=28 --Epochs=50 --Lag=28 --DOTY=True --K=1 --Country=eng -R=False" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Functions" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Forecasting" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Functions.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Weather_Data_Organiser" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Forecasting" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Weather_Data_Organiser.py" />
+      <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -796,10 +166,14 @@
     <list>
       <item itemvalue="Python.Forecast" />
       <item itemvalue="Python.run" />
+      <item itemvalue="Python.Weather_Data_Organiser" />
+      <item itemvalue="Python.Functions" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.Forecast" />
+        <item itemvalue="Python.Weather_Data_Organiser" />
+        <item itemvalue="Python.Functions" />
         <item itemvalue="Python.run" />
       </list>
     </recent_temporary>
@@ -844,6 +218,8 @@
       <workItem from="1579697397960" duration="11263000" />
       <workItem from="1579791057498" duration="3454000" />
       <workItem from="1579861481185" duration="1035000" />
+      <workItem from="1579867310301" duration="2071000" />
+      <workItem from="1580116252191" duration="4309000" />
     </task>
     <task id="LOCAL-00001" summary="Added transformer model. Model compiles but a training schedule needs to be created.">
       <created>1578492487636</created>
@@ -903,6 +279,16 @@
           <line>33</line>
           <option name="timeStamp" value="144" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Transformer.py</url>
+          <line>147</line>
+          <option name="timeStamp" value="146" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Transformer.py</url>
+          <line>155</line>
+          <option name="timeStamp" value="147" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -916,6 +302,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Forecasting$Load_Data.coverage" NAME="Forecast Coverage Results" MODIFIED="1576095768553" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Forecasting$data_formatting.coverage" NAME="data_formatting Coverage Results" MODIFIED="1576492782984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Forecasting$Forecast.coverage" NAME="Forecast Coverage Results" MODIFIED="1579862478340" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Forecasting$Functions.coverage" NAME="Functions Coverage Results" MODIFIED="1580122225866" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Forecasting$Forecast.coverage" NAME="Forecast Coverage Results" MODIFIED="1580123358016" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
