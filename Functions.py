@@ -107,11 +107,11 @@ class data_builder:
 
         assert country == 'eng' or country == 'us'
         if not args.Server:
-            self.weather_directory = '/home/mimorris/ili_data/Weather/all_weather_data.csv'
+            self.weather_directory = '/Users/michael/Documents/ili_data/Weather/all_weather_data.csv'
             self.directory = '/Users/michael/Documents/ili_data/dataset_forecasting_lag' + str(
                 self.lag) + '/' + country + '_smoothed_' + str(look_ahead) + '/fold' + str(fold) + '/'
         else:
-            self.weather_directory = '/Users/michael/Documents/ili_data/Weather/all_weather_data.csv'
+            self.weather_directory = '/home/mimorris/ili_data/Weather/all_weather_data.csv'
             self.directory = '/home/mimorris/ili_data/dataset_forecasting_lag' + str(
                 self.lag) + '/' + country + '_smoothed_' + str(look_ahead) + '/fold' + str(fold) + '/'
 
