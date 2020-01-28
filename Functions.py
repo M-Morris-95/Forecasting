@@ -11,18 +11,19 @@ import time
 import tensorflow as tf
 
 def build_model(x_train, y_train):
+    initializer = tf.keras.initializers.glorot_normal(seed=None)
     ili_input = Input(shape=[x_train.shape[1],1])
 
-    x = GRU(28, activation='relu', return_sequences=True)(ili_input)
+    x = GRU(28, activation='relu', return_sequences=True, kernel_initializer=initializer)(ili_input)
     x = Model(inputs=ili_input, outputs=x)
 
     google_input = Input(shape=[x_train.shape[1], x_train.shape[2]-1])
-    y = GRU(x_train.shape[2]-1, activation='relu', return_sequences=True)(google_input)
-    y = GRU(int(0.5*(x_train.shape[2]-1)), activation='relu', return_sequences=True)(y)
+    y = GRU(x_train.shape[2]-1, activation='relu', return_sequences=True, kernel_initializer=initializer)(google_input)
+    y = GRU(int(0.5*(x_train.shape[2]-1)), activation='relu', return_sequences=True, kernel_initializer=initializer)(y)
     y = Model(inputs=google_input, outputs=y)
 
     z = concatenate([x.output, y.output])
-    z = GRU(y_train.shape[1], activation='relu',return_sequences=False)(z)
+    z = GRU(y_train.shape[1], activation='relu',return_sequences=False, kernel_initializer=initializer)(z)
 
 
     model = Model(inputs=[x.input, y.input], outputs=z)

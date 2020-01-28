@@ -2,16 +2,48 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b389ba6e-9d91-4b6a-9f07-ea78b80758c7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2014_15_0.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2014_15_0/saved_model.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2014_15_0/variables/variables.data-00000-of-00001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2014_15_0/variables/variables.index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2014_15_1.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2014_15_1/saved_model.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2014_15_1/variables/variables.data-00000-of-00001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2014_15_1/variables/variables.index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2015_16_0.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2015_16_0/saved_model.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2015_16_0/variables/variables.data-00000-of-00001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2015_16_0/variables/variables.index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2015_16_1.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2015_16_1/saved_model.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2015_16_1/variables/variables.data-00000-of-00001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2015_16_1/variables/variables.index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2016_17_0.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2016_17_0/saved_model.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2016_17_0/variables/variables.data-00000-of-00001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2016_17_0/variables/variables.index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2016_17_1.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2016_17_1/saved_model.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2016_17_1/variables/variables.data-00000-of-00001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2016_17_1/variables/variables.index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2017_18_0.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2017_18_0/saved_model.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2017_18_0/variables/variables.data-00000-of-00001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2017_18_0/variables/variables.index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2017_18_1.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2017_18_1/saved_model.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2017_18_1/variables/variables.data-00000-of-00001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/models/2017_18_1/variables/variables.index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/test_ground_truth.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/test_predictions.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logging/GRU_14LA_Jan_28_09_45/train_stats.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ILI_Forecast.py" beforeDir="false" afterPath="$PROJECT_DIR$/ILI_Forecast.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/Tools/consistency_plotter.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/Tools/four_ghraph_plotter.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/Tools/four_graphs.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/Tools/temp.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Tools/Results_Summary.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Logging/Tools/Results_Summary.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Tools/plot_consistency.m" beforeDir="false" afterPath="$PROJECT_DIR$/Logging/Tools/plot_consistency.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Tools/~$Results_Summary.xlsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/Parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tranformer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Transformer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Weather_Data_Organiser.py" beforeDir="false" afterPath="$PROJECT_DIR$/Weather_Data_Organiser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Transformer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Transformer.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -70,7 +102,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ILI_Forecast.py" />
-      <option name="PARAMETERS" value="--Model=GRU --Look_Ahead=14 --Batch_Size=28 --Epochs=50 --Lag=28 --DOTY=True --K=1 --Country=eng -R=False" />
+      <option name="PARAMETERS" value="--Model=GRU --Look_Ahead=14 --Batch_Size=28 --Epochs=15 --Lag=28 --DOTY=True --K=2 --Country=eng -R=False" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -104,6 +136,9 @@
       <module name="Forecasting" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -219,7 +254,8 @@
       <workItem from="1579791057498" duration="3454000" />
       <workItem from="1579861481185" duration="1035000" />
       <workItem from="1579867310301" duration="2071000" />
-      <workItem from="1580116252191" duration="4309000" />
+      <workItem from="1580116252191" duration="5494000" />
+      <workItem from="1580203858065" duration="2755000" />
     </task>
     <task id="LOCAL-00001" summary="Added transformer model. Model compiles but a training schedule needs to be created.">
       <created>1578492487636</created>
@@ -281,12 +317,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Transformer.py</url>
-          <line>147</line>
+          <line>149</line>
           <option name="timeStamp" value="146" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Transformer.py</url>
-          <line>155</line>
+          <line>157</line>
           <option name="timeStamp" value="147" />
         </line-breakpoint>
       </breakpoints>

@@ -6,7 +6,9 @@ cd(fullfile(root_dir,'/ATTENTION_14LA_Jan_21_14_30'))
 % cd(fullfile(root_dir,'/ATTENTION_14LA_Jan_22_15_10'))
 % cd(fullfile(root_dir,'/ATTENTION_14LA_Jan_22_16_45'))
 % cd(fullfile(root_dir,'/GRU_14LA_Jan_22_13_54'))
-cd(fullfile(root_dir,'/ENCODER_14LA_Jan_24_11_14'))
+cd(fullfile(root_dir,'/GRU_14LA_Jan_27_11_55'))
+cd(fullfile(root_dir,'/GRU_14LA_Jan_28_09_45'))
+% cd(fullfile(root_dir,'/ENCODER_14LA_Jan_24_11_14'))
 
 loc = string(fullfile(pwd, 'test_predictions.csv'));
 y_pred = readtable(loc);
@@ -19,18 +21,22 @@ y_true = readtable(loc);
 y_true(:,1) = [] ;
 y_true = table2array(y_true);
 
+
+K = 2;
+
 figure(1)
 clf
 hold on
-y_15 = zeros(365, 10);
-y_16 = zeros(365, 10);
-y_17 = zeros(365, 10);
-y_18 = zeros(365, 10);
+y_15 = zeros(365, K);
+y_16 = zeros(365, K);
+y_17 = zeros(365, K);
+y_18 = zeros(365, K);
 a = 1;
 b = 1;
 c = 1;
 d = 1;
-for i = 1:40
+
+for i = 1:K*4
     if contains(string(Names(i)), '14_15') == 1
         subplot(2,2,1);
         hold on
@@ -38,7 +44,7 @@ for i = 1:40
         y_15(:,a) = y_pred(:,i);
         a = a+1;
         title('2014/15')
-        if a == 11
+        if a == K+1
             plot(mean(y_15.'), 'linewidth', 4)
         end
     elseif contains(string(Names(i)), '15_16') == 1
@@ -48,7 +54,7 @@ for i = 1:40
         y_16(:,b) = y_pred(:,i);
         b = b+1;
         title('2015/16')
-        if b == 11
+        if b == K+1
             plot(mean(y_16.'), 'linewidth', 4)
         end
     elseif contains(string(Names(i)), '16_17') == 1
@@ -58,7 +64,7 @@ for i = 1:40
         y_17(:,c) = y_pred(:,i);
         c = c+1;
         title('2016/17')
-        if c == 11
+        if c == K+1
             plot(mean(y_17.'), 'linewidth', 4)
         end
     elseif contains(string(Names(i)), '17_18') == 1
@@ -68,7 +74,7 @@ for i = 1:40
         y_18(:,d) = y_pred(:,i);
         d = d+1;
         title('2017/18')
-        if d == 11
+        if d == K+1
             plot(mean(y_18.'), 'linewidth', 4)
         end
     end
@@ -97,13 +103,13 @@ end
 cd '/Users/michael/Documents/github/Forecasting/Logging/Tools'
 
 R = zeros(4,45);
-RMSE = zeros(4,10);
-MAE = zeros(4,10);
-R_ERR = zeros(4,10);
+RMSE = zeros(4,K);
+MAE = zeros(4,K);
+R_ERR = zeros(4,K);
 count = 0;
 
-for j = 1:10
-    for k = j+1:10
+for j = 1:K
+    for k = j+1:K
         count = count+1;
         R(1,count) = corr(y_15(:,j), y_15(:,k));
         R(2,count) = corr(y_16(:,j), y_16(:,k));
@@ -133,12 +139,12 @@ max(R_ERR.')- min(R_ERR.');
 
 
 
-for j = 1:10
+for j = 1:k
     if y_15(5,j)==0
-        idx = j
+        idx = j;
         continue
     end
-    for k = j+1:10
+    for k = j+1:k
         count = count+1;
         R(1,count) = corr(y_15(:,j), y_15(:,k));
         R(2,count) = corr(y_16(:,j), y_16(:,k));

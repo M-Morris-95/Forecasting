@@ -140,10 +140,12 @@ def encoder_network(output_size, num_layers, units, d_model, num_heads, dropout,
 
     return model
 
-def transformer_network(output_size, num_layers, units, d_model, num_heads, dropout, name="transformer"):
+def transformer_network(output_size, num_layers, units, d_model, num_heads, dropout, embedding_size = 500, name="transformer"):
     # inputs
     inputs = tf.keras.Input(shape=(units,d_model), name="inputs")
     flatten = tf.keras.layers.Flatten()(inputs)
+    embedding_layer = tf.keras.layers.Dense(units=embedding_size, name='embedding_layer')(flatten)
+
     # encoder
     enc_outputs = encoder(
         num_layers=1,
