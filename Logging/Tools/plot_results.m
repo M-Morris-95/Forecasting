@@ -7,6 +7,7 @@ root_dir = root_dir(1:end-6);
 cd(fullfile(root_dir,'/14 days ahead/ATTN_DOTY'))
 % cd(fullfile(root_dir,'/ENCODER_14LA_Jan_24_10_56'))
 cd(fullfile(root_dir,'/GRU_14LA_Jan_27_11_11'))
+cd(fullfile(root_dir,'/TRANSFORMER_14LA_Jan_28_12_08'))
 
 loc = string(fullfile(pwd, 'test_predictions.csv'));
 y_pred = readtable(loc);

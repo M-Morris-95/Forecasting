@@ -82,8 +82,7 @@ def encoder_layer(units, d_model, num_heads, dropout, name="encoder_layer"):
     attention = tf.keras.layers.LayerNormalization(epsilon=1e-6)(inputs + attention)
 
     # feed forward
-    outputs = tf.keras.layers.Dense(units=units, activation='relu')(attention)
-    outputs = tf.keras.layers.Dense(units=d_model)(outputs)
+    outputs = tf.keras.layers.Dense(units=d_model, activation='relu')(attention)
     # dropout
     outputs = tf.keras.layers.Dropout(rate=dropout)(outputs)
 
@@ -150,15 +149,16 @@ def transformer_network(output_size, num_layers, units, d_model, num_heads, drop
     enc_outputs = encoder(
         num_layers=1,
         units=1,
-        d_model=flatten.shape[1],
-        num_heads=7,
+        d_model=embedding_size,
+        num_heads=10,
         dropout=dropout,
-    )(inputs=[flatten])
+    )(inputs=[embedding_layer])
 
-    outputs = tf.keras.layers.Dense(units=output_size, activation = 'relu')(enc_outputs)
-    # output dense layer
-    outputs = Flatten()(outputs)
-    outputs = tf.keras.layers.Dense(units=output_size, name="outputs")(outputs)
+    transpose = tf.transpose(enc_outputs, perm=[2, 1, 0])
+    flatten2 = tf.keras.layers.Flatten()(transpose)
+    transpose = tf.transpose(enc_outputs, perm=[1, 0])
+    outputs = tf.keras.layers.Dense(units=output_size, activation = 'relu')(transpose)
+
     # build model
     model = tf.keras.Model(inputs=inputs, outputs=outputs, name=name)
 
