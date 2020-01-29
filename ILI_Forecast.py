@@ -4,7 +4,7 @@ import metrics
 from Parser import GetParser
 from Functions import data_builder, build_attention, build_model, recurrent_attention, logger
 from Transformer import encoder_network
-from Time_Series_Transformer import transformer_network
+from Time_Series_Transformer import transformer_network, modified_encoder
 parser = GetParser()
 args = parser.parse_args()
 
@@ -116,6 +116,28 @@ for Model in models:
                         for j in range(21):
                             temp = model([x_test[np.newaxis,i, :, :], prediction[np.newaxis,np.newaxis,i,j]], training=False)
                             prediction[i,j+1] = temp.numpy()
+
+
+                elif Model == 'MODENC':
+                    model = modified_encoder(
+                        output_size=21,
+                        num_layers=1,
+                        units=x_train.shape[1],
+                        d_model=x_train.shape[2],
+                        num_heads=10,
+                        dropout=0.1,
+                        name="transformer")
+
+                    model.compile(optimizer=optimizer,
+                                  loss='mse',
+                                  metrics=['mae', 'mse', metrics.rmse])
+
+                    model.fit(
+                        x_train, y_train,
+                        # validation_data=(x_test, y_test),
+                        epochs=EPOCHS, batch_size=BATCH_SIZE)
+
+                    prediction = model(x_test, training=False)
 
                 elif Model == 'R_ATTN':
                     model = recurrent_attention(x_train, y_train, num_heads=7, regularizer = args.Regularizer)

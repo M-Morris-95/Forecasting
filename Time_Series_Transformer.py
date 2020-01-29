@@ -200,3 +200,24 @@ def transformer_network(output_size, units, num_layers, d_model, num_heads, drop
     model = tf.keras.Model(inputs=[inputs, prev_outputs], outputs=outputs, name=name)
 
     return model
+
+def modified_encoder(output_size, units, num_layers, d_model, num_heads, dropout, embedding_size = 500, name="transformer"):
+    # inputs
+    inputs = tf.keras.Input(shape=(units, d_model), name="inputs")
+
+    # encoder
+    enc_outputs = encoder(
+        num_layers=num_layers,
+        d_model=d_model,
+        units = units,
+        embedding_size = embedding_size,
+        num_heads=num_heads,
+        dropout=dropout,
+    )(inputs=[inputs])
+
+    outputs = tf.keras.layers.Dense(units=output_size, activation = 'relu')(enc_outputs)
+
+    # build model
+    model = tf.keras.Model(inputs=inputs, outputs=outputs, name=name)
+
+    return model
