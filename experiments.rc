@@ -1,5 +1,0 @@
-#!/bin/bash
-
-python3 ILI_Forecast.py  --Model=ATTENTION --Server=True
-python3 ILI_Forecast.py  --Model=ENCODER --Server=True
-python3 ILI_Forecast.py  --Model=GRU --Server=True
