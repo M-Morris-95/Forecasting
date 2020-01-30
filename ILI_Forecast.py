@@ -2,9 +2,10 @@ import numpy as np
 import tensorflow as tf
 import metrics
 from Parser import GetParser
-from Functions import data_builder, build_attention, build_model, recurrent_attention, logger
+from Functions import data_builder, build_attention, build_model, recurrent_attention, logger, simple
 from Transformer import encoder_network
 from Time_Series_Transformer import transformer_network, modified_encoder
+import pandas as pd
 parser = GetParser()
 args = parser.parse_args()
 
@@ -75,6 +76,15 @@ for Model in models:
                     model.fit(
                         x_train, y_train,
                         validation_data=(x_test, y_test),
+                        epochs=EPOCHS, batch_size=BATCH_SIZE)
+
+                    prediction = model.predict(x_test)
+
+                elif Model == 'SIMPLE':
+                    model = simple(x_train)
+
+                    model.fit(
+                        x_train, y_train[:,-1],
                         epochs=EPOCHS, batch_size=BATCH_SIZE)
 
                     prediction = model.predict(x_test)
@@ -156,3 +166,8 @@ for Model in models:
                     prediction = model.predict(x_test)
 
                 logging.log(prediction, y_test, model, save=True)
+
+
+final_weights = model.weights[0].numpy()[-167:]
+weights = pd.DataFrame(columns=['weight'],index = np.asarray(data.columns), data = np.squeeze(final_weights))
+weights.to_csv('weights.csv')

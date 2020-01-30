@@ -16,17 +16,22 @@ def GetParser():
                         default=False,
                         required = False)
 
-
     parser.add_argument('--DOTY',
-                        type=bool,
+                        type=str,
                         help='use day of the year data?',
-                        default=True,
-                        required = False)
+                        default='True',
+                        required=False)
 
     parser.add_argument('--Weather',
-                        type=bool,
+                        type=str,
                         help='use weather data?',
-                        default=True,
+                        default='True',
+                        required=False)
+
+    parser.add_argument('--Save_Model',
+                        type=bool,
+                        help='save models?',
+                        default=False,
                         required = False)
 
 

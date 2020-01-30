@@ -8,6 +8,13 @@ cd(fullfile(root_dir,'/14 days ahead/ATTN_DOTY'))
 % cd(fullfile(root_dir,'/ENCODER_14LA_Jan_24_10_56'))
 cd(fullfile(root_dir,'/GRU_14LA_Jan_27_11_11'))
 cd(fullfile(root_dir,'/TRANSFORMER_14LA_Jan_28_12_08'))
+cd(fullfile(root_dir,'/MODENC_14LA_Jan_29_09_39'))
+
+% cd(fullfile(root_dir,'/SIMPLE FULL'))
+cd(fullfile(root_dir,'/Simple_None'))
+cd(fullfile(root_dir,'/Simple_doty'))
+cd(fullfile(root_dir,'/Simple_weather'))
+cd(fullfile(root_dir,'/Simple_all'))
 
 loc = string(fullfile(pwd, 'test_predictions.csv'));
 y_pred = readtable(loc);
@@ -21,7 +28,7 @@ y_true(:,1) = [] ;
 y_true = table2array(y_true);
 
 figure(2)
-clf
+
 hold on
 y_15 = zeros(365, 1);
 y_16 = zeros(365, 1);

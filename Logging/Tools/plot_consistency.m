@@ -9,6 +9,9 @@ cd(fullfile(root_dir,'/ATTENTION_14LA_Jan_21_14_30'))
 cd(fullfile(root_dir,'/GRU_14LA_Jan_27_11_55'))
 cd(fullfile(root_dir,'/GRU_14LA_Jan_28_09_45'))
 % cd(fullfile(root_dir,'/ENCODER_14LA_Jan_24_11_14'))
+cd(fullfile(root_dir,'/MODENC_14LA_Jan_29_10_04'))
+cd(fullfile(root_dir,'/SIMPLE_14LA_Jan_29_14_07'))
+cd(fullfile(root_dir,'/SIMPLE_21LA_Jan_30_09_42'))
 
 loc = string(fullfile(pwd, 'test_predictions.csv'));
 y_pred = readtable(loc);
@@ -22,7 +25,7 @@ y_true(:,1) = [] ;
 y_true = table2array(y_true);
 
 
-K = 2;
+K = 3;
 
 figure(1)
 clf
@@ -35,7 +38,7 @@ a = 1;
 b = 1;
 c = 1;
 d = 1;
-
+plot_mean = 0;
 for i = 1:K*4
     if contains(string(Names(i)), '14_15') == 1
         subplot(2,2,1);
@@ -45,7 +48,9 @@ for i = 1:K*4
         a = a+1;
         title('2014/15')
         if a == K+1
-            plot(mean(y_15.'), 'linewidth', 4)
+            if plot_mean == 1
+                plot(mean(y_15.'), 'linewidth', 2)
+            end
         end
     elseif contains(string(Names(i)), '15_16') == 1
         subplot(2,2,2);
@@ -55,7 +60,9 @@ for i = 1:K*4
         b = b+1;
         title('2015/16')
         if b == K+1
-            plot(mean(y_16.'), 'linewidth', 4)
+            if plot_mean == 1
+            plot(mean(y_16.'), 'linewidth', 2)
+            end
         end
     elseif contains(string(Names(i)), '16_17') == 1
         subplot(2,2,3);
@@ -65,7 +72,9 @@ for i = 1:K*4
         c = c+1;
         title('2016/17')
         if c == K+1
-            plot(mean(y_17.'), 'linewidth', 4)
+            if plot_mean == 1
+            plot(mean(y_17.'), 'linewidth', 2)
+            end
         end
     elseif contains(string(Names(i)), '17_18') == 1
         subplot(2,2,4);
@@ -75,16 +84,18 @@ for i = 1:K*4
         d = d+1;
         title('2017/18')
         if d == K+1
-            plot(mean(y_18.'), 'linewidth', 4)
+            if plot_mean == 1
+            plot(mean(y_18.'), 'linewidth', 2)
+            end
         end
     end
 end
 for i = 1:4
     subplot(2,2,i)
     hold on
-    plot(y_true(:,i), 'linewidth', 4)
+    plot(y_true(:,i), 'linewidth', 2)
     xlim([0,365])
-    legend('mean', 'truth')
+    legend('truth', 'mean')
     hold off
     xlabel('day of the year')
     ylabel('ili rate')

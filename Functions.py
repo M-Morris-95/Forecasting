@@ -36,6 +36,22 @@ def build_model(x_train, y_train):
 
     return model
 
+def simple(x_train):
+    ili_input = Input(shape=[x_train.shape[1],x_train.shape[2]])
+    flatten = tf.keras.layers.Flatten()(ili_input)
+    output = tf.keras.layers.Dense(1)(flatten)
+    model = Model(inputs=ili_input, outputs=output)
+
+    optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
+
+    model.compile(optimizer=optimizer,
+                  loss='mae',
+                  metrics=['mae', 'mse', metrics.rmse])
+
+    return model
+
+
+
 def recurrent_attention(x_train, y_train, num_heads = 1, regularizer = False):
     if regularizer:
         regularizer = tf.keras.regularizers.l2(0.01)
@@ -102,9 +118,16 @@ class data_builder:
     def __init__(self, args, fold, look_ahead=14):
         country = args.Country
         self.look_ahead = look_ahead
+        if args.Weather == 'True':
+            self.weather = True
+        else:
+            self.weather = False
+        if args.DOTY == 'True':
+            self.doty = True
+        else:
+            self.doty = False
+
         self.lag = args.Lag
-        self.weather = args.Weather
-        self.doty = args.DOTY
 
         assert country == 'eng' or country == 'us'
         if not args.Server:
@@ -133,9 +156,9 @@ class data_builder:
                 weather = weather[:idx+1]
         if self.weather:
             weather = weather.reset_index(drop = True)
-            google_data['mean'] = weather['mean']
-            google_data['min'] = weather['min']
-            google_data['max'] = weather['max']
+            google_data['weather mean'] = weather['mean']
+            # google_data['min'] = weather['min']
+            # google_data['max'] = weather['max']
 
 
 
@@ -169,7 +192,7 @@ class data_builder:
         n = normalizer(google_train, y_train)
         google_train = n.normalize(google_train, y_train)
         google_test = n.normalize(google_test, y_test)
-
+        self.columns = google_train.columns
         x_train = np.asarray([google_train[i:i + self.lag].values for i in range(len(google_train) - self.lag + 1)])
         x_test = np.asarray([google_test[i:i + self.lag].values for i in range(len(google_test) - self.lag + 1)])
 
@@ -236,6 +259,9 @@ class logger:
         timestamp = time.strftime('_%b_%d_%H_%M', time.localtime())
         self.root_directory = os.getcwd()
         self.ret_max_k = args.K
+
+        self.save_model = args.Save_Model
+
         if args.K != 1:
             self.iter = True
         else:
@@ -336,7 +362,8 @@ class logger:
         os.chdir(self.save_directory+'/models')
 
         self.model_history.to_csv(r''+self.save_name.replace('/', '_') + '.csv')
-        model.save(self.save_name.replace('/', '_'), save_format='tf')
+        if self.save_model:
+            model.save(self.save_name.replace('/', '_'), save_format='tf')
         os.chdir(self.save_directory)
 
         self.train_stats.to_csv(r'train_stats.csv')
