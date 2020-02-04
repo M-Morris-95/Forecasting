@@ -42,12 +42,6 @@ def simple(x_train):
     output = tf.keras.layers.Dense(1)(flatten)
     model = Model(inputs=ili_input, outputs=output)
 
-    optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
-
-    model.compile(optimizer=optimizer,
-                  loss='mae',
-                  metrics=['mae', 'mse', metrics.rmse])
-
     return model
 
 
@@ -114,6 +108,25 @@ def build_attention(x_train, y_train, num_heads = 1, regularizer = False):
 
     return model
 
+
+def simple_GRU(x_train, y_train, regularizer = False):
+    if regularizer:
+        regularizer = tf.keras.regularizers.l2(0.01)
+    else:
+        regularizer = None
+
+    ili_input = Input(shape=[x_train.shape[1],x_train.shape[2]])
+    x = GRU(x_train.shape[1], activation='relu', return_sequences=True, kernel_regularizer=regularizer)(ili_input)
+    x = GRU(int((x_train.shape[2] - 1)), activation='relu', return_sequences=True, kernel_regularizer=regularizer)(x)
+    y = GRU(int(0.75*(x_train.shape[2]-1)), activation='relu', return_sequences=True, kernel_regularizer=regularizer)(x)
+    z = GRU(y_train.shape[1], activation='relu',return_sequences=False, kernel_regularizer=regularizer)(y)
+
+
+    model = Model(inputs=ili_input, outputs=z)
+
+
+    return model
+
 class data_builder:
     def __init__(self, args, fold, look_ahead=14):
         country = args.Country
@@ -148,6 +161,7 @@ class data_builder:
         google_data = pd.read_csv(path)
         weather = pd.read_csv(self.weather_directory)
         temp = google_data['Unnamed: 0'].values
+
         for idx, val in enumerate(weather['0']):
             if val == temp[0]:
                 weather = weather[idx:]
@@ -157,16 +171,22 @@ class data_builder:
         if self.weather:
             weather = weather.reset_index(drop = True)
             google_data['weather mean'] = weather['mean']
-            # google_data['min'] = weather['min']
-            # google_data['max'] = weather['max']
-
-
 
         if self.doty:
             google_data['Unnamed: 0'] = np.asarray([datetime.datetime.strptime(val, '%Y-%m-%d').timetuple().tm_yday for val in temp])
         else:
             google_data = google_data.drop(['Unnamed: 0'], axis=1)
         return google_data
+
+    def split(self, x_train, y_train):
+        self.years= 3
+        self.val_size = 3*365
+        x_val = x_train[-self.val_size:]
+        y_val = y_train[-self.val_size:]
+        x_train = x_train[:-self.val_size]
+        y_train = y_train[:-self.val_size]
+        return x_train, y_train, x_val, y_val
+
 
     def build(self):
         google_train = self.load_google_data(self.directory + 'google-train')
@@ -180,22 +200,32 @@ class data_builder:
 
         y_ahead = self.look_ahead + 7
 
-        temp = pd.read_csv(self.directory + 'ili-train', header=None)[self.lag-1:self.lag+self.look_ahead+6]
-        temp = temp.append(pd.read_csv(self.directory + 'y-train', header=None))[1].values
+        ili_train = pd.read_csv(self.directory + 'ili-train', header=None)
+        y_train = pd.read_csv(self.directory + 'y-train', header=None)
+        for idx, val in enumerate(ili_train[0]):
+            if val == y_train[0][0]:
+                ili_train = ili_train[idx-y_ahead+1:idx]
+        ili_train = ili_train.append(y_train)
+        y_train = np.asarray([np.asarray(ili_train[1][i:i + y_ahead]) for i in range(len(ili_train) - y_ahead+1)])
 
-        y_train = np.asarray([np.asarray(temp[i:i + y_ahead]) for i in range(len(temp) - y_ahead)])
-
-        temp = pd.read_csv(self.directory + 'ili-test', header=None)[self.lag-1:self.lag+self.look_ahead+6]
-        temp = temp.append(pd.read_csv(self.directory + 'y-test', header=None))[1].values
-        y_test = np.asarray([np.asarray(temp[i:i + y_ahead]) for i in range(len(temp) - y_ahead)])
-
+        ili_test = pd.read_csv(self.directory + 'ili-test', header=None)
+        y_test = pd.read_csv(self.directory + 'y-test', header=None)
+        for idx, val in enumerate(ili_test[0]):
+            if val == y_test[0][0]:
+                ili_test = ili_test[idx-y_ahead+1:idx]
+        ili_test = ili_test.append(y_test)
+        y_test = np.asarray([np.asarray(ili_test[1][i:i + y_ahead]) for i in range(len(ili_test) - y_ahead+1)])
+        #
         n = normalizer(google_train, y_train)
         google_train = n.normalize(google_train, y_train)
         google_test = n.normalize(google_test, y_test)
         self.columns = google_train.columns
         x_train = np.asarray([google_train[i:i + self.lag].values for i in range(len(google_train) - self.lag + 1)])
+        A = pd.read_csv(self.directory + 'google-train')
         x_test = np.asarray([google_test[i:i + self.lag].values for i in range(len(google_test) - self.lag + 1)])
 
+        # print(x_train.shape, y_train.shape, y_train_index.shape)
+        # print(x_test.shape, y_test.shape, y_test_index.shape)
         assert(x_train.shape[0] == y_train.shape[0] == y_train_index.shape[0])
         assert(x_test.shape[0] == y_test.shape[0] == y_test_index.shape[0])
 
@@ -244,6 +274,36 @@ class plotter:
         plt.grid(b=True, which='major', color='#666666', linestyle='-')
         plt.minorticks_on()
         plt.grid(b=True, which='minor', color='#999999', linestyle='-', alpha=0.2)
+
+    def plot_df(self, logging):
+        plt.figure(self.number)
+        pred = logging.test_predictions
+        cols = pred.columns
+
+        for i in range(4):
+            plt.subplot(2,2,i+1)
+            plt.grid(b=True, which='major', color='#666666', linestyle='-')
+            plt.minorticks_on()
+            plt.grid(b=True, which='minor', color='#999999', linestyle='-', alpha=0.2)
+            plt.plot(logging.test_ground_truth[cols[0]].values)
+
+        for col in cols:
+            if '14/15' in col:
+                plt.subplot(2, 2, 1)
+                plt.plot(pred[col].values)
+            if '15/16' in col:
+                plt.subplot(2, 2, 2)
+                plt.plot(pred[col].values)
+            if '16/17' in col:
+                plt.subplot(2, 2, 3)
+                plt.plot(pred[col].values)
+            if '17/18' in col:
+                plt.subplot(2, 2, 4)
+                plt.plot(pred[col].values)
+
+        plt.show()
+
+
 
     def save(self, name):
 
@@ -332,10 +392,16 @@ class logger:
             y_pred = np.squeeze(y_pred)
         if y_true.ndim == 3:
             y_true = np.squeeze(y_true)
-        y_true = y_true[:365, -1]
-        y_pred = y_pred[:365, -1]
-
+        if y_true.ndim ==2:
+            y_true = y_true[:, -1]
+        if y_pred.ndim == 2:
+            y_pred = y_pred[:, -1]
+        y_pred = np.asarray(y_pred)
         self.train_stats[str(self.save_name)] = metrics.evaluate(y_true, y_pred)
+
+        y_true = np.append(y_true, np.nan)[:366]
+        y_pred = np.append(y_pred, np.nan)[:366]
+
         self.test_ground_truth[str(self.save_name)] = y_true
         self.test_predictions[str(self.save_name)] = y_pred
 

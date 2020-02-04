@@ -19,13 +19,13 @@ def GetParser():
     parser.add_argument('--DOTY',
                         type=str,
                         help='use day of the year data?',
-                        default='True',
+                        default='False',
                         required=False)
 
     parser.add_argument('--Weather',
                         type=str,
                         help='use weather data?',
-                        default='True',
+                        default='False',
                         required=False)
 
     parser.add_argument('--Save_Model',
