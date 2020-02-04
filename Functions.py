@@ -221,7 +221,6 @@ class data_builder:
         google_test = n.normalize(google_test, y_test)
         self.columns = google_train.columns
         x_train = np.asarray([google_train[i:i + self.lag].values for i in range(len(google_train) - self.lag + 1)])
-        A = pd.read_csv(self.directory + 'google-train')
         x_test = np.asarray([google_test[i:i + self.lag].values for i in range(len(google_test) - self.lag + 1)])
 
         # print(x_train.shape, y_train.shape, y_train_index.shape)

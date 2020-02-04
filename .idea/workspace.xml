@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b389ba6e-9d91-4b6a-9f07-ea78b80758c7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Linear_Model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ILI_Forecast.py" beforeDir="false" afterPath="$PROJECT_DIR$/ILI_Forecast.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/Tools/Results_Summary.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Logging/Tools/Results_Summary.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging/Tools/plot_results.m" beforeDir="false" afterPath="$PROJECT_DIR$/Logging/Tools/plot_results.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/Parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/temp.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Linear_Model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Linear_Model.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -101,7 +96,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Linear_Model" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="Linear_Model" type="PythonConfigurationType" factoryName="Python">
       <module name="Forecasting" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -188,14 +183,13 @@
     </configuration>
     <list>
       <item itemvalue="Python.Forecast" />
+      <item itemvalue="Python.Linear_Model" />
       <item itemvalue="Python.run" />
       <item itemvalue="Python.Weather_Data_Organiser" />
       <item itemvalue="Python.Functions" />
-      <item itemvalue="Python.Linear_Model" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Linear_Model" />
         <item itemvalue="Python.Weather_Data_Organiser" />
         <item itemvalue="Python.Functions" />
         <item itemvalue="Python.run" />
@@ -250,7 +244,7 @@
       <workItem from="1580462445265" duration="11373000" />
       <workItem from="1580723125732" duration="18725000" />
       <workItem from="1580808237015" duration="5470000" />
-      <workItem from="1580821409631" duration="2978000" />
+      <workItem from="1580821409631" duration="6114000" />
     </task>
     <task id="LOCAL-00001" summary="Added transformer model. Model compiles but a training schedule needs to be created.">
       <created>1578492487636</created>
@@ -312,7 +306,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Linear_Model.py</url>
-          <line>57</line>
+          <line>47</line>
           <option name="timeStamp" value="351" />
         </line-breakpoint>
       </breakpoints>

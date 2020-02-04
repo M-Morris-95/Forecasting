@@ -4,6 +4,7 @@ import metrics
 from Parser import GetParser
 from Functions import data_builder,logger, plotter
 from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import Ridge
 import matplotlib.pyplot as plt
 import tensorflow_probability as tfp
 # tf.config.experimental_run_functions_eagerly(True)
@@ -16,6 +17,8 @@ EPOCHS, BATCH_SIZE = args.Epochs, args.Batch_Size
 logging = logger(args)
 models, look_aheads, max_k = logging.get_inputs()
 optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
+# optimizer = tf.keras.optimizers.Adam()
+# optimizer = tf.keras.optimizers.SGD()
 reg = np.zeros((16,2))
 for idx, i in enumerate([0, 0.001, 0.01, 0.1]):
     for jdx, j in enumerate([0, 0.001, 0.01, 0.1]):
@@ -26,22 +29,9 @@ for Model in models:
     for look_ahead in look_aheads:
         for k in range(max_k):
             for fold_num in range(1,5):
-                # print(k, fold_num)
                 tf.random.set_seed(0)
                 logging.update_details(fold_num=fold_num, k=k, model=Model, look_ahead=look_ahead)
 
-                # if k == 0:
-                #     args.Weather = 'True'
-                #     args.DOTY = 'True'
-                # if k == 1:
-                #     args.Weather = 'False'
-                #     args.DOTY = 'True'
-                # if k == 2:
-                #     args.Weather = 'True'
-                #     args.DOTY = 'False'
-                # if k == 1:
-                #     args.Weather = 'False'
-                #     args.DOTY = 'False'
 
 
                 # regularizer = tf.keras.regularizers.L1L2(reg[k,0], reg[k,1])
@@ -56,7 +46,9 @@ for Model in models:
                 y_test = y_test[:, -1]
 
                 ili_input = tf.keras.layers.Input(shape=[x_train.shape[1]])
-                output = tf.keras.layers.Dense(1)(ili_input)
+                hidden = tf.keras.layers.Dense(x_train.shape[1])(ili_input)
+                hidden2 = tf.keras.layers.Dense(int(x_train.shape[1]/2))(hidden)
+                output = tf.keras.layers.Dense(1)(hidden2)
                 # output = tfp.layers.VariationalGaussianProcess(1)(ili_input)
                 model = tf.keras.models.Model(inputs=ili_input, outputs=output)
 
@@ -69,11 +61,14 @@ for Model in models:
                     epochs=EPOCHS, batch_size=BATCH_SIZE,
                     verbose = 2)
 
+                # reg = Ridge(solver='sag').fit(x_train, y_train)
+
+
                 prediction = model.predict(x_test)
                 plt.subplot(2, 2, fold_num)
                 plt.plot(prediction)
                 plt.plot(y_test)
-
+                # plt.plot(reg.predict(x_test))
                 logging.log(prediction, y_test, model, save=True)
 
 plt.show()
