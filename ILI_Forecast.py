@@ -42,7 +42,7 @@ class early_stopping:
             else:
                 self.count = 1
                 return False
-
+do_early_stopping = False
 for Model in models:
     for look_ahead in look_aheads:
         for k in range(max_k):
@@ -142,7 +142,7 @@ for Model in models:
                                   loss='mae',
                                   metrics=['mae', 'mse', metrics.rmse])
 
-                    if early_stopping:
+                    if do_early_stopping:
                         val_metric = []
 
                         patience = 5

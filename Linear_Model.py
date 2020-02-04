@@ -5,6 +5,8 @@ from Parser import GetParser
 from Functions import data_builder,logger, plotter
 from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import Ridge
+from sklearn.linear_model import SGDRegressor
+from metrics import evaluate
 import matplotlib.pyplot as plt
 import tensorflow_probability as tfp
 # tf.config.experimental_run_functions_eagerly(True)
@@ -19,6 +21,7 @@ models, look_aheads, max_k = logging.get_inputs()
 optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
 # optimizer = tf.keras.optimizers.Adam()
 # optimizer = tf.keras.optimizers.SGD()
+# optimizer = tf.compat.v1.train.GradientDescentOptimizer(0.0005)
 reg = np.zeros((16,2))
 for idx, i in enumerate([0, 0.001, 0.01, 0.1]):
     for jdx, j in enumerate([0, 0.001, 0.01, 0.1]):
@@ -42,14 +45,13 @@ for Model in models:
 
                 x_train = x_train.reshape((x_train.shape[0], -1))
                 x_test = x_test.reshape((x_test.shape[0], -1))
-                y_train = y_train[:,-1]
+                y_train = y_train[:, -1]
                 y_test = y_test[:, -1]
 
                 ili_input = tf.keras.layers.Input(shape=[x_train.shape[1]])
-                hidden = tf.keras.layers.Dense(x_train.shape[1])(ili_input)
-                hidden2 = tf.keras.layers.Dense(int(x_train.shape[1]/2))(hidden)
-                output = tf.keras.layers.Dense(1)(hidden2)
-                # output = tfp.layers.VariationalGaussianProcess(1)(ili_input)
+                # hidden = tf.keras.layers.Dense(100)(ili_input)
+                # hidden2 = tf.keras.layers.Dense(50)(hidden)
+                output = tf.keras.layers.Dense(1)(ili_input)
                 model = tf.keras.models.Model(inputs=ili_input, outputs=output)
 
                 model.compile(optimizer=optimizer,
@@ -61,7 +63,7 @@ for Model in models:
                     epochs=EPOCHS, batch_size=BATCH_SIZE,
                     verbose = 2)
 
-                # reg = Ridge(solver='sag').fit(x_train, y_train)
+                # reg = SGDRegressor().fit(x_train, y_train)
 
 
                 prediction = model.predict(x_test)
@@ -70,7 +72,7 @@ for Model in models:
                 plt.plot(y_test)
                 # plt.plot(reg.predict(x_test))
                 logging.log(prediction, y_test, model, save=True)
-
+                # print(evaluate(y_test,reg.predict(x_test) ))
 plt.show()
 print(logging.train_stats)
 
