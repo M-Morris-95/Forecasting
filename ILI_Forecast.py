@@ -121,7 +121,7 @@ for Model in models:
 
                 elif Model == 'MODENC':
                     model = modified_encoder(
-                        output_size=21,
+                        output_size=y_train.shape[1],
                         num_layers=1,
                         units=x_train.shape[1],
                         d_model=x_train.shape[2],
