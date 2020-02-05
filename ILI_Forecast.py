@@ -135,14 +135,13 @@ for Model in models:
                     y_test = y_test[:,:,np.newaxis]
 
                 if model != 'TRANSFORMER':
-                    x_train, y_train, x_val, y_val = data.split(x_train, y_train)
                     optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
-
                     model.compile(optimizer=optimizer,
                                   loss='mae',
                                   metrics=['mae', 'mse', metrics.rmse])
 
                     if do_early_stopping:
+                        x_train, y_train, x_val, y_val = data.split(x_train, y_train)
                         val_metric = []
 
                         patience = 5
@@ -177,13 +176,13 @@ for Model in models:
                     else:
                         model.fit(
                             x_train, y_train,
-                            epochs=100, batch_size=BATCH_SIZE)
+                            epochs=EPOCHS, batch_size=BATCH_SIZE)
 
                     # prediction = model(x_test, training = False)
                     prediction = model.predict(x_test)
                 logging.log(prediction, y_test, model, save=True)
 
 
-final_weights = model.weights[0].numpy()[-167:]
-weights = pd.DataFrame(columns=['weight'],index = np.asarray(data.columns), data = np.squeeze(final_weights))
-weights.to_csv('weights.csv')
+# final_weights = model.weights[0].numpy()[-167:]
+# weights = pd.DataFrame(columns=['weight'],index = np.asarray(data.columns), data = np.squeeze(final_weights))
+# weights.to_csv('weights.csv')

@@ -3,8 +3,353 @@
   <component name="ChangeListManager">
     <list default="true" id="b389ba6e-9d91-4b6a-9f07-ea78b80758c7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Functions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ILI_Forecast.py" beforeDir="false" afterPath="$PROJECT_DIR$/ILI_Forecast.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Linear_Model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Linear_Model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_22/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_22/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_22/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_22/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_22/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_22/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_22/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_23/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_23/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_23/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_23/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_23/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_23/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_23/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_27/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_27/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_27/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_27/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_27/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_27/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_27/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_29/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_29/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_29/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_29/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_29/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_29/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_29/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_35/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_35/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_35/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_35/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_35/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_35/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_14LA_Feb_04_10_35/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_21LA_Feb_04_10_38/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_21LA_Feb_04_10_38/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_21LA_Feb_04_10_38/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_21LA_Feb_04_10_38/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_21LA_Feb_04_10_38/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_21LA_Feb_04_10_38/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/GRU_21LA_Feb_04_10_38/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_15_23/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_15_23/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_15_23/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_15_23/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_15_23/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_15_23/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_15_23/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_15_25/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_15_25/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_15_25/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_15_25/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_15_25/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_15_25/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_15_25/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_15_26/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_15_26/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_15_26/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_15_26/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_15_26/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_15_26/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_15_26/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_15_59/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_15_59/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_15_59/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_15_59/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_15_59/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_15_59/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_15_59/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_11/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_11/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_11/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_11/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_11/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_11/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_11/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_15/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_15/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_15/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_15/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_15/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_15/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_15/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_19/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_19/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_19/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_19/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_19/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_19/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_19/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_20/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_20/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_20/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_20/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_20/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_20/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_20/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_23/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_23/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_23/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_23/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_23/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_23/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_23/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_31/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_31/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_31/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_31/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_31/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_31/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_31/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_32/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_32/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_32/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_32/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_32/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_32/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_32/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_39/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_39/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_39/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_39/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_39/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_39/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_39/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_49/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_49/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_49/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_49/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_49/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_49/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_49/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_55/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_55/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_55/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_55/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_55/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_55/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_55/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_56/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_56/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_56/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_56/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_56/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_56/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_56/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_58/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_58/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_58/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_58/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_58/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_58/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_16_58/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_04/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_04/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_04/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_04/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_04/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_04/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_04/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_06/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_06/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_06/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_06/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_06/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_06/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_06/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_07/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_07/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_07/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_07/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_07/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_07/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_07/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_14/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_14/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_14/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_14/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_14/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_14/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_14/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_15/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_15/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_15/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_15/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_15/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_15/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_15/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_16/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_16/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_16/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_16/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_16/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_16/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_16/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_18/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_18/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_18/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_18/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_18/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_18/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_18/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_47/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_47/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_47/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_47/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_47/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_47/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_17_47/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_18_10/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_18_10/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_18_10/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_18_10/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_18_10/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_18_10/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_14LA_Feb_04_18_10/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_13_49/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_13_49/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_13_49/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_13_49/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_13_49/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_13_49/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_19/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_19/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_19/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_19/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_19/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_19/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_19/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_28/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_28/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_28/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_28/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_28/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_28/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_28/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_31/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_31/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_31/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_31/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_31/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_31/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_31/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_34/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_34/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_34/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_34/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_34/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_34/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_34/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_35/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_35/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_35/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_35/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_35/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_35/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_35/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_40/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_40/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_40/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_40/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_40/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_40/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_40/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_42/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_42/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_42/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_42/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_42/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_42/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_42/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_43/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_43/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_43/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_43/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_43/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_43/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_43/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_44/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_44/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_44/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_44/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_44/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_44/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_17_44/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_18_11/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_18_11/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_18_11/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_18_11/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_18_11/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_18_11/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_21LA_Feb_04_18_11/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_7LA_Feb_04_18_09/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_7LA_Feb_04_18_09/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_7LA_Feb_04_18_09/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_7LA_Feb_04_18_09/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_7LA_Feb_04_18_09/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_7LA_Feb_04_18_09/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/LINEAR_7LA_Feb_04_18_09/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_07/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_07/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_07/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_07/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_07/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_07/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_07/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_10/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_10/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_10/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_10/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_10/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_10/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_10/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_13/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_13/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_13/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_13/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_13/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_13/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_13/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_17/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_17/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_17/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_17/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_17/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_17/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_17/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_19/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_19/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_19/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_19/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_19/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_19/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/SIMPLE_14LA_Jan_31_14_19/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Tools/Results_Summary.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Logging/Tools/Results_Summary.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Tools/~$Results_Summary.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/simpleGRU_14LA_Jan_31_12_19/models/2014_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/simpleGRU_14LA_Jan_31_12_19/models/2015_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/simpleGRU_14LA_Jan_31_12_19/models/2016_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/simpleGRU_14LA_Jan_31_12_19/models/2017_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/simpleGRU_14LA_Jan_31_12_19/test_ground_truth.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/simpleGRU_14LA_Jan_31_12_19/test_predictions.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/simpleGRU_14LA_Jan_31_12_19/train_stats.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/metrics.py" beforeDir="false" afterPath="$PROJECT_DIR$/metrics.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -63,7 +408,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ILI_Forecast.py" />
-      <option name="PARAMETERS" value="--Model=SIMPLE --Look_Ahead=14 --Batch_Size=28 --Epochs=50 --Lag=28 --DOTY=True --K=1 --Country=eng -R=False --Weather=True" />
+      <option name="PARAMETERS" value="--Model=GRU --Look_Ahead=14 --Batch_Size=28 --Epochs=2 --Lag=28 --DOTY=True --K=1 --Country=eng -R=False --Weather=True" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -97,6 +442,9 @@
       <module name="Forecasting" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -240,7 +588,8 @@
       <workItem from="1580462445265" duration="11373000" />
       <workItem from="1580723125732" duration="18725000" />
       <workItem from="1580808237015" duration="5470000" />
-      <workItem from="1580821409631" duration="11038000" />
+      <workItem from="1580821409631" duration="11364000" />
+      <workItem from="1580896316257" duration="635000" />
     </task>
     <task id="LOCAL-00001" summary="Added transformer model. Model compiles but a training schedule needs to be created.">
       <created>1578492487636</created>
@@ -325,6 +674,6 @@
     <SUITE FILE_PATH="coverage/Forecasting$data_formatting.coverage" NAME="data_formatting Coverage Results" MODIFIED="1576492782984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Forecasting$Functions.coverage" NAME="Functions Coverage Results" MODIFIED="1580122225866" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Forecasting$Linear_Model.coverage" NAME="Linear_Model Coverage Results" MODIFIED="1580837364685" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Forecasting$Forecast.coverage" NAME="Forecast Coverage Results" MODIFIED="1580724534221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Forecasting$Forecast.coverage" NAME="Forecast Coverage Results" MODIFIED="1580896712632" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

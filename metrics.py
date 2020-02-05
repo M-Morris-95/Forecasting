@@ -25,5 +25,8 @@ def mse(y_true, y_pred):
 def mae(y_true, y_pred):
     return tf.reduce_mean(tf.math.abs(y_true-y_pred))
 
+def lag(y_true, y_pred):
+    return tf.argmax(y_pred)-tf.argmax(y_true)
+
 def evaluate(y_true, y_pred):
-    return mae(y_true, y_pred).numpy(), rmse(y_true, y_pred).numpy(), pearson(y_true, y_pred)
+    return mae(y_true, y_pred).numpy(), rmse(y_true, y_pred).numpy(), pearson(y_true, y_pred), lag(y_true, y_pred)

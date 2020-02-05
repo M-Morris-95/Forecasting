@@ -349,7 +349,7 @@ class logger:
             self.logging_directory = '/home/mimorris/Forecasting/Logging/'
         self.save_directory = self.logging_directory + args.Model + look_ahead_str + timestamp
 
-        self.train_stats = pd.DataFrame(index=['MAE', 'RMSE', 'R'])
+        self.train_stats = pd.DataFrame(index=['MAE', 'RMSE', 'R', 'Lag'])
         self.test_predictions = pd.DataFrame()
         self.test_ground_truth = pd.DataFrame()
         self.cleanup()
