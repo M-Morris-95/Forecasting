@@ -76,7 +76,16 @@ for Model in models:
                         name="encoder")
 
                 elif Model == 'ATTENTION':
+<<<<<<< fba63bdadc7e933d4dd3b476e70d36926f8ba22b
                     model = build_attention(x_train, y_train, num_heads=7, regularizer = args.Regularizer)
+=======
+<<<<<<< 4cebca0764fa4b3ca0e7cb8fa968399d50927582
+                    initializer = tf.keras.initializers.glorot_normal(seed=None)
+                    model = build_attention(x_train, y_train, num_heads=7, regularizer = args.Regularizer, initializer=initializer)
+=======
+                    model = build_attention(x_train, y_train, num_heads=7, regularizer = args.Regularizer)
+>>>>>>> removed large files
+>>>>>>> removed large files
 
                 elif Model == 'SIMPLE':
                     model = simple(x_train)
