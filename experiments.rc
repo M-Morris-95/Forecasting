@@ -1,3 +1,0 @@
-nohup python3 ILI_Forecast.py --Model=GRU --Look_Ahead=7 --Batch_Size=28 --Epochs=100 --Server=True --Lag=28 --DOTY=False --K=1 --Country=us -R=False --Weather=False
-nohup python3 ILI_Forecast.py --Model=GRU --Look_Ahead=14 --Batch_Size=28 --Epochs=100 --Server=True --Lag=28 --DOTY=False --K=1 --Country=us -R=False --Weather=False
-nohup python3 ILI_Forecast.py --Model=GRU --Look_Ahead=21 --Batch_Size=28 --Epochs=100 --Server=True --Lag=28 --DOTY=False --K=1 --Country=us -R=False --Weather=False
