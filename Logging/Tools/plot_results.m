@@ -2,15 +2,9 @@ clear all
 root_dir = pwd;
 root_dir = root_dir(1:end-6);
 
-root_dir = '/Users/michael/Documents/Forecasting Old Logs/consistency';
-% cd(fullfile(root_dir,'/14 days ahead/GRU_No_DOTY'))
-% cd(fullfile(root_dir,'/GRU_14LA_Jan_22_13_54'))
-% cd(fullfile(root_dir,'/14 days ahead/GRU_DOTY'))
-cd(fullfile(root_dir,'/14 days ahead/ATTN_DOTY'))
-% cd(fullfile(root_dir,'/ENCODER_14LA_Jan_24_10_56'))
-cd(fullfile(root_dir,'/consistency/MODENC_14LA_Jan_29_10_04'))
-cd(fullfile(root_dir,'/SIMPLE_14LA_Jan_31_14_19'))
-cd(fullfile(root_dir,'/GRU_21LA_Feb_03_16_30'))
+
+cd(fullfile(root_dir,'/GRU_Feb_05_eng'))
+
 
 % cd(fullfile(root_dir,'/Simple_None'))
 % cd(fullfile(root_dir,'/Simple/Simple_doty'))
@@ -85,7 +79,7 @@ for i = 1:4
     xlim([0,365])
 
 
-    legend('L1= 0.1 L2= 0.0 ','L1= 0.0 L2= 0.0 ','L1= 0.0 L2= 0.001 ','L1= 0.001 L2= 0.001 ','L1= 0.01 L2= 0.001 ','L1= 0.1 L2= 0.001 ','L1= 0.001 L2= 0.01 ','L1= 0.0 L2= 0.0 ','L1= 0.01 L2= 0.01 ','L1= 0.001 L2= 0.1 ','L1= 0.1 L2= 0.01 ','L1= 0.0 L2= 0.0 ','L1= 0.01 L2= 0.1 ','L1= 0.0 L2= 0.0 ','L1= 0.0 L2= 0.0 ','L1= 0.1 L2= 0.1 ','truth')
+%     legend('L1= 0.1 L2= 0.0 ','L1= 0.0 L2= 0.0 ','L1= 0.0 L2= 0.001 ','L1= 0.001 L2= 0.001 ','L1= 0.01 L2= 0.001 ','L1= 0.1 L2= 0.001 ','L1= 0.001 L2= 0.01 ','L1= 0.0 L2= 0.0 ','L1= 0.01 L2= 0.01 ','L1= 0.001 L2= 0.1 ','L1= 0.1 L2= 0.01 ','L1= 0.0 L2= 0.0 ','L1= 0.01 L2= 0.1 ','L1= 0.0 L2= 0.0 ','L1= 0.0 L2= 0.0 ','L1= 0.1 L2= 0.1 ','truth')
     
     title(string(2013+i) + '/' +string(14+i))
     xlabel('day of the year')
