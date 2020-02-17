@@ -527,11 +527,21 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.CNN" />
       <item itemvalue="Python.Forecast" />
+<<<<<<< fc1dce5fe4c8895fd5853a74912ca85dd1e4ee3c
       <item itemvalue="Python.Linear_Model" />
       <item itemvalue="Python.run" />
       <item itemvalue="Python.Weather_Data_Organiser" />
+=======
+      <item itemvalue="Python.Forecaster" />
+>>>>>>> still trying to un-fuck everything
       <item itemvalue="Python.Functions" />
+<<<<<<< fba63bdadc7e933d4dd3b476e70d36926f8ba22b
+=======
+      <item itemvalue="Python.Weather_Data_Organiser" />
+      <item itemvalue="Python.run" />
+>>>>>>> still trying to un-fuck everything
     </list>
     <recent_temporary>
       <list>
