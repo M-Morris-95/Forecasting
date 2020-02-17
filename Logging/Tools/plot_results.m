@@ -1,6 +1,8 @@
 clear all
 root_dir = pwd;
 root_dir = root_dir(1:end-6);
+
+root_dir = '/Users/michael/Documents/Forecasting Old Logs/consistency';
 % cd(fullfile(root_dir,'/14 days ahead/GRU_No_DOTY'))
 % cd(fullfile(root_dir,'/GRU_14LA_Jan_22_13_54'))
 % cd(fullfile(root_dir,'/14 days ahead/GRU_DOTY'))

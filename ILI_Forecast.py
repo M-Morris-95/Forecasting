@@ -80,7 +80,14 @@ for Model in models:
                     model = build_attention(x_train, y_train, num_heads=7, regularizer = args.Regularizer)
 =======
 <<<<<<< 4cebca0764fa4b3ca0e7cb8fa968399d50927582
+<<<<<<< 4cebca0764fa4b3ca0e7cb8fa968399d50927582
                     initializer = tf.keras.initializers.glorot_normal(seed=None)
+=======
+                    if args.Init =='uniform':
+                        initializer = tf.keras.initializers.glorot_normal(seed=None)
+                    else:
+                        initializer = tf.keras.initializers.glorot_uniform(seed=None)
+>>>>>>> changed initiliser to arg
                     model = build_attention(x_train, y_train, num_heads=7, regularizer = args.Regularizer, initializer=initializer)
 =======
                     model = build_attention(x_train, y_train, num_heads=7, regularizer = args.Regularizer)

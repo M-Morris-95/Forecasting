@@ -62,7 +62,7 @@ def GetParser():
     parser.add_argument('--Init',
                         type=str,
                         help='how to initialise variables',
-                        default='GRU',
+                        default='uniform',
                         required=False)
 
     parser.add_argument('--Lag',

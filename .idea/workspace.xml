@@ -3,10 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="b389ba6e-9d91-4b6a-9f07-ea78b80758c7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Functions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ILI_Forecast.py" beforeDir="false" afterPath="$PROJECT_DIR$/ILI_Forecast.py" afterDir="false" />
 <<<<<<< fba63bdadc7e933d4dd3b476e70d36926f8ba22b
 =======
+<<<<<<< 4cebca0764fa4b3ca0e7cb8fa968399d50927582
 <<<<<<< 4cebca0764fa4b3ca0e7cb8fa968399d50927582
       <change beforePath="$PROJECT_DIR$/Logging/GRU_Feb_05_10_11/models/_14_2014_15.csv" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Logging/GRU_Feb_05_10_11/models/_14_2015_16.csv" beforeDir="false" />
@@ -419,6 +419,11 @@
 =======
 >>>>>>> removed large files
 >>>>>>> removed large files
+=======
+      <change beforePath="$PROJECT_DIR$/Logging/Tools/plot_consistency.m" beforeDir="false" afterPath="$PROJECT_DIR$/Logging/Tools/plot_consistency.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logging/Tools/plot_results.m" beforeDir="false" afterPath="$PROJECT_DIR$/Logging/Tools/plot_results.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/Parser.py" afterDir="false" />
+>>>>>>> changed initiliser to arg
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -469,7 +474,11 @@
   <component name="RunManager" selected="Python.Forecast">
 =======
 <<<<<<< 4cebca0764fa4b3ca0e7cb8fa968399d50927582
+<<<<<<< 4cebca0764fa4b3ca0e7cb8fa968399d50927582
   <component name="RunManager" selected="Python.Linear_Model">
+=======
+  <component name="RunManager" selected="Python.Forecaster">
+>>>>>>> changed initiliser to arg
     <configuration name="CNN" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Forecasting" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -515,6 +524,25 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Forecaster" type="PythonConfigurationType" factoryName="Python">
+      <module name="Forecasting" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ILI_Forecast.py" />
+      <option name="PARAMETERS" value="--K=10 --Epochs=50 --Lag=28 --Look_Ahead=14 --Country=eng --Model=ATTENTION --DOTY=False --Weather=False --Init=normal" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Functions" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Forecasting" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -530,28 +558,6 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Functions.py" />
       <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Linear_Model" type="PythonConfigurationType" factoryName="Python">
-      <module name="Forecasting" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Linear_Model.py" />
-      <option name="PARAMETERS" value="--K=1 --Epochs=100 --Lag=28 --Look_Ahead=21 --Country=us --Model=LINEAR" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -629,11 +635,18 @@
       <item itemvalue="Python.Forecast" />
 <<<<<<< fc1dce5fe4c8895fd5853a74912ca85dd1e4ee3c
 <<<<<<< 4cebca0764fa4b3ca0e7cb8fa968399d50927582
+<<<<<<< 4cebca0764fa4b3ca0e7cb8fa968399d50927582
 =======
 <<<<<<< fc1dce5fe4c8895fd5853a74912ca85dd1e4ee3c
 <<<<<<< fc1dce5fe4c8895fd5853a74912ca85dd1e4ee3c
 >>>>>>> removed large files
+=======
+<<<<<<< fc1dce5fe4c8895fd5853a74912ca85dd1e4ee3c
+>>>>>>> changed initiliser to arg
       <item itemvalue="Python.Linear_Model" />
+=======
+      <item itemvalue="Python.Forecaster" />
+>>>>>>> changed initiliser to arg
       <item itemvalue="Python.run" />
       <item itemvalue="Python.Weather_Data_Organiser" />
 =======
@@ -716,10 +729,17 @@
 <<<<<<< 4cebca0764fa4b3ca0e7cb8fa968399d50927582
       <workItem from="1580896316257" duration="10060000" />
       <workItem from="1580985470071" duration="69000" />
+<<<<<<< 4cebca0764fa4b3ca0e7cb8fa968399d50927582
 =======
       <workItem from="1580896316257" duration="635000" />
 >>>>>>> removed large files
+<<<<<<< fba63bdadc7e933d4dd3b476e70d36926f8ba22b
 >>>>>>> removed large files
+=======
+=======
+      <workItem from="1581934265796" duration="859000" />
+>>>>>>> changed initiliser to arg
+>>>>>>> changed initiliser to arg
     </task>
     <task id="LOCAL-00001" summary="Added transformer model. Model compiles but a training schedule needs to be created.">
       <created>1578492487636</created>
@@ -792,7 +812,7 @@
 =======
 <<<<<<< 4cebca0764fa4b3ca0e7cb8fa968399d50927582
           <url>file://$PROJECT_DIR$/ILI_Forecast.py</url>
-          <line>124</line>
+          <line>127</line>
           <option name="timeStamp" value="358" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

@@ -1,17 +1,12 @@
 clear all
-root_dir = pwd;
-root_dir = root_dir(1:end-6);
-cd(fullfile(root_dir,'/R_ATTN_14LA_Jan_21_14_31'))
-cd(fullfile(root_dir,'/ATTENTION_14LA_Jan_21_14_30'))
-% cd(fullfile(root_dir,'/ATTENTION_14LA_Jan_22_15_10'))
-% cd(fullfile(root_dir,'/ATTENTION_14LA_Jan_22_16_45'))
-% cd(fullfile(root_dir,'/GRU_14LA_Jan_22_13_54'))
-cd(fullfile(root_dir,'/GRU_14LA_Jan_27_11_55'))
-cd(fullfile(root_dir,'/GRU_14LA_Jan_28_09_45'))
-% cd(fullfile(root_dir,'/ENCODER_14LA_Jan_24_11_14'))
-cd(fullfile(root_dir,'/MODENC_14LA_Jan_29_10_04'))
-cd(fullfile(root_dir,'/SIMPLE_14LA_Jan_29_14_07'))
-cd(fullfile(root_dir,'/SIMPLE_21LA_Jan_30_09_42'))
+root_dir = '/Users/michael/Documents/Forecasting Old Logs/consistency';
+
+cd(fullfile(root_dir,'/ATTENTION_14LA_Jan_21_14_30')) 
+
+% cd(fullfile(root_dir,'/ENCODER_14LA_Jan_24_11_14')) 
+% cd(fullfile(root_dir,'/GRU_14LA_Jan_22_13_54')) 
+% cd(fullfile(root_dir,'/MODENC_14LA_Jan_29_10_04')) 
+
 
 loc = string(fullfile(pwd, 'test_predictions.csv'));
 y_pred = readtable(loc);
@@ -25,7 +20,7 @@ y_true(:,1) = [] ;
 y_true = table2array(y_true);
 
 
-K = 3;
+K = floor(length(Names)/4);
 
 figure(1)
 clf
