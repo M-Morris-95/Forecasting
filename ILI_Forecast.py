@@ -1,12 +1,16 @@
 import numpy as np
 import tensorflow as tf
+import tensorflow_probability as tfp
+import matplotlib.pyplot as plt
 import metrics
 from Parser import GetParser
-from Functions import data_builder, build_attention, build_model, recurrent_attention, logger, simple, simple_GRU
+from Functions import data_builder, build_attention, build_model, recurrent_attention, logger, simple, simple_GRU, plotter
 from Transformer import encoder_network
 from Time_Series_Transformer import transformer_network, modified_encoder
 # tf.config.experimental_run_functions_eagerly(True)
 import pandas as pd
+
+confidence = False
 parser = GetParser()
 args = parser.parse_args()
 
@@ -15,7 +19,7 @@ EPOCHS, BATCH_SIZE = args.Epochs, args.Batch_Size
 logging = logger(args)
 models, look_aheads, max_k = logging.get_inputs()
 optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
-
+fig = plotter(1)
 
 def validation(y_true, y_pred):
     mse = tf.abs(y_true - tf.squeeze(y_pred))
@@ -43,12 +47,14 @@ class early_stopping:
                 self.count = 1
                 return False
 do_early_stopping = False
+fig = plotter(1)
+loss = tf.keras.losses.MAE
 for Model in models:
     for look_ahead in look_aheads:
         for k in range(max_k):
             for fold_num in range(1,5):
                 print(k, fold_num)
-                tf.random.set_seed(k)
+                tf.random.set_seed(2)
                 logging.update_details(fold_num=fold_num, k=k, model=Model, look_ahead=look_ahead)
                 data = data_builder(args, fold=fold_num, look_ahead=look_ahead)
                 x_train, y_train, y_train_index, x_test, y_test, y_test_index = data.build()
@@ -83,8 +89,7 @@ for Model in models:
 
                     model = build_attention(x_train, y_train, num_heads=7, regularizer = args.Regularizer, initializer=initializer)
 
-
-                elif Model == 'SIMPLE':
+                elif Model == 'LINEAR':
                     model = simple(x_train)
                     y_train = y_train[:,-1]
                     y_test = y_test[:, -1]
@@ -135,15 +140,72 @@ for Model in models:
                         dropout=0.1,
                         name="transformer")
 
+                elif Model == 'GRU_BAYES':
+                    def normal_scale_uncertainty(t, softplus_scale=0.5):
+                        """Create distribution with variable mean and variance"""
+                        return tfd.Normal(loc=t[..., :1],
+                                          scale=1e-3 + tf.math.softplus(softplus_scale * t[..., 1:]))
+
+                    confidence = True
+                    tfd = tfp.distributions
+
+                    loss = lambda y, p_y: -p_y.log_prob(y)
+
+
+
+                    ili_input = tf.keras.layers.Input(shape=[x_train.shape[1], x_train.shape[2]])
+                    x = tf.keras.layers.GRU(x_train.shape[1], activation='relu', return_sequences=True)(
+                        ili_input)
+                    x = tf.keras.layers.GRU(int((x_train.shape[2] - 1)), activation='relu', return_sequences=True)(x)
+                    y = tf.keras.layers.GRU(int(0.75 * (x_train.shape[2] - 1)), activation='relu', return_sequences=False)(x)
+                    z = tf.keras.layers.Dense(2, activation = 'relu')(y)
+                    z = tfp.layers.DistributionLambda(normal_scale_uncertainty)(z)
+
+                    model = tf.keras.models.Model(inputs=ili_input, outputs=z)
+
+                    y_test = y_test[:, -1]
+                    y_train = y_train[:, -1]
+
+                elif Model == 'LINEAR_BAYES':
+
+                    def normal_scale_uncertainty(t, softplus_scale=0.5):
+                        """Create distribution with variable mean and variance"""
+                        return tfd.Normal(loc=t[..., :1],
+                                          scale=1e-3 + tf.math.softplus(softplus_scale * t[..., 1:]))
+
+                    confidence = True
+                    tfd = tfp.distributions
+
+                    loss = lambda y, p_y: -p_y.log_prob(y)
+                    # loss = lambda y, p_y: abs(y-p_y)
+                    model = tf.keras.Sequential([
+                        tf.keras.layers.Dense(1 + 1),
+                        tfp.layers.DistributionLambda(normal_scale_uncertainty
+
+                            # lambda t: tfd.Normal(loc=t[..., :1],
+                            #                      scale=1e-3 + tf.math.softplus(0.05 * t[..., 1:]))
+                        )
+                    ])
+
+                    x_train = x_train.reshape((x_train.shape[0], -1))
+                    x_test = x_test.reshape((x_test.shape[0], -1))
+                    y_test = y_test[:, -1]
+                    y_train = y_train[:, -1]
+
+
+
+
+
+
                 elif Model == 'R_ATTN':
                     model = recurrent_attention(x_train, y_train, num_heads=7, regularizer = args.Regularizer)
                     y_train = y_train[:,:,np.newaxis]
                     y_test = y_test[:,:,np.newaxis]
 
-                if model != 'TRANSFORMER':
+                if Model != 'TRANSFORMER':
                     optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
                     model.compile(optimizer=optimizer,
-                                  loss='mae',
+                                  loss=loss,
                                   metrics=['mae', 'mse', metrics.rmse])
 
                     if do_early_stopping:
@@ -184,10 +246,18 @@ for Model in models:
                             x_train, y_train,
                             epochs=EPOCHS, batch_size=BATCH_SIZE)
 
-                    # prediction = model(x_test, training = False)
+                if confidence:
+                    yhat = model(x_test)
+                    prediction = yhat.mean()
+                    stddev = yhat.stddev()
+                    fig.plot_conf(fold_num, prediction, y_test, stddev)
+                else:
                     prediction = model.predict(x_test)
+                    fig.plot(fold_num, prediction, y_test, x1=False)
                 logging.log(prediction, y_test, model, save=True)
 
+fig.save(logging.save_directory + '/predictions.png')
+fig.show()
 
 # final_weights = model.weights[0].numpy()[-167:]
 # weights = pd.DataFrame(columns=['weight'],index = np.asarray(data.columns), data = np.squeeze(final_weights))

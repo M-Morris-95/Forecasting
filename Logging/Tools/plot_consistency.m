@@ -1,12 +1,18 @@
 clear all
 root_dir = '/Users/michael/Documents/Forecasting Old Logs/consistency';
 
-cd(fullfile(root_dir,'/ATTENTION_14LA_Jan_21_14_30')) 
+% cd(fullfile(root_dir,'/ATTENTION_14LA_Jan_21_14_30')) 
+% cd(fullfile(root_dir,'/ATTENTION_Feb_17_uniform')) 
+cd(fullfile(root_dir,'/ATTENTION_Feb_17_normal')) 
 
 % cd(fullfile(root_dir,'/ENCODER_14LA_Jan_24_11_14')) 
 % cd(fullfile(root_dir,'/GRU_14LA_Jan_22_13_54')) 
 % cd(fullfile(root_dir,'/MODENC_14LA_Jan_29_10_04')) 
 
+% Define Colours
+color(1,:) = [188,63,69]/255;
+color(2,:) = [55,173,241]/255;
+color(3,:) = [237,125,49]/255;
 
 loc = string(fullfile(pwd, 'test_predictions.csv'));
 y_pred = readtable(loc);
@@ -22,18 +28,19 @@ y_true = table2array(y_true);
 
 K = floor(length(Names)/4);
 
-figure(1)
-clf
-hold on
-y_15 = zeros(365, K);
-y_16 = zeros(365, K);
-y_17 = zeros(365, K);
-y_18 = zeros(365, K);
+
+y_15 = zeros(366, K);
+y_16 = zeros(366, K);
+y_17 = zeros(366, K);
+y_18 = zeros(366, K);
 a = 1;
 b = 1;
 c = 1;
 d = 1;
-plot_mean = 0;
+plot_mean = 1;
+figure(1)
+clf
+
 for i = 1:K*4
     if contains(string(Names(i)), '14_15') == 1
         subplot(2,2,1);
@@ -44,7 +51,7 @@ for i = 1:K*4
         title('2014/15')
         if a == K+1
             if plot_mean == 1
-                plot(mean(y_15.'), 'linewidth', 2)
+                plot(mean(y_15.'), '--','linewidth', 3, 'DisplayName','Mean', 'color',color(1,:))      
             end
         end
     elseif contains(string(Names(i)), '15_16') == 1
@@ -56,7 +63,7 @@ for i = 1:K*4
         title('2015/16')
         if b == K+1
             if plot_mean == 1
-            plot(mean(y_16.'), 'linewidth', 2)
+            plot(mean(y_16.'), '--','linewidth', 3, 'DisplayName','Mean', 'color',color(1,:))  
             end
         end
     elseif contains(string(Names(i)), '16_17') == 1
@@ -68,7 +75,7 @@ for i = 1:K*4
         title('2016/17')
         if c == K+1
             if plot_mean == 1
-            plot(mean(y_17.'), 'linewidth', 2)
+            plot(mean(y_17.'), '--','linewidth', 3, 'DisplayName','Mean', 'color',color(1,:))  
             end
         end
     elseif contains(string(Names(i)), '17_18') == 1
@@ -80,7 +87,7 @@ for i = 1:K*4
         title('2017/18')
         if d == K+1
             if plot_mean == 1
-            plot(mean(y_18.'), 'linewidth', 2)
+            plot(mean(y_18.'), '--','linewidth', 3, 'DisplayName','Mean', 'color',color(1,:))  
             end
         end
     end
@@ -88,9 +95,10 @@ end
 for i = 1:4
     subplot(2,2,i)
     hold on
-    plot(y_true(:,i), 'linewidth', 2)
+    plot(y_true(:,i), '-.','linewidth', 3, 'DisplayName','Ground Truth', 'color',color(2,:))  
     xlim([0,365])
-    legend('truth', 'mean')
+%     legend('truth', 'mean')
+    legend()
     hold off
     xlabel('day of the year')
     ylabel('ili rate')
@@ -99,8 +107,9 @@ for i = 1:4
     box on
     grid on
     grid minor
-    
+
 end
+suptitle('attention model consistency with normally distibuted weights')
 
 
 
@@ -122,15 +131,15 @@ for j = 1:K
         R(3,count) = corr(y_17(:,j), y_17(:,k));
         R(4,count) = corr(y_18(:,j), y_18(:,k));
     end
-        RMSE(1,j) = sqrt(mean((y_15(:,j)-y_true(:,1)).^2));
-        RMSE(2,j) = sqrt(mean((y_16(:,j)-y_true(:,2)).^2));
-        RMSE(3,j) = sqrt(mean((y_17(:,j)-y_true(:,3)).^2));
-        RMSE(4,j) = sqrt(mean((y_18(:,j)-y_true(:,4)).^2));
+        RMSE(1,j) = sqrt(nanmean((y_15(:,j)-y_true(:,1)).^2));
+        RMSE(2,j) = sqrt(nanmean((y_16(:,j)-y_true(:,2)).^2));
+        RMSE(3,j) = sqrt(nanmean((y_17(:,j)-y_true(:,3)).^2));
+        RMSE(4,j) = sqrt(nanmean((y_18(:,j)-y_true(:,4)).^2));
         
-        MAE(1,j) = mean(abs((y_15(:,j)-y_true(:,1))));
-        MAE(2,j) = mean(abs((y_16(:,j)-y_true(:,2))));
-        MAE(3,j) = mean(abs((y_17(:,j)-y_true(:,3))));
-        MAE(4,j) = mean(abs((y_18(:,j)-y_true(:,4))));
+        MAE(1,j) = nanmean(abs(y_15(:,j)-y_true(:,1)));
+        MAE(2,j) = nanmean(abs(y_16(:,j)-y_true(:,2)));
+        MAE(3,j) = nanmean(abs(y_17(:,j)-y_true(:,3)));
+        MAE(4,j) = nanmean(abs(y_18(:,j)-y_true(:,4)));
         
         R_ERR(1,j) = corr(y_15(:,j), y_true(:,1));
         R_ERR(2,j) = corr(y_16(:,j), y_true(:,2));
@@ -157,15 +166,15 @@ for j = 1:k
         R(3,count) = corr(y_17(:,j), y_17(:,k));
         R(4,count) = corr(y_18(:,j), y_18(:,k));
     end
-        RMSE(1,j) = sqrt(mean((y_15(:,j)-y_true(:,1)).^2));
-        RMSE(2,j) = sqrt(mean((y_16(:,j)-y_true(:,2)).^2));
-        RMSE(3,j) = sqrt(mean((y_17(:,j)-y_true(:,3)).^2));
-        RMSE(4,j) = sqrt(mean((y_18(:,j)-y_true(:,4)).^2));
+        RMSE(1,j) = sqrt(nanmean((y_15(:,j)-y_true(:,1)).^2));
+        RMSE(2,j) = sqrt(nanmean((y_16(:,j)-y_true(:,2)).^2));
+        RMSE(3,j) = sqrt(nanmean((y_17(:,j)-y_true(:,3)).^2));
+        RMSE(4,j) = sqrt(nanmean((y_18(:,j)-y_true(:,4)).^2));
         
-        MAE(1,j) = mean(abs((y_15(:,j)-y_true(:,1))));
-        MAE(2,j) = mean(abs((y_16(:,j)-y_true(:,2))));
-        MAE(3,j) = mean(abs((y_17(:,j)-y_true(:,3))));
-        MAE(4,j) = mean(abs((y_18(:,j)-y_true(:,4))));
+        MAE(1,j) = nanmean(abs((y_15(:,j)-y_true(:,1))));
+        MAE(2,j) = nanmean(abs((y_16(:,j)-y_true(:,2))));
+        MAE(3,j) = nanmean(abs((y_17(:,j)-y_true(:,3))));
+        MAE(4,j) = nanmean(abs((y_18(:,j)-y_true(:,4))));
         
         R_ERR(1,j) = corr(y_15(:,j), y_true(:,1));
         R_ERR(2,j) = corr(y_16(:,j), y_true(:,2));
@@ -178,14 +187,19 @@ end
 
 
  max(R.') - min(R.');
- max(MAE.')- min(MAE.')
- max(RMSE.')- min(RMSE.')
- max(R_ERR.')- min(R_ERR.')
+ max(MAE.')- min(MAE.');
+ max(RMSE.')- min(RMSE.');
+ max(R_ERR.')- min(R_ERR.');
 
- mean(MAE.')
- mean(RMSE.')
- mean(R_ERR.')
+ mean(MAE.');
+ mean(RMSE.');
+ mean(R_ERR.');
 
- min(MAE.')
- min(RMSE.')
- max(R_ERR.')
+ min(MAE.');
+ min(RMSE.');
+ max(R_ERR.');
+ 
+ sum = 0;
+ for i = 1:23
+     sum = sum + (23-i)/365;
+ end

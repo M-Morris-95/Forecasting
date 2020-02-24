@@ -279,6 +279,35 @@ class plotter:
         plt.minorticks_on()
         plt.grid(b=True, which='minor', color='#999999', linestyle='-', alpha=0.2)
 
+    def plot_conf(self, fold_num, y_pred, y_true, y_std):
+        plt.figure(self.number)
+        plt.subplot(2, 2, fold_num)
+        y_pred = y_pred.numpy()
+        y_std = y_std.numpy()
+        if y_pred.ndim > 1:
+            if y_pred.shape[1] != 0:
+                y_pred = y_pred[:, -1]
+            else:
+                y_pred = np.squeeze(y_pred)
+
+        if y_std.ndim > 1:
+            if y_std.shape[1] != 0:
+                y_std = y_std[:, -1]
+            else:
+                y_std = np.squeeze(y_std)
+
+
+        plt.plot(np.linspace(1, y_pred.shape[0], y_pred.shape[0]), y_pred, color="red", label="prediction")
+        plt.plot(np.linspace(1, y_true.shape[0], y_true.shape[0]), y_true, color="blue", label="ground_truth")
+        plt.fill_between(np.linspace(1, y_true.shape[0], y_true.shape[0]), np.squeeze(y_pred - y_std), np.squeeze(y_pred + y_std),
+                         color="pink", alpha=0.5, label="predict std")
+        plt.xlabel('Day of the Season', fontsize=8)
+        plt.ylabel('ILI Rate (Infected/100,000)', fontsize=8)
+        plt.legend(fontsize=8)
+        plt.grid(b=True, which='major', color='#666666', linestyle='-')
+        plt.minorticks_on()
+        plt.grid(b=True, which='minor', color='#999999', linestyle='-', alpha=0.2)
+
     def plot_df(self, logging):
         plt.figure(self.number)
         pred = logging.test_predictions
