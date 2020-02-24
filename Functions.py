@@ -226,8 +226,6 @@ class data_builder:
         x_train = np.asarray([google_train[i:i + self.lag].values for i in range(len(google_train) - self.lag + 1)])
         x_test = np.asarray([google_test[i:i + self.lag].values for i in range(len(google_test) - self.lag + 1)])
 
-        # print(x_train.shape, y_train.shape, y_train_index.shape)
-        # print(x_test.shape, y_test.shape, y_test_index.shape)
         assert (x_train.shape[0] == y_train.shape[0] == y_train_index.shape[0])
         assert (x_test.shape[0] == y_test.shape[0] == y_test_index.shape[0])
 
@@ -264,19 +262,23 @@ class plotter:
         self.number = number
         plt.figure(number, figsize=(8, 6), dpi=200, facecolor='w', edgecolor='k')
 
-    def plot(self, fold_num, y1, y2, x1=False):
+    def plot(self, fold_num, y_pred, y_true, x1=False):
         plt.figure(self.number)
         plt.subplot(2, 2, fold_num)
         if type(x1) != np.ndarray:
-            plt.plot(y1)
-            plt.plot(y2)
+            plt.plot(y_pred, color="red", label="prediction")
+            plt.plot(y_true, color = "blue", label = "ground_truth")
+
         else:
-            plt.plot(pd.to_datetime(x1), y1)
-            plt.plot(pd.to_datetime(x1), y2)
+            plt.plot(pd.to_datetime(x1), y_pred, color="red", label="prediction")
+            plt.plot(pd.to_datetime(x1), y_true, color = "blue", label = "ground_truth")
+
             plt.legend(['prediction', 'true'])
 
+        plt.xlabel('Day of the Season', fontsize=8)
+        plt.ylabel('ILI Rate (Infected/100,000)', fontsize=8)
+        plt.legend(fontsize=8)
         plt.grid(b=True, which='major', color='#666666', linestyle='-')
-        plt.minorticks_on()
         plt.grid(b=True, which='minor', color='#999999', linestyle='-', alpha=0.2)
 
     def plot_conf(self, fold_num, y_pred, y_true, y_std):
@@ -295,7 +297,6 @@ class plotter:
                 y_std = y_std[:, -1]
             else:
                 y_std = np.squeeze(y_std)
-
 
         plt.plot(np.linspace(1, y_pred.shape[0], y_pred.shape[0]), y_pred, color="red", label="prediction")
         plt.plot(np.linspace(1, y_true.shape[0], y_true.shape[0]), y_true, color="blue", label="ground_truth")
@@ -351,6 +352,7 @@ class logger:
         timestamp = time.strftime('_%b_%d_%H_%M', time.localtime())
         self.root_directory = os.getcwd()
         self.ret_max_k = args.K
+        self.do_stddev = False
 
         self.save_model = args.Save_Model
 
@@ -385,6 +387,7 @@ class logger:
         self.train_stats = pd.DataFrame(index=['MAE', 'RMSE', 'R', 'Lag'])
         self.test_predictions = pd.DataFrame()
         self.test_ground_truth = pd.DataFrame()
+        self.stddev = pd.DataFrame()
         self.cleanup()
 
     def get_inputs(self):
@@ -416,7 +419,7 @@ class logger:
 
         self.save_name = model_str + look_ahead_str + fold_str + iter_str + epochs_str
 
-    def log(self, y_pred, y_true, model, save=False):
+    def log(self, y_pred, y_true, model, stddev=None,save=False, save_weights=False, col_names=None):
 
         self.model_history = pd.DataFrame(model.history.history)
         if y_pred.ndim == 3:
@@ -427,6 +430,18 @@ class logger:
             y_true = y_true[:, -1]
         if y_pred.ndim == 2:
             y_pred = y_pred[:, -1]
+
+        if stddev is not None:
+            self.do_stddev = True
+            if stddev.ndim > 1:
+                if stddev.shape[1] != 0:
+                    stddev = stddev[:, -1]
+                else:
+                    stddev = np.squeeze(stddev)
+
+            stddev = np.append(stddev, np.nan)[:366]
+            self.stddev[str(self.save_name)] = stddev
+
         y_pred = np.asarray(y_pred)
         self.train_stats[str(self.save_name)] = metrics.evaluate(y_true, y_pred)
 
@@ -435,6 +450,11 @@ class logger:
 
         self.test_ground_truth[str(self.save_name)] = y_true
         self.test_predictions[str(self.save_name)] = y_pred
+
+        if save_weights:
+            final_weights = model.weights[0].numpy()[-167:]
+            weights = pd.DataFrame(columns=['weight'],index = np.asarray(col_names), data = np.squeeze(final_weights))
+            weights.to_csv('weights.csv')
 
         if save:
             self.save(model)
@@ -462,6 +482,9 @@ class logger:
         if self.save_model:
             model.save(self.save_name.replace('/', '_'), save_format='tf')
         os.chdir(self.save_directory)
+
+        if self.do_stddev:
+            self.stddev.to_csv(r'test_stddev.csv')
 
         self.train_stats.to_csv(r'train_stats.csv')
         self.test_predictions.to_csv(r'test_predictions.csv')

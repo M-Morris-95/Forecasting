@@ -61,6 +61,7 @@ for Model in models:
 
                 if Model == 'simpleGRU':
                     model = simple_GRU(x_train, y_train)
+
                 if Model == 'GRU':
                     model = build_model(x_train, y_train)
 
@@ -177,13 +178,9 @@ for Model in models:
                     tfd = tfp.distributions
 
                     loss = lambda y, p_y: -p_y.log_prob(y)
-                    # loss = lambda y, p_y: abs(y-p_y)
                     model = tf.keras.Sequential([
                         tf.keras.layers.Dense(1 + 1),
                         tfp.layers.DistributionLambda(normal_scale_uncertainty
-
-                            # lambda t: tfd.Normal(loc=t[..., :1],
-                            #                      scale=1e-3 + tf.math.softplus(0.05 * t[..., 1:]))
                         )
                     ])
 
@@ -191,11 +188,6 @@ for Model in models:
                     x_test = x_test.reshape((x_test.shape[0], -1))
                     y_test = y_test[:, -1]
                     y_train = y_train[:, -1]
-
-
-
-
-
 
                 elif Model == 'R_ATTN':
                     model = recurrent_attention(x_train, y_train, num_heads=7, regularizer = args.Regularizer)
@@ -247,18 +239,18 @@ for Model in models:
                             epochs=EPOCHS, batch_size=BATCH_SIZE)
 
                 if confidence:
+
                     yhat = model(x_test)
                     prediction = yhat.mean()
                     stddev = yhat.stddev()
                     fig.plot_conf(fold_num, prediction, y_test, stddev)
                 else:
+                    stddev = None
                     prediction = model.predict(x_test)
                     fig.plot(fold_num, prediction, y_test, x1=False)
-                logging.log(prediction, y_test, model, save=True)
+
+                logging.log(prediction, y_test, model, stddev, save=True, save_weights=False, col_names = data.columns)
 
 fig.save(logging.save_directory + '/predictions.png')
 fig.show()
 
-# final_weights = model.weights[0].numpy()[-167:]
-# weights = pd.DataFrame(columns=['weight'],index = np.asarray(data.columns), data = np.squeeze(final_weights))
-# weights.to_csv('weights.csv')
