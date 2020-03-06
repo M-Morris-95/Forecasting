@@ -191,12 +191,14 @@ class data_builder:
         y_train = y_train[:-self.val_size]
         return x_train, y_train, x_val, y_val
 
-    def build(self):
+    def build(self, squared, normalise_all=False):
         google_train = self.load_google_data(self.directory + 'google-train')
         google_train['ili'] = self.load_ili_data(self.directory + 'ili-train').values
+        # google_train = self.load_ili_data(self.directory + 'ili-train')
 
         google_test = self.load_google_data(self.directory + 'google-test')
         google_test['ili'] = self.load_ili_data(self.directory + 'ili-test').values
+        # google_test = self.load_ili_data(self.directory + 'ili-test')
 
         y_train_index = pd.read_csv(self.directory + 'y-train', header=None)[0]
         y_test_index = pd.read_csv(self.directory + 'y-test', header=None)[0]
@@ -219,9 +221,30 @@ class data_builder:
         ili_test = ili_test.append(y_test)
         y_test = np.asarray([np.asarray(ili_test[1][i:i + y_ahead]) for i in range(len(ili_test) - y_ahead + 1)])
         #
-        n = normalizer(google_train, y_train)
-        google_train = n.normalize(google_train, y_train)
-        google_test = n.normalize(google_test, y_test)
+
+        if squared:
+
+            google_train = pd.concat((google_train, google_train.pow(2)), axis=1)
+            google_test = pd.concat((google_test, google_test.pow(2)), axis=1)
+
+
+        if not normalise_all:
+            train_ili = google_train.ili
+            test_ili = google_test.ili
+            google_train = google_train.drop(columns=['ili'])
+            google_test = google_test.drop(columns=['ili'])
+
+            n = normalizer(google_train, y_train)
+            google_train = n.normalize(google_train, y_train)
+            google_test = n.normalize(google_test, y_test)
+            google_train = pd.concat((google_train, train_ili), axis=1)
+            google_test = pd.concat((google_test, test_ili), axis = 1)
+
+        else:
+            n = normalizer(google_train, y_train)
+            google_train = n.normalize(google_train, y_train)
+            google_test = n.normalize(google_test, y_test)
+
         self.columns = google_train.columns
         x_train = np.asarray([google_train[i:i + self.lag].values for i in range(len(google_train) - self.lag + 1)])
         x_test = np.asarray([google_test[i:i + self.lag].values for i in range(len(google_test) - self.lag + 1)])
@@ -258,13 +281,14 @@ class normalizer:
 
 
 class plotter:
-    def __init__(self, number):
+    def __init__(self, number, size=[8,6], dpi=200):
         self.number = number
-        plt.figure(number, figsize=(8, 6), dpi=200, facecolor='w', edgecolor='k')
+        plt.figure(number, figsize=(size[0], size[1]), dpi=dpi, facecolor='w', edgecolor='k')
 
-    def plot(self, fold_num, y_pred, y_true, x1=False):
+    def plot(self, fold_num, y_pred, y_true, x1=False, split=True):
         plt.figure(self.number)
-        plt.subplot(2, 2, fold_num)
+        if split:
+            plt.subplot(2, 2, fold_num)
         if type(x1) != np.ndarray:
             plt.plot(y_pred, color="red", label="prediction")
             plt.plot(y_true, color = "blue", label = "ground_truth")
@@ -281,9 +305,10 @@ class plotter:
         plt.grid(b=True, which='major', color='#666666', linestyle='-')
         plt.grid(b=True, which='minor', color='#999999', linestyle='-', alpha=0.2)
 
-    def plot_conf(self, fold_num, y_pred, y_true, y_std):
+    def plot_conf(self, fold_num, y_pred, y_true, y_std, split=True):
         plt.figure(self.number)
-        plt.subplot(2, 2, fold_num)
+        if split:
+            plt.subplot(2, 2, fold_num)
         y_pred = y_pred.numpy()
         y_std = y_std.numpy()
         if y_pred.ndim > 1:
@@ -308,6 +333,35 @@ class plotter:
         plt.grid(b=True, which='major', color='#666666', linestyle='-')
         plt.minorticks_on()
         plt.grid(b=True, which='minor', color='#999999', linestyle='-', alpha=0.2)
+
+    def plot_ensemble(self, fold_num, yhats,  y_true):
+        plt.figure(self.number)
+        plt.subplot(2, 2, fold_num)
+
+        means = []
+        for yhat in yhats:
+            # plt.scatter(np.linspace(1, y_true.shape[0], y_true.shape[0]), yhat.mean(), s=0.2, alpha=0.5, color="red")
+            means.append(yhat)
+        means = np.squeeze(np.asarray(means))
+
+        stddev = np.std(means, 0)
+        y_pred = np.mean(means, 0)
+
+        plt.fill_between(np.linspace(1, y_true.shape[0], y_true.shape[0]), np.squeeze(y_pred - stddev),
+                         np.squeeze(y_pred + stddev),
+                         color="pink", alpha=0.5, label="predict std")
+        plt.plot(np.linspace(1, y_pred.shape[0], y_pred.shape[0]), y_pred, color="red", label="prediction")
+        plt.plot(np.linspace(1, y_true.shape[0], y_true.shape[0]), y_true, color="blue", label="ground_truth")
+
+
+        plt.xlabel('Day of the Season', fontsize=8)
+        plt.ylabel('ILI Rate (Infected/100,000)', fontsize=8)
+
+        plt.grid(b=True, which='major', color='#666666', linestyle='-')
+        plt.minorticks_on()
+        plt.grid(b=True, which='minor', color='#999999', linestyle='-', alpha=0.2)
+
+        return y_pred
 
     def plot_df(self, logging):
         plt.figure(self.number)
@@ -346,6 +400,30 @@ class plotter:
         plt.figure(self.number)
         plt.show()
 
+class early_stopping:
+    def __init__(self, patience):
+        self.count = 1
+        self.patience = patience
+
+    def __call__(self, val_metric, epoch):
+        if len(val_metric) > 0:
+            if val_metric[epoch] > val_metric[epoch - self.count]:
+                count = self.count + 1
+                if count > self.patience:
+                    self.count = 1
+                    return True
+            else:
+                self.count = 1
+                return False
+
+    def validation(self, y_true, y_pred):
+        mse = tf.abs(y_true - tf.squeeze(y_pred))
+
+        mean1 = np.mean(mse[:365] / 3)
+        mean2 = np.mean(mse[365:2 * 365])
+        mean3 = np.mean(mse[2 * 365:])
+
+        return mean1 + mean2 + mean3
 
 class logger:
     def __init__(self, args):

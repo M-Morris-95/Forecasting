@@ -16,6 +16,19 @@ def GetParser():
                         default=False,
                         required = False)
 
+    parser.add_argument('--Logging',
+                        help='Done save logs?',
+                        dest='Logging',
+                        action='store_false')
+
+    parser.add_argument('--Square_Inputs',
+                        type=bool,
+                        help='Make inputs second order as well by squaring each one',
+                        default=False,
+                        required = False)
+
+
+
     parser.add_argument('--DOTY',
                         type=str,
                         help='use day of the year data?',

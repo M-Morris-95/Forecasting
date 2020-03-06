@@ -4,13 +4,14 @@ import tensorflow_probability as tfp
 import matplotlib.pyplot as plt
 import metrics
 from Parser import GetParser
-from Functions import data_builder, build_attention, build_model, recurrent_attention, logger, simple, simple_GRU, plotter
+from Functions import *
 from Transformer import encoder_network
 from Time_Series_Transformer import transformer_network, modified_encoder
 # tf.config.experimental_run_functions_eagerly(True)
 import pandas as pd
 
 confidence = False
+Ensemble = False
 parser = GetParser()
 args = parser.parse_args()
 
@@ -21,33 +22,12 @@ models, look_aheads, max_k = logging.get_inputs()
 optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
 fig = plotter(1)
 
-def validation(y_true, y_pred):
-    mse = tf.abs(y_true - tf.squeeze(y_pred))
+fig2 = [plotter(2, size=[20,5], dpi=500),  plotter(3, size=[12,10], dpi=500),  plotter(4, size=[12,10], dpi=500),  plotter(5, size=[12,10], dpi=500)]
+# fig2 = plotter(2, size=[12,10])
+plot_train=False
 
-    mean1 = np.mean(mse[:365] / 3)
-    mean2 = np.mean(mse[365:2 * 365])
-    mean3 = np.mean(mse[2 * 365:])
-
-    return mean1 + mean2 + mean3
-
-
-class early_stopping:
-    def __init__(self, patience):
-        self.count = 1
-        self.patience = patience
-
-    def __call__(self, val_metric):
-        if len(val_metric) > 0:
-            if val_metric[epoch] > val_metric[epoch - self.count]:
-                count = self.count + 1
-                if count > self.patience:
-                    self.count = 1
-                    return True
-            else:
-                self.count = 1
-                return False
 do_early_stopping = False
-fig = plotter(1)
+
 loss = tf.keras.losses.MAE
 for Model in models:
     for look_ahead in look_aheads:
@@ -57,7 +37,7 @@ for Model in models:
                 tf.random.set_seed(2)
                 logging.update_details(fold_num=fold_num, k=k, model=Model, look_ahead=look_ahead)
                 data = data_builder(args, fold=fold_num, look_ahead=look_ahead)
-                x_train, y_train, y_train_index, x_test, y_test, y_test_index = data.build()
+                x_train, y_train, y_train_index, x_test, y_test, y_test_index = data.build(squared = args.Square_Inputs, normalise_all=True)
 
                 if Model == 'simpleGRU':
                     model = simple_GRU(x_train, y_train)
@@ -144,10 +124,13 @@ for Model in models:
                 elif Model == 'GRU_BAYES':
                     def normal_scale_uncertainty(t, softplus_scale=0.5):
                         """Create distribution with variable mean and variance"""
+                        # return tfd.Normal(loc=t[..., :1],
+                        #                   scale=1e-3 + tf.math.softplus(softplus_scale * t[..., 1:]))
                         return tfd.Normal(loc=t[..., :1],
                                           scale=1e-3 + tf.math.softplus(softplus_scale * t[..., 1:]))
 
                     confidence = True
+
                     tfd = tfp.distributions
 
                     loss = lambda y, p_y: -p_y.log_prob(y)
@@ -167,27 +150,107 @@ for Model in models:
                     y_test = y_test[:, -1]
                     y_train = y_train[:, -1]
 
-                elif Model == 'LINEAR_BAYES':
-
-                    def normal_scale_uncertainty(t, softplus_scale=0.5):
-                        """Create distribution with variable mean and variance"""
-                        return tfd.Normal(loc=t[..., :1],
-                                          scale=1e-3 + tf.math.softplus(softplus_scale * t[..., 1:]))
-
-                    confidence = True
-                    tfd = tfp.distributions
-
-                    loss = lambda y, p_y: -p_y.log_prob(y)
-                    model = tf.keras.Sequential([
-                        tf.keras.layers.Dense(1 + 1),
-                        tfp.layers.DistributionLambda(normal_scale_uncertainty
-                        )
-                    ])
-
+                elif Model == 'LINEAR_DATA_UNCERTAINTY':
                     x_train = x_train.reshape((x_train.shape[0], -1))
                     x_test = x_test.reshape((x_test.shape[0], -1))
                     y_test = y_test[:, -1]
                     y_train = y_train[:, -1]
+                    confidence = True
+                    loss = lambda y, p_y: -p_y.log_prob(y)
+
+                    def normal_scale_uncertainty(t):
+                        """Create distribution with variable mean and variance"""
+                        return tfp.distributions.Normal(loc=t[:, :1],
+                                          scale=1e-5+(t[:, 1:]))
+
+                    ili_input = tf.keras.layers.Input(shape=x_train.shape[1])
+                    mean = tf.keras.layers.Dense(1, activation='linear')(ili_input)
+                    std = tf.keras.layers.Dense(1, activation = 'linear')(ili_input)
+
+                    concat = tf.keras.layers.concatenate([mean, std])
+                    prob = tfp.layers.DistributionLambda(normal_scale_uncertainty)(concat)
+                    model = tf.keras.models.Model(inputs=ili_input, outputs=prob)
+
+                elif Model == 'LINEAR_MODEL_UNCERTAINTY':
+                    x_train = x_train.reshape((x_train.shape[0], -1))
+                    x_test = x_test.reshape((x_test.shape[0], -1))
+                    y_test = y_test[:, -1]
+                    y_train = y_train[:, -1]
+                    Ensemble = True
+                    tfd = tfp.distributions
+
+                    def posterior_mean_field(kernel_size, bias_size=0, dtype=None):
+                        n = kernel_size + bias_size
+
+                        return tf.keras.Sequential([
+                            tfp.layers.VariableLayer(2 * n, dtype=dtype),
+                            tfp.layers.DistributionLambda(lambda t: tfd.Independent(
+                                tfd.Normal(loc=t[..., :n],
+                                           scale=1e-5 + 0.2*tf.nn.softplus(t[..., n:])),
+                                reinterpreted_batch_ndims=None))
+                        ])
+                        '''reinterpreted_batch_ndims: Scalar, integer number of rightmost batch dims which will 
+                        be regarded as event dims. When None all but the first batch axis (batch axis 0) will be 
+                        transferred to event dimensions (analogous to tf.layers.flatten).'''
+
+
+
+                    def prior_trainable(kernel_size, bias_size=0, dtype=None):
+                        n = kernel_size + bias_size
+
+                        return tf.keras.Sequential([
+                            tfp.layers.VariableLayer(n, dtype=dtype),
+                            tfp.layers.DistributionLambda(lambda t: tfd.Independent(
+                                tfd.Normal(loc=t, scale=5),
+                                reinterpreted_batch_ndims=None))
+                        ])
+
+                    Input = tf.keras.layers.Input(shape=x_train.shape[1])
+
+                    # Dense = tf.keras.layers.Dense(10)(Input)
+                    DenseVariational = tfp.layers.DenseVariational(1, posterior_mean_field, prior_trainable)(Input)
+                    DistributionLambda = tfp.layers.DistributionLambda(lambda t: tfd.Normal(loc=t, scale=1))(DenseVariational)
+
+                    model = tf.keras.models.Model(inputs=Input, outputs=DistributionLambda)
+
+                elif Model == 'GRU_MODEL_UNCERTAINTY':
+                    y_test = y_test[:, -1]
+                    y_train = y_train[:, -1]
+                    Ensemble = True
+                    tfd = tfp.distributions
+
+                    def posterior_mean_field(kernel_size, bias_size=0, dtype=None):
+                        n = kernel_size + bias_size
+
+                        return tf.keras.Sequential([
+                            tfp.layers.VariableLayer(2 * n, dtype=dtype),
+                            tfp.layers.DistributionLambda(lambda t: tfd.Independent(
+                                tfd.Normal(loc=t[..., :n],
+                                           scale=1e-5 + tf.nn.softplus(t[..., n:])),
+                                reinterpreted_batch_ndims=None))
+                        ])
+                        '''reinterpreted_batch_ndims: Scalar, integer number of rightmost batch dims which will 
+                        be regarded as event dims. When None all but the first batch axis (batch axis 0) will be 
+                        transferred to event dimensions (analogous to tf.layers.flatten).'''
+
+
+                    def prior_trainable(kernel_size, bias_size=0, dtype=None):
+                        n = kernel_size + bias_size
+
+                        return tf.keras.Sequential([
+                            tfp.layers.VariableLayer(n, dtype=dtype, trainable=False),
+                            tfp.layers.DistributionLambda(lambda t: tfd.Independent(
+                                tfd.Normal(loc=t, scale=5),
+                                reinterpreted_batch_ndims=None))
+                        ])
+
+                    ili_input = tf.keras.layers.Input(shape=[x_train.shape[1], x_train.shape[2]])
+                    GRU1 = tf.keras.layers.GRU(x_train.shape[1], activation='relu', return_sequences=True)(ili_input)
+                    GRU2 = tf.keras.layers.GRU(int((x_train.shape[2] - 1)), activation='relu', return_sequences=True)(GRU1)
+                    GRU3 = tf.keras.layers.GRU(int(0.75 * (x_train.shape[2] - 1)), activation='relu', return_sequences=False)(GRU2)
+                    DenseVariational = tfp.layers.DenseVariational(1, make_posterior_fn=posterior_mean_field, make_prior_fn=prior_trainable)(GRU3)
+
+                    model = tf.keras.models.Model(inputs=ili_input, outputs=DenseVariational)
 
                 elif Model == 'R_ATTN':
                     model = recurrent_attention(x_train, y_train, num_heads=7, regularizer = args.Regularizer)
@@ -239,18 +302,45 @@ for Model in models:
                             epochs=EPOCHS, batch_size=BATCH_SIZE)
 
                 if confidence:
+                    if plot_train:
+                        yhat = model(x_train)
+                        prediction = yhat.mean()
+                        stddev = yhat.stddev()
+                        fig2[fold_num-1].plot_conf(fold_num, prediction, y_train, stddev, split=False)
 
                     yhat = model(x_test)
                     prediction = yhat.mean()
                     stddev = yhat.stddev()
                     fig.plot_conf(fold_num, prediction, y_test, stddev)
+
+                elif Ensemble:
+                    stddev = None
+                    yhats = [model(x_test) for i in range(10)]
+
+                    prediction = fig.plot_ensemble(fold_num, yhats, y_test)
+
                 else:
+                    if plot_train:
+                        prediction = model.predict(x_train)
+                        fig2[fold_num-1].plot(fold_num, prediction, y_train, x1=False, split=False)
+
+
                     stddev = None
                     prediction = model.predict(x_test)
                     fig.plot(fold_num, prediction, y_test, x1=False)
 
-                logging.log(prediction, y_test, model, stddev, save=True, save_weights=False, col_names = data.columns)
 
-fig.save(logging.save_directory + '/predictions.png')
+                if args.Logging:
+                    logging.log(prediction, y_test, model, stddev, save=True, save_weights=False, col_names = data.columns)
+if args.Logging:
+    fig.save(logging.save_directory + '/predictions.png')
 fig.show()
+for i in range(4):
+    fig2[i].show()
 
+# weights0 = model.weights[0].numpy()[:,0]
+# weights1 = model.weights[0].numpy()[:,1]
+# plt.plot(np.matmul(x_test, weights0) + np.matmul(x_test, weights1))
+# plt.plot(np.matmul(x_test, weights0) - np.matmul(x_test, weights1))
+# plt.plot(np.matmul(x_test, weights0))
+# plt.show()
