@@ -32,7 +32,6 @@ y, x, x_tst = create_dataset()
 negloglik = lambda y, p_y: -p_y.log_prob(y)
 
 case = 3
-
 if case == 1:
     # Build model.
     model = tf.keras.Sequential([
