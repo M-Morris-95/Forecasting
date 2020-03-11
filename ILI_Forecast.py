@@ -1,14 +1,16 @@
 import numpy as np
 import tensorflow as tf
 import tensorflow_probability as tfp
-import matplotlib.pyplot as plt
-import metrics
 from Parser import GetParser
 from Functions import *
-from Transformer import encoder_network
-from Time_Series_Transformer import transformer_network, modified_encoder
-# tf.config.experimental_run_functions_eagerly(True)
-import pandas as pd
+from Transformer import *
+from Time_Series_Transformer import *
+from Data_Builder import *
+from Plotter import *
+from Logger import *
+from Early_Stopping import *
+
+
 
 confidence = False
 Ensemble = False
@@ -34,7 +36,7 @@ for Model in models:
         for k in range(max_k):
             for fold_num in range(1,5):
                 print(k, fold_num)
-                tf.random.set_seed(2)
+                tf.random.set_seed(0)
                 logging.update_details(fold_num=fold_num, k=k, model=Model, look_ahead=look_ahead)
                 data = data_builder(args, fold=fold_num, look_ahead=look_ahead)
                 x_train, y_train, y_train_index, x_test, y_test, y_test_index = data.build(squared = args.Square_Inputs, normalise_all=True)
@@ -43,7 +45,7 @@ for Model in models:
                     model = simple_GRU(x_train, y_train)
 
                 if Model == 'GRU':
-                    model = build_model(x_train, y_train)
+                    model = full_GRU(x_train, y_train)
 
                     x_train = [x_train[:,:,-1, np.newaxis],x_train[:,:,:-1]]
                     x_test = [x_test[:, :, -1, np.newaxis], x_test[:, :, :-1]]
@@ -201,7 +203,7 @@ for Model in models:
                         return tf.keras.Sequential([
                             tfp.layers.VariableLayer(n, dtype=dtype),
                             tfp.layers.DistributionLambda(lambda t: tfd.Independent(
-                                tfd.Normal(loc=t, scale=5),
+                                tfd.Normal(loc=t, scale=2.5),
                                 reinterpreted_batch_ndims=None))
                         ])
 
@@ -211,7 +213,7 @@ for Model in models:
                     DenseVariational = tfp.layers.DenseVariational(1, posterior_mean_field, prior_trainable)(Input)
                     DistributionLambda = tfp.layers.DistributionLambda(lambda t: tfd.Normal(loc=t, scale=1))(DenseVariational)
 
-                    model = tf.keras.models.Model(inputs=Input, outputs=DistributionLambda)
+                    model = tf.keras.models.Model(inputs=Input, outputs=DenseVariational)
 
                 elif Model == 'GRU_MODEL_UNCERTAINTY':
                     y_test = y_test[:, -1]
@@ -251,6 +253,70 @@ for Model in models:
                     DenseVariational = tfp.layers.DenseVariational(1, make_posterior_fn=posterior_mean_field, make_prior_fn=prior_trainable)(GRU3)
 
                     model = tf.keras.models.Model(inputs=ili_input, outputs=DenseVariational)
+
+                elif Model == 'FULL_GRU_MODEL_UNCERTAINTY':
+                    y_test = y_test[:, -1]
+                    y_train = y_train[:, -1]
+                    Ensemble = True
+                    tfd = tfp.distributions
+
+                    def posterior_mean_field(kernel_size, bias_size=0, dtype=None):
+                        n = kernel_size + bias_size
+
+                        return tf.keras.Sequential([
+                            tfp.layers.VariableLayer(2 * n, dtype=dtype),
+                            tfp.layers.DistributionLambda(lambda t: tfd.Independent(
+                                tfd.Normal(loc=t[..., :n],
+                                           scale=1e-5 + tf.nn.softplus(t[..., n:])),
+                                reinterpreted_batch_ndims=None))
+                        ])
+
+                    # def prior_trainable(kernel_size, bias_size=0, dtype=None):
+                    #     n = kernel_size + bias_size
+                    #
+                    #     return tf.keras.Sequential([
+                    #         tfp.layers.VariableLayer(n, dtype=dtype, trainable=False),
+                    #         tfp.layers.DistributionLambda(lambda t: tfd.Independent(
+                    #             tfd.Normal(loc=t,
+                    #                        scale=2.5),
+                    #             reinterpreted_batch_ndims=None))
+                    #     ])
+
+
+                    def prior_trainable(kernel_size, bias_size=0, dtype=None):
+                        n = kernel_size + bias_size
+                        return tf.keras.Sequential([
+                            tfp.layers.VariableLayer(n, dtype=dtype),
+                            tfp.layers.DistributionLambda(lambda t: tfd.Independent(
+                                tfd.Normal(loc=t, scale=1),
+                                reinterpreted_batch_ndims=1)),
+                        ])
+
+                    ili_input = tf.keras.layers.Input(shape=[x_train.shape[1], 1])
+
+                    x = tf.keras.layers.GRU(28, activation='relu', return_sequences=True)(ili_input)
+                    x = tf.keras.models.Model(inputs=ili_input, outputs=x)
+
+                    google_input = tf.keras.layers.Input(shape=[x_train.shape[1], x_train.shape[2] - 1])
+                    y = tf.keras.layers.GRU(x_train.shape[2] - 1, activation='relu', return_sequences=True)(google_input)
+                    y = tf.keras.layers.GRU(int(0.5 * (x_train.shape[2] - 1)), activation='relu', return_sequences=True)(y)
+                    y = tf.keras.models.Model(inputs=google_input, outputs=y)
+
+                    concatenate = tf.keras.layers.concatenate([x.output, y.output])
+                    GRU1 = tf.keras.layers.GRU(int((concatenate.shape[2] - 1)), activation='relu', return_sequences=True)(concatenate)
+                    GRU2 = tf.keras.layers.GRU(int(0.75 * (concatenate.shape[2] - 1)), activation='relu', return_sequences=False)(GRU1)
+                    DenseVariational = tfp.layers.DenseVariational(1, make_posterior_fn=posterior_mean_field,make_prior_fn=prior_trainable)(GRU2)
+
+                    model = tf.keras.models.Model(inputs=[x.input, y.input], outputs=DenseVariational)
+
+                    optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
+
+                    model.compile(optimizer=optimizer,
+                                  loss='mae',
+                                  metrics=['mae', 'mse', metrics.rmse])
+
+                    x_train = [x_train[:,:,-1, np.newaxis],x_train[:,:,:-1]]
+                    x_test = [x_test[:, :, -1, np.newaxis], x_test[:, :, :-1]]
 
                 elif Model == 'R_ATTN':
                     model = recurrent_attention(x_train, y_train, num_heads=7, regularizer = args.Regularizer)
@@ -315,7 +381,7 @@ for Model in models:
 
                 elif Ensemble:
                     stddev = None
-                    yhats = [model(x_test) for i in range(10)]
+                    yhats = [model(x_test) for i in range(25)]
 
                     prediction = fig.plot_ensemble(fold_num, yhats, y_test)
 
@@ -333,10 +399,12 @@ for Model in models:
                 if args.Logging:
                     logging.log(prediction, y_test, model, stddev, save=True, save_weights=False, col_names = data.columns)
 if args.Logging:
+    logging.save(last=True)
     fig.save(logging.save_directory + '/predictions.png')
 fig.show()
 for i in range(4):
     fig2[i].show()
+
 
 # weights0 = model.weights[0].numpy()[:,0]
 # weights1 = model.weights[0].numpy()[:,1]

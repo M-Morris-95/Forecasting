@@ -1,130 +1,85 @@
 import numpy as np
 import tensorflow_probability as tfp
-import tensorflow as tf
 import matplotlib.pyplot as plt
+import tensorflow as tf
+from Plotter import *
 from metrics import *
-length = 10028
-width = 1
-mean = 0
-split = 0.25
-stddev = 0.2
-
-EPOCHS = 3
-
-BATCH_SIZE=128
-tf.random.set_seed(1)
-x_train = np.zeros((length,width))
-y_train = np.zeros((length, 1))
-for j in range(x_train.shape[1]):
-    for i in range(x_train.shape[0]):
-        x_train[i, j] = (i +  (np.random.normal(mean, 0.1)))
-
-for i in range(y_train.shape[0]):
-    N = 4
-    temp = 2*(x_train[i, 0]/length)**1- 6*(x_train[i, 0]/length)**2 + 2*(x_train[i, 0]/length)**3 + 2*(x_train[i, 0]/length)**4
-    temp = 4 * (x_train[i, 0] / length)
-
-
-    # temp = 5*(np.sin(4*N*np.pi*(x_train[i, 1])/length)+np.cos(2*N*np.pi*(x_train[i, 1])/length))
-
-    y_train[i] = temp + 0.5*temp*(np.random.normal(mean, stddev))
-
-
-''' DATASET 
-5 SIN(2 PI X/5000) + N(MEAN=0, STD=0.2)
-'''
-
-x_data = []
-y_data = []
-lag = 28
-for i in range(length - lag-1):
-    x_data.append(x_train[i:i+lag])
-    y_data.append(y_train[i+lag+1])
-
-x_train=np.asarray(x_data)
-y_train=np.asarray(y_data)
-
-x_train = x_train/np.max(x_train)
-y_train = y_train - np.min(y_train)
-# y_train = y_train/np.max(y_train)
-
-split_te = int((split)*(length-lag))
-split_tr = int((1-split)*(length-lag))
-
-x_test = x_train[-split_te:]
-y_test = y_train[-split_te:]
-
-x_train= x_train[:-split_te]
-y_train = y_train[:-split_te]
-
-plt.scatter(x_train[:, 0, 0], y_train, s=0.2, alpha=0.5)
-plt.scatter(x_test[:, 0, 0], y_test, s=0.2, alpha=0.5)
-plt.show()
-
-
-
-
-def normal_scale_uncertainty(t, softplus_scale=0.2):
-    """Create distribution with variable mean and variance"""
-    return tfd.Normal(loc=t[..., :1],
-                      scale=1e-3*tf.math.softplus(softplus_scale * t[..., 1:]))
-
-initializer = tf.keras.initializers.glorot_normal(seed=None)
-confidence = True
+from make_data import *
+from distributions import *
 tfd = tfp.distributions
 
-loss = lambda y, p_y: -p_y.log_prob(y)
+def create_dataset():
+  np.random.seed(43)
+  n = 150
+  w0 = 0.125
+  b0 = 5.
+  x_range = [-20, 60]
+  x_tst = np.linspace(*x_range).astype(np.float32)
 
-ili_input = tf.keras.layers.Input(shape=[x_train.shape[1], x_train.shape[2]])
-x = tf.keras.layers.LSTM(x_train.shape[1], activation='relu', return_sequences=True)(
-    ili_input)
-# x = tf.keras.layers.LSTM(int((x_train.shape[2] - 1)), activation='relu', return_sequences=True,kernel_initializer=initializer)(x)
-y = tf.keras.layers.LSTM(10, activation='relu', return_sequences=False,kernel_initializer=initializer)(x)
-z = tf.keras.layers.Dense(2, activation='relu',kernel_initializer=initializer)(y)
-z = tfp.layers.DistributionLambda(normal_scale_uncertainty)(z)
-model = tf.keras.models.Model(inputs=ili_input, outputs=z)
+  def s(x):
+    g = (x - x_range[0]) / (x_range[1] - x_range[0])
+    return 3 * (0.25 + g**2.)
 
-optimizer = tf.keras.optimizers.Adam()
+  x = (x_range[1] - x_range[0]) * np.random.rand(n) + x_range[0]
+  eps = np.random.randn(n) * s(x)
+  y = (w0 * x * (1. + np.sin(x)) + b0) + eps
+  x = x[..., np.newaxis]
+  x_tst = x_tst[..., np.newaxis]
 
-model.compile(optimizer=optimizer,
-              loss=loss,
-              metrics=['mae', 'mse', rmse])
+  return y, x, x_tst
+
+fig = plotter(1)
+
+EPOCHS = 1000
+length = 1028
+
+x_train, y_train, x_test, y_test = get_data(length = length, stddev = 0.2, width = 1)
+x_tst = x_train
+# y_train, x_train, x_tst = create_dataset()
+# (150, 1)
+# num_batches = length / BATCH_SIZE
+
+# kl_weight = 1.0 / num_batches
+kl_weight = 1.0
+
+negloglik = lambda y, p_y: -p_y.log_prob(y)
+
+
+model = tf.keras.Sequential([
+    tfp.layers.DenseVariational(1, posterior_mean_field, posterior_mean_field),
+    tfp.layers.DistributionLambda(lambda t: tfd.Normal(loc=t, scale=1)),
+])
+
+model.compile(optimizer=tf.keras.optimizers.Adam(),
+              loss=negloglik)
 
 model.fit(x_train, y_train,
-                validation_data = (x_test,y_test),
-                epochs=EPOCHS, batch_size=BATCH_SIZE)
+                epochs=1500, batch_size=32)
 
-# model2.fit(x_train, y_train,
-#                 validation_data = (x_test,y_test),
-#                 epochs=EPOCHS, batch_size=BATCH_SIZE)
+# Make predictions.
+yhat = [model(x_tst).mean() for i in range(100)]
+yhat = np.asarray(yhat)
 
+mean = np.squeeze(np.mean(yhat, 0))
+stddev = np.squeeze(np.std(yhat, 0))
 
-yhat = model(x_train)
-y_pred = yhat.mean()
-y_std = yhat.stddev()
-plt.plot(x_train[:, 0, 0], y_pred, color="lime", label="train prediction")
-plt.scatter(x_train[:, 0, 0], y_train, s=0.2, alpha=0.5, color="mediumslateblue", label="train ground_truth")
-plt.fill_between(x_train[:, 0, 0], np.squeeze(y_pred - y_std), np.squeeze(y_pred + y_std),
-                 color="aquamarine", alpha=0.5, label="train predict std")
-
-yhat = model(x_test)
-y_pred = yhat.mean()
-y_std = yhat.stddev()
-
-plt.plot(x_test[:, 0, 0], y_pred, color="red", label="prediction")
-plt.scatter(x_test[:, 0, 0], y_test, s=0.2, alpha=0.5, color="blue", label="ground_truth")
-plt.fill_between(x_test[:, 0, 0], np.squeeze(y_pred - y_std), np.squeeze(y_pred + y_std),
-                 color="pink", alpha=0.5, label="predict std")
-# plt.plot(x_test[:, -1, 0], model2.predict(x_test),  label="no conf")
-
-plt.legend(fontsize=8)
-plt.grid(b=True, which='major', color='#666666', linestyle='-')
-plt.minorticks_on()
-plt.grid(b=True, which='minor', color='#999999', linestyle='-', alpha=0.2)
-
+plt.scatter(x_train, y_train)
+for i in range(yhat.shape[0]):
+    plt.plot(np.squeeze(x_tst), yhat[i, :, :], linewidth=0.5, alpha=0.5, color='red')
+plt.plot(x_tst, mean, color='red')
+plt.ylim((0, 17.5))
 plt.show()
 
-plt.plot(model.history.history['loss'])
-plt.plot(model.history.history['val_loss'])
-plt.show()
+fig.plot_synthetic(x_train, y_train, model, tfd = True)
 
+
+
+
+
+# ili_input = tf.keras.layers.Input(shape=[x_train.shape[1], x_train.shape[2]])
+# flatten = tf.keras.layers.Flatten()(ili_input)
+#
+# DenseVariational = tfp.layers.DenseVariational(1, make_posterior_fn=posterior_mean_field, make_prior_fn=prior_trainable)(flatten)
+# DistributionLambda = tfp.layers.DistributionLambda(lambda t: tfd.Normal(loc=t, scale=1))(DenseVariational)
+#
+# model = tf.keras.models.Model(inputs=ili_input, outputs=DistributionLambda)
