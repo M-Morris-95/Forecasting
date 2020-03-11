@@ -4,7 +4,7 @@ tfd = tfp.distributions
 tfk = tf.keras
 import numpy as np
 
-def posterior_mean_field(kernel_size, bias_size=1, dtype=None):
+def posterior_mean_field(kernel_size, bias_size=0, dtype=None):
   n = kernel_size + bias_size
   c = np.log(np.expm1(1.)) #biases the softplus so that if t = 0 then scale = 1 + 1e-5
   return tf.keras.Sequential([
