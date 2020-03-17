@@ -223,36 +223,34 @@ for Model in models:
 
                     def posterior_mean_field(kernel_size, bias_size=0, dtype=None):
                         n = kernel_size + bias_size
-
+                        c = np.log(np.expm1(1.))
                         return tf.keras.Sequential([
                             tfp.layers.VariableLayer(2 * n, dtype=dtype),
-                            tfp.layers.DistributionLambda(lambda t: tfd.Independent(
+                            tfp.layers.DistributionLambda(lambda t: tfd.Independent(  # pylint: disable=g-long-lambda
                                 tfd.Normal(loc=t[..., :n],
-                                           scale=1e-5 + tf.nn.softplus(t[..., n:])),
-                                reinterpreted_batch_ndims=None))
+                                           scale=1e-5 + tf.nn.softplus(c + t[..., n:])),
+                                reinterpreted_batch_ndims=1)),
                         ])
-                        '''reinterpreted_batch_ndims: Scalar, integer number of rightmost batch dims which will 
-                        be regarded as event dims. When None all but the first batch axis (batch axis 0) will be 
-                        transferred to event dimensions (analogous to tf.layers.flatten).'''
 
 
                     def prior_trainable(kernel_size, bias_size=0, dtype=None):
                         n = kernel_size + bias_size
-
                         return tf.keras.Sequential([
-                            tfp.layers.VariableLayer(n, dtype=dtype, trainable=False),
-                            tfp.layers.DistributionLambda(lambda t: tfd.Independent(
-                                tfd.Normal(loc=t, scale=5),
-                                reinterpreted_batch_ndims=None))
+                            tfp.layers.VariableLayer(n, dtype=dtype),
+                            tfp.layers.DistributionLambda(
+                                lambda t: tfd.Independent(tfd.Normal(loc=t, scale=1),  # pylint: disable=g-long-lambda
+                                                          reinterpreted_batch_ndims=1)),
                         ])
+
+                    loss = lambda y, p_y: -p_y.log_prob(y)
 
                     ili_input = tf.keras.layers.Input(shape=[x_train.shape[1], x_train.shape[2]])
                     GRU1 = tf.keras.layers.GRU(x_train.shape[1], activation='relu', return_sequences=True)(ili_input)
                     GRU2 = tf.keras.layers.GRU(int((x_train.shape[2] - 1)), activation='relu', return_sequences=True)(GRU1)
                     GRU3 = tf.keras.layers.GRU(int(0.75 * (x_train.shape[2] - 1)), activation='relu', return_sequences=False)(GRU2)
                     DenseVariational = tfp.layers.DenseVariational(1, make_posterior_fn=posterior_mean_field, make_prior_fn=prior_trainable)(GRU3)
-
-                    model = tf.keras.models.Model(inputs=ili_input, outputs=DenseVariational)
+                    DistributionLambda = tfp.layers.DistributionLambda(lambda t: tfd.Normal(loc=t, scale=1))(DenseVariational)
+                    model = tf.keras.models.Model(inputs=ili_input, outputs=DistributionLambda)
 
                 elif Model == 'FULL_GRU_MODEL_UNCERTAINTY':
                     y_test = y_test[:, -1]
@@ -381,7 +379,7 @@ for Model in models:
 
                 elif Ensemble:
                     stddev = None
-                    yhats = [model(x_test) for i in range(25)]
+                    yhats = [model(x_test).mean() for i in range(25)]
 
                     prediction = fig.plot_ensemble(fold_num, yhats, y_test)
 
