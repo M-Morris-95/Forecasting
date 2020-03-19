@@ -23,12 +23,14 @@ A = [0.2, 0.5, 0.75, 1, 3, 5]
 B = [0.2, 0.5, 0.75, 1, 3, 5]
 C = [0.2, 0.5, 0.75, 1, 3, 5]
 D = [0.2, 0.5, 0.75, 1, 3, 5]
+k = 0
 
 for posterior_mean_scaler in A:
     for posterior_std_scaler in B:
         for prior_mean_scaler in C:
             for prior_std_scaler in D:
                 for look_ahead in look_aheads:
+                    k = k + 1
                     for fold_num in range(1,5):
                         print(fold_num)
                         tf.random.set_seed(0)
@@ -94,4 +96,4 @@ for posterior_mean_scaler in A:
                         if args.Logging:
                             logging.log(y_pred = prediction, y_true = y_test, model = model, stddev = std, save=True, save_weights=False, col_names = data.columns)
 
-                logging.save(last=True)
+logging.save(last=True)
