@@ -11,7 +11,7 @@ from Logger import *
 from Early_Stopping import *
 
 
-
+noised=True
 confidence = False
 Ensemble = False
 parser = GetParser()
@@ -29,6 +29,12 @@ fig2 = [plotter(2, size=[20,5], dpi=500),  plotter(3, size=[12,10], dpi=500),  p
 plot_train=False
 
 do_early_stopping = False
+posterior_std_scaler = 1
+posterior_mean_scaler = 1
+
+prior_std_scaler = 1
+prior_mean_scaler = 1
+
 
 loss = tf.keras.losses.MAE
 for Model in models:
@@ -221,14 +227,17 @@ for Model in models:
                     Ensemble = True
                     tfd = tfp.distributions
 
+
+
+
                     def posterior_mean_field(kernel_size, bias_size=0, dtype=None):
                         n = kernel_size + bias_size
                         c = np.log(np.expm1(1.))
                         return tf.keras.Sequential([
                             tfp.layers.VariableLayer(2 * n, dtype=dtype),
                             tfp.layers.DistributionLambda(lambda t: tfd.Independent(  # pylint: disable=g-long-lambda
-                                tfd.Normal(loc=t[..., :n],
-                                           scale=1e-5 + tf.nn.softplus(c + t[..., n:])),
+                                tfd.Normal(loc=posterior_mean_scaler*t[..., :n],
+                                           scale=1e-5 + tf.nn.softplus(c + posterior_std_scaler * t[..., n:])),
                                 reinterpreted_batch_ndims=1)),
                         ])
 
@@ -238,7 +247,7 @@ for Model in models:
                         return tf.keras.Sequential([
                             tfp.layers.VariableLayer(n, dtype=dtype),
                             tfp.layers.DistributionLambda(
-                                lambda t: tfd.Independent(tfd.Normal(loc=t, scale=1),  # pylint: disable=g-long-lambda
+                                lambda t: tfd.Independent(tfd.Normal(loc=prior_mean_scaler*t, scale=prior_std_scaler),  # pylint: disable=g-long-lambda
                                                           reinterpreted_batch_ndims=1)),
                         ])
 
@@ -248,8 +257,13 @@ for Model in models:
                     GRU1 = tf.keras.layers.GRU(x_train.shape[1], activation='relu', return_sequences=True)(ili_input)
                     GRU2 = tf.keras.layers.GRU(int((x_train.shape[2] - 1)), activation='relu', return_sequences=True)(GRU1)
                     GRU3 = tf.keras.layers.GRU(int(0.75 * (x_train.shape[2] - 1)), activation='relu', return_sequences=False)(GRU2)
-                    DenseVariational = tfp.layers.DenseVariational(1, make_posterior_fn=posterior_mean_field, make_prior_fn=prior_trainable)(GRU3)
+                    DenseVariational1 = tfp.layers.DenseVariational(50, make_posterior_fn=posterior_mean_field,
+                                                                   make_prior_fn=prior_trainable)(GRU3)
+                    DenseVariational2 = tfp.layers.DenseVariational(1, make_posterior_fn=posterior_mean_field, make_prior_fn=prior_trainable)(DenseVariational1)
                     DistributionLambda = tfp.layers.DistributionLambda(lambda t: tfd.Normal(loc=t, scale=1))(DenseVariational)
+
+
+
                     model = tf.keras.models.Model(inputs=ili_input, outputs=DistributionLambda)
 
                 elif Model == 'FULL_GRU_MODEL_UNCERTAINTY':
@@ -269,18 +283,6 @@ for Model in models:
                                 reinterpreted_batch_ndims=None))
                         ])
 
-                    # def prior_trainable(kernel_size, bias_size=0, dtype=None):
-                    #     n = kernel_size + bias_size
-                    #
-                    #     return tf.keras.Sequential([
-                    #         tfp.layers.VariableLayer(n, dtype=dtype, trainable=False),
-                    #         tfp.layers.DistributionLambda(lambda t: tfd.Independent(
-                    #             tfd.Normal(loc=t,
-                    #                        scale=2.5),
-                    #             reinterpreted_batch_ndims=None))
-                    #     ])
-
-
                     def prior_trainable(kernel_size, bias_size=0, dtype=None):
                         n = kernel_size + bias_size
                         return tf.keras.Sequential([
@@ -289,6 +291,8 @@ for Model in models:
                                 tfd.Normal(loc=t, scale=1),
                                 reinterpreted_batch_ndims=1)),
                         ])
+
+
 
                     ili_input = tf.keras.layers.Input(shape=[x_train.shape[1], 1])
 
@@ -321,18 +325,31 @@ for Model in models:
                     y_train = y_train[:,:,np.newaxis]
                     y_test = y_test[:,:,np.newaxis]
 
-                if Model != 'TRANSFORMER':
-                    optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
-                    model.compile(optimizer=optimizer,
-                                  loss=loss,
-                                  metrics=['mae', 'mse', metrics.rmse])
 
-                    if do_early_stopping:
-                        x_train, y_train, x_val, y_val = data.split(x_train, y_train)
-                        val_metric = []
+                optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
+                model.compile(optimizer=optimizer,
+                              loss=loss,
+                              metrics=['mae', 'mse', metrics.rmse])
 
-                        patience = 5
+                if do_early_stopping:
+                    x_train, y_train, x_val, y_val = data.split(x_train, y_train)
+                    val_metric = []
+
+                    patience = 5
+                    for epoch in range(EPOCHS):
+                        model.fit(
+                            x_train, y_train,
+                            epochs=1, batch_size=BATCH_SIZE)
+                        val_metric.append(validation(y_val, model(x_val)))
+                        print("validation loss = {:1.1f}".format(val_metric[epoch]))
+                        if early_stopping(patience)(val_metric):
+                            break
+                    for j in range(2):
                         for epoch in range(EPOCHS):
+                            x_train = np.append(x_train, x_val[:365], 0)
+                            y_train = np.append(y_train, y_val[:365], 0)
+                            x_val = x_val[365:]
+                            y_val = y_val[365:]
                             model.fit(
                                 x_train, y_train,
                                 epochs=1, batch_size=BATCH_SIZE)
@@ -340,30 +357,22 @@ for Model in models:
                             print("validation loss = {:1.1f}".format(val_metric[epoch]))
                             if early_stopping(patience)(val_metric):
                                 break
-                        for j in range(2):
-                            for epoch in range(EPOCHS):
-                                x_train = np.append(x_train, x_val[:365], 0)
-                                y_train = np.append(y_train, y_val[:365], 0)
-                                x_val = x_val[365:]
-                                y_val = y_val[365:]
-                                model.fit(
-                                    x_train, y_train,
-                                    epochs=1, batch_size=BATCH_SIZE)
-                                val_metric.append(validation(y_val, model(x_val)))
-                                print("validation loss = {:1.1f}".format(val_metric[epoch]))
-                                if early_stopping(patience)(val_metric):
-                                    break
 
-                        for epoch in range(5):
-                            x_train = np.append(x_train, x_val, 0)
-                            y_train = np.append(y_train, y_val, 0)
-                            model.fit(
-                                x_train, y_train,
-                                epochs=1, batch_size=BATCH_SIZE)
-                    else:
+                    for epoch in range(5):
+                        x_train = np.append(x_train, x_val, 0)
+                        y_train = np.append(y_train, y_val, 0)
                         model.fit(
                             x_train, y_train,
-                            epochs=EPOCHS, batch_size=BATCH_SIZE)
+                            epochs=1, batch_size=BATCH_SIZE)
+                else:
+
+
+                    for i in range(EPOCHS):
+                        stddev = args.Noise_Std
+                        model.fit(
+                            x_train + np.random.normal(0, stddev, x_train.shape), y_train,
+                            epochs=1,
+                            batch_size=BATCH_SIZE)
 
                 if confidence:
                     if plot_train:
@@ -384,14 +393,18 @@ for Model in models:
                     prediction = fig.plot_ensemble(fold_num, yhats, y_test)
 
                 else:
+                    stddev = None
                     if plot_train:
                         prediction = model.predict(x_train)
                         fig2[fold_num-1].plot(fold_num, prediction, y_train, x1=False, split=False)
 
+                    if args.Noised_OP:
+                        prediction, stddev = noised_inputs(model, x_test, stddev=0.05, num=100)
+                        stddev = stddev[:, -1]
+                    else:
+                        prediction = model.predict(x_test)
 
-                    stddev = None
-                    prediction = model.predict(x_test)
-                    fig.plot(fold_num, prediction, y_test, x1=False)
+                    fig.plot_conf(fold_num, prediction[:,-1], y_test[:,-1], stddev)
 
 
                 if args.Logging:
@@ -404,9 +417,3 @@ for i in range(4):
     fig2[i].show()
 
 
-# weights0 = model.weights[0].numpy()[:,0]
-# weights1 = model.weights[0].numpy()[:,1]
-# plt.plot(np.matmul(x_test, weights0) + np.matmul(x_test, weights1))
-# plt.plot(np.matmul(x_test, weights0) - np.matmul(x_test, weights1))
-# plt.plot(np.matmul(x_test, weights0))
-# plt.show()

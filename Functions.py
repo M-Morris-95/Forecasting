@@ -11,6 +11,18 @@ import os
 import time
 import tensorflow as tf
 
+def noised_inputs(model, x, num=20, stddev = 0.1):
+    prediction = []
+    for i in range(num):
+        prediction.append(model.predict(x + np.random.normal(0, stddev, x.shape)))
+
+    prediction = np.squeeze(np.asarray(prediction))
+
+    mean = np.mean(prediction, axis = 0)
+    std = np.std(prediction, axis = 0)
+
+    return mean, std
+
 
 def full_GRU(x_train, y_train):
     initializer = tf.keras.initializers.glorot_normal(seed=None)
@@ -119,12 +131,17 @@ def simple_GRU(x_train, y_train, regularizer=False):
     else:
         regularizer = None
 
+    batch_norm = True
+
     ili_input = Input(shape=[x_train.shape[1], x_train.shape[2]])
     x = GRU(x_train.shape[1], activation='relu', return_sequences=True, kernel_regularizer=regularizer)(ili_input)
+    if batch_norm: x = tf.keras.layers.BatchNormalization()(x)
     x = GRU(int((x_train.shape[2] - 1)), activation='relu', return_sequences=True, kernel_regularizer=regularizer)(x)
-    y = GRU(int(0.75 * (x_train.shape[2] - 1)), activation='relu', return_sequences=True,
+    if batch_norm: x = tf.keras.layers.BatchNormalization()(x)
+    x = GRU(int(0.75 * (x_train.shape[2] - 1)), activation='relu', return_sequences=True,
             kernel_regularizer=regularizer)(x)
-    z = GRU(y_train.shape[1], activation='relu', return_sequences=False, kernel_regularizer=regularizer)(y)
+    if batch_norm: x = tf.keras.layers.BatchNormalization()(x)
+    z = GRU(y_train.shape[1], activation='linear', return_sequences=False, kernel_regularizer=regularizer)(x)
 
     model = Model(inputs=ili_input, outputs=z)
 

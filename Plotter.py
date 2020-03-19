@@ -28,11 +28,15 @@ class plotter:
         plt.grid(b=True, which='minor', color='#999999', linestyle='-', alpha=0.2)
 
     def plot_conf(self, fold_num, y_pred, y_true, y_std, split=True):
+        if y_std is None:
+            self.plot(fold_num, y_pred, y_true)
+            return
         plt.figure(self.number)
         if split:
             plt.subplot(2, 2, fold_num)
-        y_pred = y_pred.numpy()
-        y_std = y_std.numpy()
+        if not isinstance(y_pred, (np.ndarray, np.generic) ):
+            y_pred = y_pred.numpy()
+            y_std = y_std.numpy()
         if y_pred.ndim > 1:
             if y_pred.shape[1] != 0:
                 y_pred = y_pred[:, -1]

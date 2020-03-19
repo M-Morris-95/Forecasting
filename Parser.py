@@ -4,6 +4,20 @@ def GetParser():
     parser = argparse.ArgumentParser(
         description='M-Morris-95 Foprecasting')
 
+
+    parser.add_argument('--Noise_Std',
+                        type=float,
+                        help='how much noise to add in training',
+                        default=0,
+                        required = False)
+
+    parser.add_argument('--Noised_OP',
+                        type=bool,
+                        help='how much noise to add in testing for confidence intervals',
+                        default=False,
+                        required = False)
+
+
     parser.add_argument('--Server', '-S',
                         type=bool,
                         help='is it on the server?',
