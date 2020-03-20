@@ -83,3 +83,5 @@ for stddev_in in stddev_choices:
     weights_true = model.weights[0].numpy()
     error.append(np.mean(np.abs((weights_ideal - weights_true)/weights_true)))
 
+error = np.asarray(error)
+np.save('error.npy', error)
