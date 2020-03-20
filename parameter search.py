@@ -24,7 +24,7 @@ B = [0.2, 0.5, 0.75, 1, 3, 5]
 C = [0.2, 0.5, 0.75, 1, 3, 5]
 D = [0.2, 0.5, 0.75, 1, 3, 5]
 k = 0
-
+logging.iter=True
 for posterior_mean_scaler in A:
     for posterior_std_scaler in B:
         for prior_mean_scaler in C:
@@ -35,7 +35,7 @@ for posterior_mean_scaler in A:
                         print(fold_num)
                         tf.random.set_seed(0)
 
-                        logging.update_details(fold_num=fold_num, k=1, model='GRU_VI_Par_Search', look_ahead=look_ahead)
+                        logging.update_details(fold_num=fold_num, k=k, model='GRU_VI_Par_Search', look_ahead=look_ahead)
                         data = data_builder(args, fold=fold_num, look_ahead=look_ahead)
                         x_train, y_train, y_train_index, x_test, y_test, y_test_index = data.build(squared = args.Square_Inputs, normalise_all=True)
                         y_test = y_test[:, -1]
