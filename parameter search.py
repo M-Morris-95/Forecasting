@@ -63,9 +63,9 @@ for posterior_mean_scaler in A:
                             return tf.keras.Sequential([
                                 tfp.layers.VariableLayer(n, dtype=dtype),
                                 tfp.layers.DistributionLambda(
-                                    lambda t: tfd.Independent(tfd.Normal(loc=prior_mean_scaler * t, scale=1),
+                                    lambda t: tfd.Independent(tfd.Normal(loc=prior_mean_scaler * t, scale=prior_std_scaler),
                                                               # pylint: disable=g-long-lambda
-                                                              reinterpreted_batch_ndims=prior_std_scaler)),
+                                                              reinterpreted_batch_ndims=1)),
                             ])
 
 
