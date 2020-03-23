@@ -40,7 +40,7 @@ loss = tf.keras.losses.MAE
 for Model in models:
     for look_ahead in look_aheads:
         for k in range(max_k):
-            for fold_num in range(1,5):
+            for fold_num in range(1,2):
                 print(k, fold_num)
                 tf.random.set_seed(0)
                 logging.update_details(fold_num=fold_num, k=k, model=Model, look_ahead=look_ahead)
@@ -226,9 +226,10 @@ for Model in models:
                     y_train = y_train[:, -1]
                     Ensemble = True
                     tfd = tfp.distributions
-
-
-
+                    posterior_mean_scaler = 1
+                    posterior_std_scaler = 1
+                    prior_mean_scaler = 1
+                    prior_std_scaler = 1
 
                     def posterior_mean_field(kernel_size, bias_size=0, dtype=None):
                         n = kernel_size + bias_size
@@ -236,7 +237,7 @@ for Model in models:
                         return tf.keras.Sequential([
                             tfp.layers.VariableLayer(2 * n, dtype=dtype),
                             tfp.layers.DistributionLambda(lambda t: tfd.Independent(  # pylint: disable=g-long-lambda
-                                tfd.Normal(loc=posterior_mean_scaler*t[..., :n],
+                                tfd.Normal(loc=posterior_mean_scaler * t[..., :n],
                                            scale=1e-5 + tf.nn.softplus(c + posterior_std_scaler * t[..., n:])),
                                 reinterpreted_batch_ndims=1)),
                         ])
@@ -247,23 +248,23 @@ for Model in models:
                         return tf.keras.Sequential([
                             tfp.layers.VariableLayer(n, dtype=dtype),
                             tfp.layers.DistributionLambda(
-                                lambda t: tfd.Independent(tfd.Normal(loc=prior_mean_scaler*t, scale=prior_std_scaler),  # pylint: disable=g-long-lambda
-                                                          reinterpreted_batch_ndims=1)),
+                                lambda t: tfd.Independent(tfd.Normal(loc=prior_mean_scaler*t, scale=1),  # pylint: disable=g-long-lambda
+                                                          reinterpreted_batch_ndims=prior_std_scaler)),
                         ])
+
 
                     loss = lambda y, p_y: -p_y.log_prob(y)
 
                     ili_input = tf.keras.layers.Input(shape=[x_train.shape[1], x_train.shape[2]])
                     GRU1 = tf.keras.layers.GRU(x_train.shape[1], activation='relu', return_sequences=True)(ili_input)
-                    GRU2 = tf.keras.layers.GRU(int((x_train.shape[2] - 1)), activation='relu', return_sequences=True)(GRU1)
-                    GRU3 = tf.keras.layers.GRU(int(0.75 * (x_train.shape[2] - 1)), activation='relu', return_sequences=False)(GRU2)
-                    DenseVariational1 = tfp.layers.DenseVariational(50, make_posterior_fn=posterior_mean_field,
+                    GRU2 = tf.keras.layers.GRU(int((x_train.shape[2] - 1)), activation='relu', return_sequences=True)(
+                        GRU1)
+                    GRU3 = tf.keras.layers.GRU(int(0.75 * (x_train.shape[2] - 1)), activation='relu',
+                                               return_sequences=False)(GRU2)
+                    DenseVariational = tfp.layers.DenseVariational(1, make_posterior_fn=posterior_mean_field,
                                                                    make_prior_fn=prior_trainable)(GRU3)
-                    DenseVariational2 = tfp.layers.DenseVariational(1, make_posterior_fn=posterior_mean_field, make_prior_fn=prior_trainable)(DenseVariational1)
-                    DistributionLambda = tfp.layers.DistributionLambda(lambda t: tfd.Normal(loc=t, scale=1))(DenseVariational)
-
-
-
+                    DistributionLambda = tfp.layers.DistributionLambda(lambda t: tfd.Normal(loc=t, scale=1))(
+                        DenseVariational)
                     model = tf.keras.models.Model(inputs=ili_input, outputs=DistributionLambda)
 
                 elif Model == 'FULL_GRU_MODEL_UNCERTAINTY':
