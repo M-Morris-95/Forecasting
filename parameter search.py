@@ -19,20 +19,20 @@ models, look_aheads, max_k = logging.get_inputs()
 
 optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0005, rho=0.9)
 
-A = [0.2, 0.5, 0.75, 1, 3, 5]
-B = [0.2, 0.5, 0.75, 1, 3, 5]
-C = [0.2, 0.5, 0.75, 1, 3, 5]
-D = [0.2, 0.5, 0.75, 1, 3, 5]
+A = [0.5, 1, 3, 5]
+B = [0.2, 1, 3, 5]
+C = [0.5, 1, 3, 5]
+D = [0.5, 1, 3, 5]
 k = 0
+
 logging.iter=True
-
-
 for posterior_mean_scaler in A:
     for posterior_std_scaler in B:
         for prior_mean_scaler in C:
             for prior_std_scaler in D:
                 for look_ahead in look_aheads:
                     k = k + 1
+                    print(k)
                     for fold_num in range(1,5):
                         tf.random.set_seed(0)
 
