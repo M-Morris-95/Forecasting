@@ -2,7 +2,7 @@ import tensorflow_probability as tfp
 import matplotlib.pyplot as plt
 import tensorflow as tf
 from make_data import *
-tf.config.experimental_run_functions_eagerly()
+# tf.config.experimental_run_functions_eagerly()
 
 tfd = tfp.distributions
 
@@ -39,10 +39,9 @@ mean = yhat.mean()
 stddev = yhat.stddev()
 
 # plot train
-plt.scatter(x_train, y_train, alpha=0.5, color='orange')
-plt.plot(x_train, mean, color='green', linewidth=2)
-plt.plot(x_train, mean + stddev, color='green', linewidth=1)
-plt.plot(x_train, mean - stddev, color='green', linewidth=1)
+plt.scatter(x_train, y_train, marker='+', alpha=0.5, color='blue')
+plt.plot(x_train, mean, color='red', linewidth=2)
+plt.fill_between(x_train[:,0], mean[:,0] + stddev[:,0], mean[:,0] - stddev[:,0], color = 'orange', alpha = 0.5)
 
 # predict test
 yhat = model(x_test)
@@ -50,11 +49,11 @@ mean = yhat.mean()
 stddev = yhat.stddev()
 
 # plot test
-plt.scatter(x_test, y_test, alpha=0.5, color='orange')
-plt.plot(x_test, mean, color='green', linewidth=2)
-plt.plot(x_test, mean + stddev, color='green', linewidth=1)
-plt.plot(x_test, mean - stddev, color='green', linewidth=1)
+plt.scatter(x_test, y_test,marker='+', alpha=0.5, color='blue', label = 'Ground Truth')
+plt.fill_between(x_test[:,0], mean[:,0] + stddev[:,0], mean[:,0] - stddev[:,0], color = 'orange', alpha = 0.5, label = 'Aleatoric uncertainty')
+plt.plot(x_test, mean, color='red', linewidth=2, label = 'Mean')
 
+plt.legend()
 # tidy up graph
 plt.plot([xlim[1]*(1-split), xlim[1]*(1-split)], [-100, 100], color = 'black')
 plt.ylim((min(y_train), max(y_train)))

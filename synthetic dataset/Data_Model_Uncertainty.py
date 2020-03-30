@@ -28,7 +28,7 @@ class Train:
                       verbose = 0)
 
             KL = 0
-            for layer in self.model.layers:
+            for layer in self.model.layers[:-1]:
                 KL = KL + kl_loss_weight*tfp.distributions.kl_divergence(layer._posterior(np.ones(layer.input_shape[1])),
                                                 layer._prior(np.ones(layer.input_shape[1]))).numpy()
 
@@ -39,35 +39,6 @@ class Train:
             # print('KL = ', KL, 'Likelihood = ', lik_loss)
 
         return model
-
-    def plot(self, axes = 1):
-        fig, ax1 = plt.subplots()
-
-        color = 'tab:red'
-        ax1.set_xlabel('epoch')
-
-        ax1.plot(self.lik_loss, label = 'likelihood', color=color)
-        ax1.tick_params(axis='y', labelcolor=color)
-        ax1.set_ylabel('likelihood', color=color)
-        # ax1.set_ylim((0,100))
-
-        if axes == 2:
-            ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
-
-            color = 'tab:blue'
-            ax2.set_ylabel('KL divergence', color=color)  # we already handled the x-label with ax1
-            ax2.plot(self.kl_loss, label = 'KL divergence', color=color)
-            ax2.tick_params(axis='y', labelcolor=color)
-
-        else:
-            # ax1.plot(self.kl_loss, label='KL divergence', color=color)
-            ax1.tick_params(axis='y', labelcolor=color)
-
-        fig.tight_layout()  # otherwise the right y-label is slightly clipped
-        plt.show()
-
-        plt.legend()
-        plt.show()
 
     def plot1(self):
         self.color1 = 'tab:red'
@@ -80,8 +51,8 @@ class Train:
         plt.show()
 
 def neg_log_likelihood(y_true, y_pred, sigma=0.1):
-	dist = tfp.distributions.Normal(loc=y_pred, scale=sigma)
-	return K.sum(-dist.log_prob(y_true))
+	# dist = tfp.distributions.Normal(loc=y_pred, scale=sigma)
+	return K.sum(-y_pred.log_prob(y_true))
 
 # Specify the surrogate posterior over `keras.layers.Dense` `kernel` and `bias`.
 def posterior_mean_field(kernel_size, bias_size=0, dtype=None):
@@ -110,18 +81,20 @@ def f(x, sigma, scale):
 	epsilon = np.random.randn(*x.shape) * sigma
 	return  scale * np.sin(2 * np.pi * (x)) + epsilon
 
-train_size = 32
-noise = 0.15
+train_size = 128
+noise = 0.35
 scale = 1.0
 
 X = np.linspace(-0.5, 0.5, train_size).reshape(-1, 1)
 y = f(X, sigma=noise, scale = scale)
 y_true = f(X, sigma=0.0, scale = scale)
 
+
 plt.scatter(X, y, marker='+', label='Training data')
 plt.plot(X, y_true, label='Truth')
 plt.title('Noisy training data and ground truth')
 plt.legend()
+plt.ylim((-2,2))
 plt.show()
 
 
@@ -138,6 +111,7 @@ kl_loss_weight = 1.0 / num_batches
 
 
 # Build model.
+c = np.log(np.expm1(0.1))
 model = tf.keras.Sequential([
     tf.keras.layers.Input(shape=(1,)),
     tfp.layers.DenseVariational(units=20,
@@ -150,10 +124,13 @@ model = tf.keras.Sequential([
                                 make_prior_fn=prior_trainable,
                                 kl_weight=kl_loss_weight,
                                 activation='relu'),
-    tfp.layers.DenseVariational(units=1,
+    tfp.layers.DenseVariational(units=2,
                                 make_posterior_fn=posterior_mean_field,
                                 make_prior_fn=prior_trainable,
-                                kl_weight=kl_loss_weight)
+                                kl_weight=kl_loss_weight),
+tfp.layers.DistributionLambda(
+        lambda t: tfd.Normal(loc=t[..., :1],
+                           scale=1e-3 + tf.math.softplus(-2.2521684610440906+t[..., 1:]))),
 ])
 
 
@@ -161,7 +138,7 @@ model = tf.keras.Sequential([
 
 model.compile(loss=neg_log_likelihood, optimizer=Adam(lr=0.03), metrics=['mse'])
 
-trainer = Train(model, 1500, 32)
+trainer = Train(model, 2500, 32)
 
 
 model = trainer.fit(X, y)
@@ -171,35 +148,33 @@ trainer.plot1()
 
 X_test = np.linspace(-1.5, 1.5, 100).reshape(-1, 1)
 y_pred_list = []
+y_pred_means = []
+y_pred_stds = []
 for i in tqdm.tqdm(range(500)):
-    y_pred = model.predict(X_test)
-    y_pred_list.append(y_pred)
+    y_pred = model(X_test)
+    y_pred_means.append(y_pred.mean())
+    y_pred_stds.append(y_pred.stddev())
 
-y_preds = np.concatenate(y_pred_list, axis=1)
-y_mean = np.mean(y_preds, axis=1)
-y_sigma = np.std(y_preds, axis=1)
+y_means = np.concatenate(y_pred_means, axis=1)
+mean_mean = np.mean(y_means, axis=1)
+mean_sigma = np.std(y_means, axis=1)
 
-plt.plot(X_test, y_mean, 'r-', label='Predictive mean');
-plt.scatter(X, y, marker='+', label='Training data')
+y_stds = np.concatenate(y_pred_stds, axis=1)
+std_mean = np.mean(y_stds, axis=1)
+std_sigma = np.std(y_stds, axis=1)
 plt.fill_between(X_test.ravel(),
-                 y_mean + 2 * y_sigma,
-                 y_mean - 2 * y_sigma,
-                 alpha=0.5, label='Epistemic uncertainty')
+                 mean_mean + mean_sigma,
+                 mean_mean - mean_sigma,
+                 alpha=0.3, label='Epistemic uncertainty')
+plt.fill_between(X_test.ravel(),
+                 mean_mean + std_mean,
+                 mean_mean - std_mean,
+                 alpha=0.3, label='Aleatoric uncertainty')
+plt.plot(X_test, mean_mean, 'r-', label='Predictive mean');
+plt.scatter(X, y, marker='+', label='Training data')
 plt.title('Prediction')
 plt.legend()
+plt.ylim((-2,2))
 plt.show()
 
-
-
-def mixture_prior_params(sigma_1, sigma_2, pi, return_sigma=False):
-    params = K.variable([sigma_1, sigma_2, pi], name='mixture_prior_params')
-    sigma = np.sqrt(pi * sigma_1 ** 2 + (1 - pi) * sigma_2 ** 2)
-    return params, sigma
-
-
-def log_mixture_prior_prob(w):
-    comp_1_dist = tf.distributions.Normal(0.0, prior_params[0])
-    comp_2_dist = tf.distributions.Normal(0.0, prior_params[1])
-    comp_1_weight = prior_params[2]
-    return K.log(comp_1_weight * comp_1_dist.prob(w) + (1 - comp_1_weight) * comp_2_dist.prob(w))
 
