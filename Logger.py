@@ -78,7 +78,7 @@ class logger:
 
     def log(self, y_pred, y_true, model, stddev=None,save=False, save_weights=False, col_names=None):
 
-        self.model_history = pd.DataFrame(model.history.history)
+        self.model_history = pd.DataFrame(model.model.history.history)
         if y_pred.ndim == 3:
             y_pred = np.squeeze(y_pred)
         if y_true.ndim == 3:

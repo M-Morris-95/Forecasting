@@ -8,6 +8,7 @@ from tensorflow.keras import backend as K
 from tensorflow.keras.optimizers import Adam
 import tensorflow_probability as tfp
 tfd = tfp.distributions
+tf.random.set_seed(0)
 
 
 class Train:
@@ -86,7 +87,7 @@ def neg_log_likelihood(y_true, y_pred, sigma=0.1):
 # Specify the surrogate posterior over `keras.layers.Dense` `kernel` and `bias`.
 def posterior_mean_field(kernel_size, bias_size=0, dtype=None):
     n = kernel_size + bias_size
-    c = np.log(np.expm1(0.2))
+    c = np.log(np.expm1(0.4))
     return tf.keras.Sequential([
         tfp.layers.VariableLayer(2 * n, dtype=dtype),
         tfp.layers.DistributionLambda(lambda t: tfd.Independent(
@@ -102,7 +103,7 @@ def prior_trainable(kernel_size, bias_size=0, dtype=None):
     return tf.keras.Sequential([
         tfp.layers.VariableLayer(n, dtype=dtype),
         tfp.layers.DistributionLambda(lambda t: tfd.Independent(
-            tfd.Normal(loc=t, scale=0.2),
+            tfd.Normal(loc=t, scale=0.4),
             reinterpreted_batch_ndims=1)),
     ])
 
@@ -110,42 +111,41 @@ def f(x, sigma, scale):
 	epsilon = np.random.randn(*x.shape) * sigma
 	return  scale * np.sin(2 * np.pi * (x)) + epsilon
 
-train_size = 32
-noise = 0.15
+train_size = 8
+noise = 0.01
 scale = 1.0
 
 X = np.linspace(-0.5, 0.5, train_size).reshape(-1, 1)
+
+k = [0]
+for i in(np.random.rand(train_size-1)):
+    k.append(k[-1]+i)
+k = k/max(k) - 0.5
+X = np.asarray(k)
+
 y = f(X, sigma=noise, scale = scale)
 y_true = f(X, sigma=0.0, scale = scale)
 
-plt.scatter(X, y, marker='+', label='Training data')
-plt.plot(X, y_true, label='Truth')
-plt.title('Noisy training data and ground truth')
-plt.legend()
-plt.show()
-
-
-
-# Mixture prior parameters shared across DenseVariational layer instances
-# prior_params, prior_sigma = mixture_prior_params(sigma_1=1.0, sigma_2=0.1, pi=0.2)
+# plt.scatter(X, y, marker='+', label='Training data')
+# plt.plot(X, y_true, label='Truth')
+# plt.title('Noisy training data and ground truth')
+# plt.legend()
+# plt.show()
 
 batch_size = train_size
 num_batches = train_size / batch_size
 kl_loss_weight = 1.0 / num_batches
 
-
-
-
-
 # Build model.
+
 model = tf.keras.Sequential([
     tf.keras.layers.Input(shape=(1,)),
-    tfp.layers.DenseVariational(units=20,
+    tfp.layers.DenseVariational(units=64,
                                 make_posterior_fn=posterior_mean_field,
                                 make_prior_fn=prior_trainable,
                                 kl_weight=kl_loss_weight,
                                 activation='relu'),
-    tfp.layers.DenseVariational(units=20,
+    tfp.layers.DenseVariational(units=64,
                                 make_posterior_fn=posterior_mean_field,
                                 make_prior_fn=prior_trainable,
                                 kl_weight=kl_loss_weight,
@@ -156,12 +156,9 @@ model = tf.keras.Sequential([
                                 kl_weight=kl_loss_weight)
 ])
 
-
-
-
 model.compile(loss=neg_log_likelihood, optimizer=Adam(lr=0.03), metrics=['mse'])
 
-trainer = Train(model, 1500, 32)
+trainer = Train(model, 2000, 32)
 
 
 model = trainer.fit(X, y)
@@ -179,12 +176,14 @@ y_preds = np.concatenate(y_pred_list, axis=1)
 y_mean = np.mean(y_preds, axis=1)
 y_sigma = np.std(y_preds, axis=1)
 
-plt.plot(X_test, y_mean, 'r-', label='Predictive mean');
+plt.plot(X_test, y_mean, 'r-', label='Predicted mean');
 plt.scatter(X, y, marker='+', label='Training data')
 plt.fill_between(X_test.ravel(),
                  y_mean + 2 * y_sigma,
                  y_mean - 2 * y_sigma,
-                 alpha=0.5, label='Epistemic uncertainty')
+                 alpha=0.5, label='Predicted uncertainty')
+plt.xlabel('Input')
+plt.ylabel('Output')
 plt.title('Prediction')
 plt.legend()
 plt.show()

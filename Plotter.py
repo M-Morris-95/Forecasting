@@ -146,3 +146,4 @@ class plotter:
     def show(self):
         plt.figure(self.number)
         plt.show()
+

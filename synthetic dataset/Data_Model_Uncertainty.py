@@ -51,7 +51,6 @@ class Train:
         plt.show()
 
 def neg_log_likelihood(y_true, y_pred, sigma=0.1):
-	# dist = tfp.distributions.Normal(loc=y_pred, scale=sigma)
 	return K.sum(-y_pred.log_prob(y_true))
 
 # Specify the surrogate posterior over `keras.layers.Dense` `kernel` and `bias`.

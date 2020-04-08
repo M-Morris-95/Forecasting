@@ -6,7 +6,7 @@ from make_data import *
 
 tfd = tfp.distributions
 
-xlim=[0, 5]
+xlim=[0, 1]
 ylim=[0, 1]
 split = 0.25
 length = 500
@@ -14,7 +14,7 @@ batch_size = 32
 epochs = 500
 
 # get data
-x_train, y_train, x_test, y_test, y_stddev, y_mean = get_data(length=length, width=1, mean=0, stddev=0.8, split=split,
+x_train, y_train, x_test, y_test, y_stddev, y_mean = get_data(length=length, width=1, mean=0, stddev=0.5, split=split,
                                                       xlim=xlim, ylim=ylim)
 
 # build model
@@ -49,9 +49,11 @@ mean = yhat.mean()
 stddev = yhat.stddev()
 
 # plot test
-plt.scatter(x_test, y_test,marker='+', alpha=0.5, color='blue', label = 'Ground Truth')
-plt.fill_between(x_test[:,0], mean[:,0] + stddev[:,0], mean[:,0] - stddev[:,0], color = 'orange', alpha = 0.5, label = 'Aleatoric uncertainty')
-plt.plot(x_test, mean, color='red', linewidth=2, label = 'Mean')
+plt.scatter(x_test, y_test,marker='+', alpha=0.5, color='blue', label = 'Input Data')
+plt.fill_between(x_test[:,0], mean[:,0] + stddev[:,0], mean[:,0] - stddev[:,0], color = 'orange', alpha = 0.5, label = 'Predicted Uncertainty')
+plt.plot(x_test, mean, color='red', linewidth=2, label = 'Predicted Mean')
+plt.xlabel('Input')
+plt.ylabel('Output')
 
 plt.legend()
 # tidy up graph
