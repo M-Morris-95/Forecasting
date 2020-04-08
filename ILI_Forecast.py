@@ -47,7 +47,7 @@ for Model in models:
 
                 x_train, y_train, x_test, y_test = model.modify_data(x_train, y_train, x_test, y_test)
 
-                model.fit(x_train, y_train, epochs=EPOCHS, batch_size=BATCH_SIZE, plot = False)
+                model.fit(x_train, y_train, epochs=EPOCHS, batch_size=BATCH_SIZE, plot = True)
 
                 try:
                     kl_loss.append(np.squeeze(np.asarray(model.kl_loss)))
@@ -78,44 +78,15 @@ if args.Logging:
     logging.save(last=True)
     fig.save(logging.save_directory + '/predictions.png')
 
+try:
+    np.save(logging.save_directory + 'likelihood_loss.npy', np.asarray(lik_loss))
+    np.save(logging.save_directory + 'KL_divergence_loss.npy', np.asarray(kl_loss))
+except:
+    pass
+
 fig.show()
-for i in range(4):
-    fig2[i].show()
-
-# if do_early_stopping:
-#     x_train, y_train, x_val, y_val = data.split(x_train, y_train)
-#     val_metric = []
-#
-#     patience = 5
-#     for epoch in range(EPOCHS):
-#         model.fit(
-#             x_train, y_train,
-#             epochs=1, batch_size=BATCH_SIZE)
-#         val_metric.append(validation(y_val, model(x_val)))
-#         print("validation loss = {:1.1f}".format(val_metric[epoch]))
-#         if early_stopping(patience)(val_metric):
-#             break
-#     for j in range(2):
-#         for epoch in range(EPOCHS):
-#             x_train = np.append(x_train, x_val[:365], 0)
-#             y_train = np.append(y_train, y_val[:365], 0)
-#             x_val = x_val[365:]
-#             y_val = y_val[365:]
-#             model.fit(
-#                 x_train, y_train,
-#                 epochs=1, batch_size=BATCH_SIZE)
-#             val_metric.append(validation(y_val, model(x_val)))
-#             print("validation loss = {:1.1f}".format(val_metric[epoch]))
-#             if early_stopping(patience)(val_metric):
-#                 break
-#
-#     for epoch in range(5):
-#         x_train = np.append(x_train, x_val, 0)
-#         y_train = np.append(y_train, y_val, 0)
-#         model.fit(
-#             x_train, y_train,
-#             epochs=1, batch_size=BATCH_SIZE)
-
+# for i in range(4):
+#     fig2[i].show()
 
 for i in range(4):
     plt.subplot(2,2,i+1)
