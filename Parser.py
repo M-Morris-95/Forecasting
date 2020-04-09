@@ -41,8 +41,6 @@ def GetParser():
                         default=False,
                         required = False)
 
-
-
     parser.add_argument('--DOTY',
                         type=str,
                         help='use day of the year data?',

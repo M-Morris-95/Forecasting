@@ -108,6 +108,12 @@ class logger:
         self.test_ground_truth[str(self.save_name)] = y_true
         self.test_predictions[str(self.save_name)] = y_pred
 
+        try:
+            self.model_history = pd.DataFrame.from_dict(model.log)
+        except:
+            self.model_history = pd.DataFrame(model.model.history.history)
+
+
         if save_weights:
             final_weights = model.weights[0].numpy()[-167:]
             weights = pd.DataFrame(columns=['weight'],index = np.asarray(col_names), data = np.squeeze(final_weights))
@@ -139,7 +145,7 @@ class logger:
 
         if model is not None:
             if self.save_model:
-                model.save(self.save_name.replace('/', '_'), save_format='tf')
+                model.model.save(self.save_name.replace('/', '_'), save_format='tf')
             os.chdir(self.save_directory)
 
 

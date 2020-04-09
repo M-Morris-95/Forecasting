@@ -9,14 +9,13 @@ from Models import *
 
 parser = GetParser()
 args = parser.parse_args()
-kl_loss = []
-lik_loss = []
 EPOCHS, BATCH_SIZE = args.Epochs, args.Batch_Size
 
 logging = logger(args)
 models, look_aheads, max_k = logging.get_inputs()
 
 fig = plotter(1)
+loss_fig = plotter(3)
 fig2 = [plotter(2, size=[20,5], dpi=500),  plotter(3, size=[12,10], dpi=500),  plotter(4, size=[12,10], dpi=500),  plotter(5, size=[12,10], dpi=500)]
 
 plot_train=False
@@ -49,52 +48,21 @@ for Model in models:
 
                 model.fit(x_train, y_train, epochs=EPOCHS, batch_size=BATCH_SIZE, plot = True)
 
-                try:
-                    kl_loss.append(np.squeeze(np.asarray(model.kl_loss)))
-                    lik_loss.append(np.squeeze(np.asarray(model.lik_loss)))
-                except:
-                    pass
-
                 prediction, stddev, pred, model_mean = model.predict(x_test)
 
-                # plt.scatter(np.tile(np.linspace(0, pred.shape[1]-1, pred.shape[1]), (1, pred.shape[0])), pred.reshape(-1), s=0.02, alpha=0.1, color='blue', label='data uncertainty')
-                # plt.scatter(np.tile(np.linspace(0, pred.shape[1]-1, pred.shape[1]), (1, model_mean.shape[0])), model_mean.reshape(-1), s=0.02, alpha=1,
-                #             color='red',  label='model uncertainty')
-                # plt.plot(y_test, color = 'green', label='true value')
-                # plt.plot(np.mean(model_mean, 0), color='yellow', label='predicted value')
-                #
-                # plt.xlim([0, pred.shape[1]])
-                # plt.ylim([-10,50])
-                # plt.legend()
-                # plt.show()
+                logging.log(prediction, y_test, model, stddev, save=True, save_weights=False, col_names=data.columns)
 
-                if plot_train: fig2[fold_num - 1].plot_conf(fold_num, model.train_prediction, y_train, model.train_stddev,
+                if plot_train:
+                    fig2[fold_num - 1].plot_conf(fold_num, model.train_prediction, y_train, model.train_stddev,
                                                  split=False)
-                fig.plot_conf(fold_num, prediction, y_test, stddev)
 
-                if args.Logging:
-                    logging.log(prediction, y_test, model, stddev, save=True, save_weights=False, col_names = data.columns)
+                fig.plot_conf(fold_num, prediction, y_test, stddev)
+                loss_fig.plot_loss(fold_num, logging.model_history)
+
 if args.Logging:
     logging.save(last=True)
     fig.save(logging.save_directory + '/predictions.png')
-
-try:
-    np.save(logging.save_directory + 'likelihood_loss.npy', np.asarray(lik_loss))
-    np.save(logging.save_directory + 'KL_divergence_loss.npy', np.asarray(kl_loss))
-except:
-    pass
+    loss_fig.save(logging.save_directory + '/loss.png')
 
 fig.show()
-# for i in range(4):
-#     fig2[i].show()
-
-for i in range(4):
-    plt.subplot(2,2,i+1)
-    plt.plot(np.asarray(lik_loss)[i,:], label='likelihood')
-    plt.plot(np.asarray(kl_loss)[i, :], label='Kl divergence')
-    plt.ylim(0,50)
-    plt.ylabel('loss')
-    plt.xlabel('epoch')
-    plt.title(str(2013+i)+'/' + str(14+i))
-    plt.legend()
-plt.show()
+loss_fig.show()

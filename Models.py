@@ -797,10 +797,13 @@ class GRU_Combined_Uncertainty:
             tf.keras.layers.Input(shape=[x_train.shape[1], x_train.shape[2]]),
             tf.keras.layers.GRU(x_train.shape[1], activation='relu', return_sequences=True,
                                     kernel_regularizer=self.regulariser),
+
             tf.keras.layers.GRU(40, activation='relu', return_sequences=True,
                                      kernel_regularizer=self.regulariser),
+
             tf.keras.layers.GRU(20, activation='linear', return_sequences=False,
                                    kernel_regularizer=self.regulariser),
+
             tfp.layers.DenseVariational(units=20,
                                         make_posterior_fn=posterior_mean_field,
                                         make_prior_fn=prior_trainable,
@@ -810,6 +813,7 @@ class GRU_Combined_Uncertainty:
                                         make_posterior_fn=posterior_mean_field,
                                         make_prior_fn=prior_trainable,
                                         kl_weight=kl_loss_weight),
+
             tfp.layers.DistributionLambda(
                 lambda t: tfd.Normal(loc=t[..., :1],
                                      # scale=1)),
@@ -831,11 +835,13 @@ class GRU_Combined_Uncertainty:
         return x_train, y_train, x_test, y_test
 
     def fit(self, x_train, y_train,  epochs, batch_size, plot=False):
-        self.lik_loss = []
-        self.kl_loss = []
-        self.loss = []
-
         if plot:
+            self.log = {'Likelihood_Loss': [],
+                        'KL_Loss':[],
+                        'Loss':[],
+                        'mae':[],
+                        'mse':[]}
+
             for _ in tqdm.tqdm(range(epochs)):
                 self.model.fit(x_train, y_train,
                           epochs=1,
@@ -843,22 +849,39 @@ class GRU_Combined_Uncertainty:
                           verbose=0)
 
                 KL = 0
+                activation = x_train
                 for layer in self.model.layers:
+                    activation = layer(activation)
+
                     try:
-                        KL = KL + self.kl_loss_weight * np.sum(tfp.distributions.kl_divergence(
-                            layer._posterior(np.ones(layer.input_shape[1])),
-                            layer._prior(np.ones(layer.input_shape[1]))).numpy())
+                        KL = KL + np.sum(tfp.distributions.kl_divergence(
+                            layer._posterior(activation),
+                            layer._prior(activation)).numpy())
                     except:
                         pass
 
-                self.loss.append(self.model.history.history['loss'])
-                self.lik_loss.append(self.model.history.history['loss'])
-                self.kl_loss.append(KL)
+
+                Likelihood = np.mean(self.model.loss(y_train, activation))
+
+                self.log['Likelihood_Loss'].append(Likelihood)
+                self.log['KL_Loss'].append(KL)
+                self.log['Loss'].append(self.model.history.history['loss'])
+                self.log['mae'].append(self.model.history.history['mae'])
+                self.log['mse'].append(self.model.history.history['mse'])
+
         else:
+            self.log = {'Loss':[],
+                        'mae':[],
+                        'mse':[]}
+
             self.model.fit(x_train, y_train,
                            epochs = epochs,
                            batch_size=batch_size,
                            verbose = 1)
+
+            self.log['Loss'].append(self.model.history.history['loss'])
+            self.log['mae'].append(self.model.history.history['mae'])
+            self.log['mse'].append(self.model.history.history['mse'])
 
     def plot(self, axes=1):
         fig, ax1 = plt.subplots()
@@ -869,7 +892,6 @@ class GRU_Combined_Uncertainty:
         ax1.plot(self.lik_loss, label='likelihood', color=color)
         ax1.tick_params(axis='y', labelcolor=color)
         ax1.set_ylabel('likelihood', color=color)
-        # ax1.set_ylim((0,100))
 
         if axes == 2:
             ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
@@ -888,26 +910,6 @@ class GRU_Combined_Uncertainty:
 
         plt.legend()
         plt.show()
-
-    def plot1(self):
-        self.color1 = 'tab:red'
-        self.color2 = 'tab:blue'
-        plt.plot(self.lik_loss, label='likelihood loss', color=self.color1)
-        plt.plot(self.kl_loss, label='KL loss', color=self.color2)
-        plt.legend
-        plt.ylim((-100, 200))
-        plt.legend()
-        plt.show()
-
-    # def fit(self, x_train, y_train, epochs, batch_size, plot=False):
-    #
-    #
-    #
-    #     self.model.fit(x_train, y_train,
-    #                    epochs=epochs,
-    #                    batch_size=batch_size)
-    #     if plot:
-    #         self.train_prediction, self.train_stddev = self.predict(x_train)
 
     def predict(self, x_test):
         num_poll = 50

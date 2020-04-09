@@ -89,34 +89,6 @@ class plotter:
 
         return y_pred
 
-    def plot_df(self, logging):
-        plt.figure(self.number)
-        pred = logging.test_predictions
-        cols = pred.columns
-
-        for i in range(4):
-            plt.subplot(2, 2, i + 1)
-            plt.grid(b=True, which='major', color='#666666', linestyle='-')
-            plt.minorticks_on()
-            plt.grid(b=True, which='minor', color='#999999', linestyle='-', alpha=0.2)
-            plt.plot(logging.test_ground_truth[cols[0]].values)
-
-        for col in cols:
-            if '14/15' in col:
-                plt.subplot(2, 2, 1)
-                plt.plot(pred[col].values)
-            if '15/16' in col:
-                plt.subplot(2, 2, 2)
-                plt.plot(pred[col].values)
-            if '16/17' in col:
-                plt.subplot(2, 2, 3)
-                plt.plot(pred[col].values)
-            if '17/18' in col:
-                plt.subplot(2, 2, 4)
-                plt.plot(pred[col].values)
-
-        plt.show()
-
     def plot_synthetic(self, x_train, y_train, model, tfd = False):
         if tfd:
             yhats = [model(x_train).mean().numpy() for i in range(25)]
@@ -138,6 +110,22 @@ class plotter:
 
         plt.show()
 
+    def plot_loss(self, fold_num, history):
+        plt.figure(self.number)
+        plt.subplot(2,2,fold_num)
+        if 'Likelihood_Loss' in history.columns:
+            plt.plot(history.Likelihood_Loss, '-.', color = 'red', label = 'likelihood loss')
+            plt.plot(history.KL_Loss, '-', color = 'blue', label = 'KL loss')
+            plt.legend()
+        else:
+            plt.plot(history.Loss, '-', color = 'blue', label = 'KL loss')
+        plt.xlabel('Epoch', fontsize=8)
+        plt.ylabel('Loss', fontsize=8)
+        plt.grid(b=True, which='major', color='#666666', linestyle='-')
+        plt.minorticks_on()
+        plt.grid(b=True, which='minor', color='#999999', linestyle='-', alpha=0.2)
+
+
     def save(self, name):
 
         plt.figure(self.number)
@@ -147,3 +135,21 @@ class plotter:
         plt.figure(self.number)
         plt.show()
 
+# plt.scatter(np.tile(np.linspace(0, pred.shape[1]-1, pred.shape[1]), (1, pred.shape[0])), pred.reshape(-1), s=0.02, alpha=0.1, color='blue', label='data uncertainty')
+# plt.scatter(np.tile(np.linspace(0, pred.shape[1]-1, pred.shape[1]), (1, model_mean.shape[0])), model_mean.reshape(-1), s=0.02, alpha=1,
+#             color='red',  label='model uncertainty')
+# plt.plot(y_test, color = 'green', label='true value')
+# plt.plot(np.mean(model_mean, 0), color='yellow', label='predicted value')
+#
+# plt.xlim([0, pred.shape[1]])
+# plt.ylim([-10,50])
+# plt.legend()
+# plt.show()
+
+# random_dataset = np.random.rand(np.product(x_test.shape)).reshape(x_test.shape)
+# y_pred, y_std, pred, model_mean = model.predict(random_dataset)
+# plt.plot(np.linspace(1, y_pred.shape[0], y_pred.shape[0]), y_pred, color="red", label="prediction")
+# plt.fill_between(np.linspace(1, y_pred.shape[0], y_pred.shape[0]), np.squeeze(y_pred - y_std), np.squeeze(y_pred + y_std),
+#                          color="pink", alpha=0.5, label="predict std")
+#
+# plt.show()

@@ -65,7 +65,5 @@ for i in range(1,5):
     plt.ylabel('ILI rate', fontsize = 8)
     plt.legend(fontsize = 8)
 
-
-
 plt.savefig('comparison.png')
 plt.show()
