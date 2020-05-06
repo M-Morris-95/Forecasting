@@ -24,7 +24,7 @@ model = tf.keras.Sequential([
     tf.keras.layers.Dense(2),
     tfp.layers.DistributionLambda(
         lambda t: tfd.Normal(loc=t[..., :1],
-                             scale=1e-3 + tf.math.abs(t[..., 1:]))),
+                             scale=tf.math.abs(t[..., 1:]))),
 ])
 
 model.compile(optimizer=tf.keras.optimizers.Adam(),
