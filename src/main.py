@@ -23,7 +23,7 @@ plot_train=False
 for Model in models:
     for look_ahead in look_aheads:
         for k in range(max_k):
-            for fold_num in range(1,2):
+            for fold_num in range(1,5):
                 print(k, fold_num)
                 tf.random.set_seed(0)
                 logging.update_details(fold_num=fold_num, k=k, model=Model, look_ahead=look_ahead)
@@ -39,8 +39,8 @@ for Model in models:
                 if Model == 'TRANSFORMER': model = Transformer(x_train, y_train)
                 if Model == 'GRU_DATA_UNCERTAINTY': model = GRU_Data_Uncertainty(x_train, y_train)
                 if Model == 'LINEAR_DATA_UNCERTAINTY': model = Linear_Data_Uncertainty(x_train, y_train)
-                if Model == 'LINEAR_MODEL_UNCERTAINTY': model = Linear_Model_Uncertainty(x_train, y_train)
-                if Model == 'GRU_MODEL_UNCERTAINTY': model = GRU_Model_Uncertainty(x_train, y_train)
+                if Model == 'LINEAR_MODEL_UNCERTAINTY': model = Linear_Model_Uncertainty(x_train, y_train, args=args)
+                if Model == 'GRU_MODEL_UNCERTAINTY': model = GRU_Model_Uncertainty(x_train, y_train, args=args)
                 if Model == 'LINEAR_COMBINED_UNCERTAINTY': model = Linear_Combined_Uncertainty(x_train, y_train, args = args)
                 if Model == 'GRU_COMBINED_UNCERTAINTY': model = GRU_Combined_Uncertainty(x_train, y_train, args = args)
 
@@ -57,7 +57,7 @@ for Model in models:
                                                  split=False)
 
                 fig.plot_conf(fold_num, prediction, y_test, stddev)
-                loss_fig.plot_loss(fold_num, logging.model_history)
+                # loss_fig.plot_loss(fold_num, logging.model_history)
 
 if args.Logging:
     logging.save(last=True)

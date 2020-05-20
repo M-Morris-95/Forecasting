@@ -22,6 +22,15 @@ for i in range(1461):
     if (simons_forecasts[0][i][-5:] == '08-24'):
         idx.append(i)
 
+def rmse(error):
+    return np.sqrt(np.mean(np.square(error)))
+
+def mse(error):
+    return np.mean(np.square(error))
+
+def mae(error):
+    return np.mean(np.abs(error))
+
 temp = np.asarray(simons_forecasts[1])
 
 
@@ -44,6 +53,9 @@ truth = pd.read_csv(logging_root+comp2+truth_name)
 
 plt.figure(1, figsize = [9,7])
 formatter = DateFormatter('%b')
+
+errors = pd.DataFrame(index=['mae','mse','rmse', 'Corr'])
+
 for i in range(1,5):
     plt.subplot(2,2,i)
 
@@ -64,6 +76,15 @@ for i in range(1,5):
     plt.title(str(2013+i) + '/' + str(14+i), fontsize = 8)
     plt.ylabel('ILI rate', fontsize = 8)
     plt.legend(fontsize = 8)
+
+    simons_error = truth.iloc[:,i] - forecasts[i - 1, :]
+    my_error = truth.iloc[:,i] - mean.iloc[:, i]
+
+
+    errors['GRU-MI-MO-' + str(2013 + i) + '/' + str(14 + i)] = [mae(simons_error), mse(simons_error),
+                                                                rmse(simons_error), np.corrcoef(truth.iloc[:-1,i] , forecasts[i - 1, :-1])[0,1]]
+    errors['GRU-VI-' + str(2013 + i) + '/' + str(14 + i)] = [mae(my_error), mse(my_error),
+                                                                rmse(my_error), np.corrcoef(truth.iloc[:-1,i] , mean.iloc[:-1, i])[0,1]]
 
 plt.savefig('comparison.png')
 plt.show()

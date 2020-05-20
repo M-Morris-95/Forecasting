@@ -416,17 +416,24 @@ class Linear_Data_Uncertainty:
         return x_train, y_train, x_test, y_test
 
     def fit(self, x_train, y_train, epochs, batch_size, plot=False):
+        self.log = {'Loss': [],
+                    'mae': [],
+                    'mse': []}
         self.model.fit(x_train, y_train,
                        epochs=epochs,
                        batch_size=batch_size)
+        self.log['Loss'].append(self.model.history.history['loss'])
+        self.log['mae'].append(self.model.history.history['mae'])
+        self.log['mse'].append(self.model.history.history['mse'])
         if plot:
-            self.train_prediction, self.train_stddev = self.predict(x_train)
+
+            self.train_prediction, self.train_stddev, _, _ = self.predict(x_train)
 
     def predict(self, x_test):
         yhat = self.model(x_test)
         prediction = yhat.mean()
         stddev = yhat.stddev()
-        return prediction, stddev
+        return prediction, stddev, None, None
 
 class GRU_Data_Uncertainty:
     def __init__(self, x_train, y_train, regulariser=False, optimiser=False, loss=False):
@@ -489,7 +496,7 @@ class GRU_Data_Uncertainty:
         return prediction, stddev
 
 class GRU_Model_Uncertainty:
-    def __init__(self, x_train, y_train, regulariser=False, optimiser=False, loss=False):
+    def __init__(self, x_train, y_train, regulariser=False, optimiser=False, loss=False, args=None):
         y_train = y_train[:, -1]
         tfd = tfp.distributions
         self.train_prediction = None
@@ -506,36 +513,40 @@ class GRU_Model_Uncertainty:
 
         tfd = tfp.distributions
 
-        # Specify the surrogate posterior over `keras.layers.Dense` `kernel` and `bias`.
         def posterior_mean_field(kernel_size, bias_size=0, dtype=None):
             n = kernel_size + bias_size
-            c = np.log(np.expm1(1.))
+            c = np.log(np.expm1(0.5))
             return tf.keras.Sequential([
                 tfp.layers.VariableLayer(2 * n, dtype=dtype),
-                tfp.layers.DistributionLambda(lambda t: tfd.Independent(  # pylint: disable=g-long-lambda
-                    tfd.Normal(loc=1 * t[..., :n],
-                               scale=1e-5 + tf.nn.softplus(c + 1 * t[..., n:])),
-                    reinterpreted_batch_ndims=1)),
+                tfp.layers.DistributionLambda(lambda t: tfd.Independent(
+                    tfd.Normal(loc=t[..., :n],
+                               scale=1e-5 + tf.nn.softplus(c+t[..., n:])),
+                               # scale=1e-5 + 0.05*tf.nn.softplus(10*t[..., n:])),
+                    reinterpreted_batch_ndims=None))
             ])
 
         def prior_trainable(kernel_size, bias_size=0, dtype=None):
             n = kernel_size + bias_size
+
             return tf.keras.Sequential([
                 tfp.layers.VariableLayer(n, dtype=dtype),
-                tfp.layers.DistributionLambda(
-                    lambda t: tfd.Independent(tfd.Normal(loc=1 * t, scale=1),
-                                              # pylint: disable=g-long-lambda
-                                              reinterpreted_batch_ndims=1)),
+                tfp.layers.DistributionLambda(lambda t: tfd.Independent(
+                    tfd.Normal(loc=t, scale=2.5),
+                    # tfd.Normal(loc=t, scale=2.5),
+                    reinterpreted_batch_ndims=None))
             ])
+
+        self.kl_loss_weight = 1.0 / (x_train.shape[0] / args.Batch_Size)
+        # self.kl_loss_weight = 1.0
 
         ili_input = tf.keras.layers.Input(shape=[x_train.shape[1], x_train.shape[2]])
         GRU1 = tf.keras.layers.GRU(x_train.shape[1], activation='relu', return_sequences=True)(ili_input)
-        GRU2 = tf.keras.layers.GRU(int((x_train.shape[2] - 1)), activation='relu', return_sequences=True)(
-            GRU1)
-        GRU3 = tf.keras.layers.GRU(int(0.75 * (x_train.shape[2] - 1)), activation='relu',
-                                   return_sequences=False)(GRU2)
+        GRU2 = tf.keras.layers.GRU(int((x_train.shape[2] - 1)), activation='relu', return_sequences=True)(GRU1)
+        GRU3 = tf.keras.layers.GRU(int(0.5 * (x_train.shape[2] - 1)), activation='relu', return_sequences=False)(GRU2)
         DenseVariational = tfp.layers.DenseVariational(1, make_posterior_fn=posterior_mean_field,
-                                                       make_prior_fn=prior_trainable)(GRU3)
+                                                       make_prior_fn=prior_trainable,
+                                                       kl_weight=self.kl_loss_weight
+                                                       )(GRU3)
         DistributionLambda = tfp.layers.DistributionLambda(lambda t: tfd.Normal(loc=t, scale=1))(
             DenseVariational)
 
@@ -556,7 +567,7 @@ class GRU_Model_Uncertainty:
                        epochs=epochs,
                        batch_size=batch_size)
         if plot:
-            self.train_prediction, self.train_stddev = self.predict(x_train)
+            self.train_prediction, self.train_stddev, _, _ = self.predict(x_train)
 
     def predict(self, x_test):
         yhats = [self.model(x_test).mean() for _ in range(25)]
@@ -568,10 +579,10 @@ class GRU_Model_Uncertainty:
 
         stddev = np.std(means, 0)
         prediction = np.mean(means, 0)
-        return prediction, stddev
+        return prediction, stddev, None, None
 
 class Linear_Model_Uncertainty:
-    def __init__(self, x_train, y_train, regulariser=False, optimiser=False, loss=False):
+    def __init__(self, x_train, y_train, regulariser=False, optimiser=False, loss=False, args = None):
         x_train = x_train.reshape((x_train.shape[0], -1))
 
         tfd = tfp.distributions
@@ -590,19 +601,18 @@ class Linear_Model_Uncertainty:
         tfd = tfp.distributions
 
         # Specify the surrogate posterior over `keras.layers.Dense` `kernel` and `bias`.
+
         def posterior_mean_field(kernel_size, bias_size=0, dtype=None):
             n = kernel_size + bias_size
-
+            c = np.log(np.expm1(0.2))
             return tf.keras.Sequential([
                 tfp.layers.VariableLayer(2 * n, dtype=dtype),
                 tfp.layers.DistributionLambda(lambda t: tfd.Independent(
                     tfd.Normal(loc=t[..., :n],
-                               scale=1e-5 + 0.2 * tf.nn.softplus(t[..., n:])),
+                               # scale=1e-5 + tf.nn.softplus(c+t[..., n:])),
+                               scale=1e-5 + 0.1*tf.nn.softplus(10*t[..., n:])),
                     reinterpreted_batch_ndims=None))
             ])
-            '''reinterpreted_batch_ndims: Scalar, integer number of rightmost batch dims which will 
-            be regarded as event dims. When None all but the first batch axis (batch axis 0) will be 
-            transferred to event dimensions (analogous to tf.layers.flatten).'''
 
         def prior_trainable(kernel_size, bias_size=0, dtype=None):
             n = kernel_size + bias_size
@@ -610,16 +620,16 @@ class Linear_Model_Uncertainty:
             return tf.keras.Sequential([
                 tfp.layers.VariableLayer(n, dtype=dtype),
                 tfp.layers.DistributionLambda(lambda t: tfd.Independent(
-                    tfd.Normal(loc=t, scale=2.5),
+                    tfd.Normal(loc=t, scale=1),
+                    # tfd.Normal(loc=t, scale=2.5),
                     reinterpreted_batch_ndims=None))
             ])
 
-        Input = tf.keras.layers.Input(shape=x_train.shape[1])
+        self.kl_loss_weight = 1.0 / (x_train.shape[0] / args.Batch_Size)
 
-        # Dense = tf.keras.layers.Dense(10)(Input)
-        DenseVariational = tfp.layers.DenseVariational(1, posterior_mean_field, prior_trainable)(Input)
-        DistributionLambda = tfp.layers.DistributionLambda(lambda t: tfd.Normal(loc=t, scale=1))(
-            DenseVariational)
+        Input = tf.keras.layers.Input(shape=x_train.shape[1])
+        DenseVariational = tfp.layers.DenseVariational(2, posterior_mean_field, prior_trainable, kl_weight=self.kl_loss_weight)(Input)
+        DistributionLambda = tfp.layers.DistributionLambda(lambda t: tfd.Normal(loc=t, scale=1))(DenseVariational)
 
         self.model = tf.keras.models.Model(inputs=Input, outputs=DistributionLambda)
 
@@ -635,11 +645,37 @@ class Linear_Model_Uncertainty:
         return x_train, y_train, x_test, y_test
 
     def fit(self, x_train, y_train, epochs, batch_size, plot=False):
-        self.model.fit(x_train, y_train,
-                       epochs=epochs,
-                       batch_size=batch_size)
+        self.log = {'Loss': [],
+                    'mae': [],
+                    'mse': [],
+                    'KL':[]}
+        for epoch in range(epochs):
+            print(epoch)
+            self.model.fit(x_train, y_train,
+                           epochs=1,
+                           batch_size=batch_size,
+                           verbose = 0)
+
+
+            activation = x_train
+            KL = 0
+            for layer in self.model.layers:
+                try:
+                    KL = KL + self.kl_loss_weight*np.sum(tfp.distributions.kl_divergence(
+                        layer._posterior(activation),
+                        layer._prior(activation)).numpy())
+                except:
+                    pass
+                activation = layer(activation)
+            self.log['KL'].append(KL)
+
+
+            self.log['Loss'].append(self.model.history.history['loss'][-1])
+            self.log['mae'].append(self.model.history.history['mae'][-1])
+            self.log['mse'].append(self.model.history.history['mse'][-1])
+
         if plot:
-            self.train_prediction, self.train_stddev = self.predict(x_train)
+            self.train_prediction, self.train_stddev,_,_ = self.predict(x_train)
 
     def predict(self, x_test):
         yhats = [self.model(x_test).mean() for _ in range(25)]
@@ -651,12 +687,10 @@ class Linear_Model_Uncertainty:
 
         stddev = np.std(means, 0)
         prediction = np.mean(means, 0)
-        return prediction, stddev
+        return prediction, stddev, None, None
 
 class Linear_Combined_Uncertainty:
-    def __init__(self, x_train, y_train, optimiser=False, loss=False, args = None):
-        regulariser = args.Regulariser
-        kl_loss_weight = 1.0 / (x_train.shape[0] / args.Batch_Size)
+    def __init__(self, x_train, y_train, regulariser=False, optimiser=False, loss=False, args=None):
         x_train = x_train.reshape((x_train.shape[0], -1))
 
         tfd = tfp.distributions
@@ -675,19 +709,18 @@ class Linear_Combined_Uncertainty:
         tfd = tfp.distributions
 
         # Specify the surrogate posterior over `keras.layers.Dense` `kernel` and `bias`.
+
         def posterior_mean_field(kernel_size, bias_size=0, dtype=None):
             n = kernel_size + bias_size
-
+            c = np.log(np.expm1(0.5))
             return tf.keras.Sequential([
                 tfp.layers.VariableLayer(2 * n, dtype=dtype),
                 tfp.layers.DistributionLambda(lambda t: tfd.Independent(
                     tfd.Normal(loc=t[..., :n],
-                               scale=1e-5 + 0.2 * tf.nn.softplus(t[..., n:])),
+                               # scale=1e-5 + tf.nn.softplus(c+t[..., n:])),
+                               scale=1e-5 + 0.1*tf.nn.softplus(10*t[..., n:])),
                     reinterpreted_batch_ndims=None))
             ])
-            '''reinterpreted_batch_ndims: Scalar, integer number of rightmost batch dims which will 
-            be regarded as event dims. When None all but the first batch axis (batch axis 0) will be 
-            transferred to event dimensions (analogous to tf.layers.flatten).'''
 
         def prior_trainable(kernel_size, bias_size=0, dtype=None):
             n = kernel_size + bias_size
@@ -695,32 +728,24 @@ class Linear_Combined_Uncertainty:
             return tf.keras.Sequential([
                 tfp.layers.VariableLayer(n, dtype=dtype),
                 tfp.layers.DistributionLambda(lambda t: tfd.Independent(
-                    tfd.Normal(loc=t, scale=1),
+                    tfd.Normal(loc=t, scale=0.5),
+                    # tfd.Normal(loc=t, scale=2.5),
                     reinterpreted_batch_ndims=None))
             ])
 
-        c = np.log(np.expm1(0.1))
-        self.model = tf.keras.Sequential([
-            tf.keras.layers.Input(x_train.shape[1]),
-            # tfp.layers.DenseVariational(units=20,
-            #                             make_posterior_fn=posterior_mean_field,
-            #                             make_prior_fn=prior_trainable,
-            #                             kl_weight=kl_loss_weight,
-            #                             activation='relu'),
-            # tfp.layers.DenseVariational(units=20,
-            #                             make_posterior_fn=posterior_mean_field,
-            #                             make_prior_fn=prior_trainable,
-            #                             kl_weight=kl_loss_weight,
-            #                             activation='relu'),
-            tfp.layers.DenseVariational(units=2,
-                                        make_posterior_fn=posterior_mean_field,
-                                        make_prior_fn=prior_trainable,
-                                        kl_weight=kl_loss_weight),
-            tfp.layers.DistributionLambda(
-                lambda t: tfd.Normal(loc=t[..., :1],
-                                     # scale=1)),
-                                     scale=1e-3 + tf.math.softplus(0.01*t[..., 1:]))),
-        ])
+        self.kl_loss_weight = 1 / (x_train.shape[0] / args.Batch_Size)
+
+        Input = tf.keras.layers.Input(shape=x_train.shape[1])
+        DenseVariational = tfp.layers.DenseVariational(32, posterior_mean_field, prior_trainable,
+                                                       kl_weight=self.kl_loss_weight, activation='relu')(Input)
+        DenseVariational = tfp.layers.DenseVariational(2, posterior_mean_field, prior_trainable,
+                                                       kl_weight=self.kl_loss_weight)(DenseVariational)
+        DistributionLambda =  tfp.layers.DistributionLambda(
+            lambda t: tfd.Normal(loc=t[..., :1],
+                                 scale=1e-5 + tf.nn.softplus(np.log(np.expm1(1))+0*t[:, 1:])))(DenseVariational)
+                                 # scale=1e-5 + 0.01*tf.math.softplus(5 * t[..., 1:])))(DenseVariational)
+
+        self.model = tf.keras.models.Model(inputs=Input, outputs=DistributionLambda)
 
         self.model.compile(optimizer=optimiser,
                            loss=loss,
@@ -731,15 +756,39 @@ class Linear_Combined_Uncertainty:
         x_test = x_test.reshape((x_test.shape[0], -1))
         y_test = y_test[:, -1]
         y_train = y_train[:, -1]
-
         return x_train, y_train, x_test, y_test
 
     def fit(self, x_train, y_train, epochs, batch_size, plot=False):
-        self.model.fit(x_train, y_train,
-                       epochs=epochs,
-                       batch_size=batch_size)
+        self.log = {'Loss': [],
+                    'mae': [],
+                    'mse': [],
+                    'KL': []}
+        self.predict(x_train)
+        for epoch in range(epochs):
+            print(epoch)
+            self.model.fit(x_train, y_train,
+                           epochs=1,
+                           batch_size=batch_size,
+                           verbose=0)
+
+            activation = x_train
+            KL = 0
+            for layer in self.model.layers:
+                try:
+                    KL = KL + self.kl_loss_weight * np.sum(tfp.distributions.kl_divergence(
+                        layer._posterior(activation),
+                        layer._prior(activation)).numpy())
+                except:
+                    pass
+                activation = layer(activation)
+            self.log['KL'].append(KL)
+
+            self.log['Loss'].append(self.model.history.history['loss'][-1])
+            self.log['mae'].append(self.model.history.history['mae'][-1])
+            self.log['mse'].append(self.model.history.history['mse'][-1])
+
         if plot:
-            self.train_prediction, self.train_stddev = self.predict(x_train)
+            self.train_prediction, self.train_stddev, _, _ = self.predict(x_train)
 
     def predict(self, x_test):
         num_poll = 50
@@ -758,7 +807,8 @@ class Linear_Combined_Uncertainty:
         stddev = np.std(pred, 0)
         prediction = np.mean(pred, 0)
 
-
+        stddev = np.std(model_mean, 0)
+        prediction = np.mean(model_mean, 0)
 
         return prediction, stddev, pred, model_mean
 

@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
+import pandas as pd
 import tensorflow as tf
 import tensorflow_probability as tfp
 import tqdm
@@ -30,9 +30,11 @@ class Train:
 
             KL = 0
             for layer in self.model.layers:
-                KL = KL + kl_loss_weight*tfp.distributions.kl_divergence(layer._posterior(np.ones(layer.input_shape[1])),
+                try:
+                    KL = KL + kl_loss_weight*tfp.distributions.kl_divergence(layer._posterior(np.ones(layer.input_shape[1])),
                                                 layer._prior(np.ones(layer.input_shape[1]))).numpy()
-
+                except:
+                    pass
 
             self.loss.append(self.model.history.history['loss'])
             self.lik_loss.append(self.model.history.history['loss'])
@@ -96,7 +98,6 @@ def posterior_mean_field(kernel_size, bias_size=0, dtype=None):
             reinterpreted_batch_ndims=1)),
     ])
 
-
 # Specify the prior over `keras.layers.Dense` `kernel` and `bias`.
 def prior_trainable(kernel_size, bias_size=0, dtype=None):
     n = kernel_size + bias_size
@@ -107,26 +108,13 @@ def prior_trainable(kernel_size, bias_size=0, dtype=None):
             reinterpreted_batch_ndims=1)),
     ])
 
-def f(x, sigma, scale):
-	epsilon = np.random.randn(*x.shape) * sigma
-	return  scale * np.sin(2 * np.pi * (x)) + epsilon
+train_size = 256
 
-train_size = 1000000
-noise = 0.35
-scale = 1.0
+data = pd.read_csv('training_data.csv')
+X = data.x_train
+y = data.y_train
 
-X = np.linspace(-0.5, 0.5, train_size).reshape(-1, 1)
-
-k = [0]
-for i in(np.random.rand(train_size-1)):
-    k.append(k[-1]+i)
-k = k/max(k) - 0.5
-X = np.asarray(k)
-
-y = f(X, sigma=noise, scale = scale)
-y_true = f(X, sigma=0.0, scale = scale)
-
-batch_size = train_size
+batch_size = 32
 num_batches = train_size / batch_size
 kl_loss_weight = 1.0 / num_batches
 
@@ -143,45 +131,20 @@ model = tf.keras.Sequential([
                                 make_prior_fn=prior_trainable,
                                 kl_weight=kl_loss_weight,
                                 activation='relu'),
-    tfp.layers.DenseVariational(units=1,
+    tfp.layers.DenseVariational(units=2,
                                 make_posterior_fn=posterior_mean_field,
                                 make_prior_fn=prior_trainable,
-                                kl_weight=kl_loss_weight)
+                                kl_weight=kl_loss_weight),
+    tfp.layers.DistributionLambda(
+        lambda t: tfd.Normal(loc=t[..., :1],
+                             scale=tf.math.abs(t[..., 1:]))),
 ])
 
 model.compile(loss=neg_log_likelihood, optimizer=Adam(lr=0.03), metrics=['mse'])
 
-trainer = Train(model, 15, 32)
+trainer = Train(model, 200, 16)
 
 model = trainer.fit(X, y)
-# trainer.plot1()
-
-
-
-# predictions = []
-# for i in range(100):
-#     predictions.append(model.predict(X))
-#
-# predictions = np.squeeze(np.asarray(predictions))
-# pred_mean = np.mean(predictions, 0)
-# pred_std = np.std(predictions, 0)
-#
-# plt.scatter(X, y, marker='+', label='Training data')
-#
-# plt.plot(X, pred_mean, 'r-', label='Predicted mean')
-# plt.fill_between(X.ravel(),
-#                  pred_mean + 2 * pred_std,
-#                  pred_mean - 2 * pred_std,
-#                  color='pink',
-#                  alpha=0.5,
-#                  label='Predicted uncertainty')
-#
-# plt.xlabel('Input')
-# plt.ylabel('Output')
-# plt.title('Prediction on Training Set')
-# plt.legend()
-# plt.show()
-
 
 
 
@@ -190,14 +153,20 @@ model = trainer.fit(X, y)
 X_test = np.linspace(-1.5, 1.5, 100).reshape(-1, 1)
 
 predictions = []
-for i in range(100):
-    predictions.append(model.predict(X_test))
+means = []
+for i in tqdm.tqdm(range(25)):
+    for i in range(25):
+        means.append(model(X_test).mean())
+        predictions.append(model(X_test).sample())
+
 
 X_test = np.squeeze(X_test)
 predictions = np.squeeze(np.asarray(predictions))
 pred_mean = np.mean(predictions, 0)
 pred_std = np.std(predictions, 0)
 
+means_mean = np.mean(np.squeeze(np.asarray(means)),0)
+means_std = np.std(np.squeeze(np.asarray(means)),0)
 
 plt.scatter(X, y, marker='+', label='Training data')
 
@@ -213,4 +182,57 @@ plt.xlabel('Input')
 plt.ylabel('Output')
 plt.title('Prediction on Test Set')
 plt.legend()
+plt.show()
+
+
+
+plt.figure(1)
+plt.scatter(X,
+            y,
+            marker='+',
+            color='green',
+            label='Training Data Points')
+plt.fill_between(X_test,
+                 pred_mean-2*pred_std,
+                 pred_mean+2*pred_std,
+                 color = 'red',
+                 label = 'confidence interval (2 stddevs)',
+                 alpha = 0.3)
+plt.plot(X_test,
+         pred_mean,
+         color = 'red',
+         label = 'VI Mean Prediction')
+
+plt.fill_between(X_test,
+                 means_mean-2*means_std,
+                 means_mean+2*means_std,
+                 color = 'blue',
+                 label = 'VI confidence interval (2 stddevs)',
+                 alpha = 0.3)
+plt.plot(X_test,
+         means_mean,
+         color = 'blue',
+         label = 'VI Mean Prediction')
+
+plt.plot([-0.5, -0.5], [-2, 2],
+         color = 'black',
+         linestyle = 'dashed',
+         linewidth = 2)
+plt.plot([0.5, 0.5], [-2, 2],
+         color = 'black',
+         linestyle='dashed',
+         linewidth = 2)
+plt.ylim([-2,2])
+plt.xlim([-1.5,1.5])
+plt.text(-1, -1.8, 'out of sample', fontsize=10, horizontalalignment='center')
+plt.text( 1, -1.8, 'out of sample', fontsize=10, horizontalalignment='center')
+plt.text( 0, -1.8, 'training set' , fontsize=10, horizontalalignment='center')
+plt.title('VI Model Confidence Intervals', fontsize = 10)
+plt.xlabel('Input' , fontsize = 10)
+plt.ylabel('Output', fontsize = 10)
+plt.legend(fontsize=8)
+plt.grid(b=True, which='major', color='#666666', linestyle='-')
+plt.minorticks_on()
+plt.grid(b=True, which='minor', color='#999999', linestyle='-', alpha=0.2)
+
 plt.show()
