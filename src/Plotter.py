@@ -48,11 +48,16 @@ class plotter:
                 y_std = y_std[:, -1]
             else:
                 y_std = np.squeeze(y_std)
+        interval_dict = {50: 0.67, 80: 1.282, 85: 1.440, 90: 1.65, 95: 1.96, 99: 2.58, 99.5: 2.807, 99.9: 3.291}
+
+        interval = 90
 
         plt.plot(np.linspace(1, y_pred.shape[0], y_pred.shape[0]), y_pred, color="red", label="prediction")
         plt.plot(np.linspace(1, y_true.shape[0], y_true.shape[0]), y_true, color="blue", label="ground_truth")
-        plt.fill_between(np.linspace(1, y_true.shape[0], y_true.shape[0]), np.squeeze(y_pred - y_std), np.squeeze(y_pred + y_std),
-                         color="pink", alpha=0.5, label="predict std")
+        plt.fill_between(np.linspace(1, y_true.shape[0], y_true.shape[0]),
+                         np.squeeze(y_pred - interval_dict[interval]*y_std),
+                         np.squeeze(y_pred + interval_dict[interval]*y_std),
+                         color="pink", alpha=0.5, label=str(interval)+"% conf")
         plt.xlabel('Day of the Season', fontsize=8)
         plt.ylabel('ILI Rate (Infected/100,000)', fontsize=8)
         plt.legend(fontsize=8)

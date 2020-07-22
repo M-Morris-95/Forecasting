@@ -9,6 +9,7 @@ from tensorflow.keras.optimizers import Adam
 import tensorflow_probability as tfp
 tfd = tfp.distributions
 tf.random.set_seed(0)
+np.random.seed(seed=0)
 
 
 class Train:
@@ -111,106 +112,116 @@ def f(x, sigma, scale):
 	epsilon = np.random.randn(*x.shape) * sigma
 	return  scale * np.sin(2 * np.pi * (x)) + epsilon
 
-train_size = 1000000
-noise = 0.35
-scale = 1.0
+epochs = [800,100]
+for iter, train_size in enumerate([8, 64]):
+    # train_size = 8
+    noise = 0.1
+    scale = 1.0
 
-X = np.linspace(-0.5, 0.5, train_size).reshape(-1, 1)
+    X = np.linspace(-0.5, 0.5, train_size).reshape(-1, 1)
 
-k = [0]
-for i in(np.random.rand(train_size-1)):
-    k.append(k[-1]+i)
-k = k/max(k) - 0.5
-X = np.asarray(k)
+    k = [0]
+    for i in(np.random.rand(train_size-1)):
+        k.append(k[-1]+i)
+    k = k/max(k) - 0.5
+    X = np.asarray(k)
 
-y = f(X, sigma=noise, scale = scale)
-y_true = f(X, sigma=0.0, scale = scale)
+    y = f(X, sigma=noise, scale = scale)
+    y_true = f(X, sigma=0.0, scale = scale)
 
-batch_size = train_size
-num_batches = train_size / batch_size
-kl_loss_weight = 1.0 / num_batches
+    batch_size = 4
+    kl_anneal = 2
+    num_batches = train_size / batch_size
+    kl_loss_weight = kl_anneal / num_batches
 
-# Build model.
-model = tf.keras.Sequential([
-    tf.keras.layers.Input(shape=(1,)),
-    tfp.layers.DenseVariational(units=64,
-                                make_posterior_fn=posterior_mean_field,
-                                make_prior_fn=prior_trainable,
-                                kl_weight=kl_loss_weight,
-                                activation='relu'),
-    tfp.layers.DenseVariational(units=64,
-                                make_posterior_fn=posterior_mean_field,
-                                make_prior_fn=prior_trainable,
-                                kl_weight=kl_loss_weight,
-                                activation='relu'),
-    tfp.layers.DenseVariational(units=1,
-                                make_posterior_fn=posterior_mean_field,
-                                make_prior_fn=prior_trainable,
-                                kl_weight=kl_loss_weight)
-])
+    # Build model.
+    model = tf.keras.Sequential([
+        tf.keras.layers.Input(shape=(1,)),
+        tfp.layers.DenseVariational(units=32,
+                                    make_posterior_fn=posterior_mean_field,
+                                    make_prior_fn=prior_trainable,
+                                    kl_weight=kl_loss_weight,
+                                    activation='relu'),
+        # tfp.layers.DenseVariational(units=8,
+        #                             make_posterior_fn=posterior_mean_field,
+        #                             make_prior_fn=prior_trainable,
+        #                             kl_weight=kl_loss_weight,
+        #                             activation='relu'),
+        tfp.layers.DenseVariational(units=1,
+                                    make_posterior_fn=posterior_mean_field,
+                                    make_prior_fn=prior_trainable,
+                                    kl_weight=kl_loss_weight)
+    ])
 
-model.compile(loss=neg_log_likelihood, optimizer=Adam(lr=0.03), metrics=['mse'])
+    model.compile(loss=neg_log_likelihood, optimizer=Adam(lr=0.03), metrics=['mse'])
 
-trainer = Train(model, 15, 32)
+    trainer = Train(model, epochs=epochs[iter], batch_size=batch_size)
 
-model = trainer.fit(X, y)
-# trainer.plot1()
-
-
-
-# predictions = []
-# for i in range(100):
-#     predictions.append(model.predict(X))
-#
-# predictions = np.squeeze(np.asarray(predictions))
-# pred_mean = np.mean(predictions, 0)
-# pred_std = np.std(predictions, 0)
-#
-# plt.scatter(X, y, marker='+', label='Training data')
-#
-# plt.plot(X, pred_mean, 'r-', label='Predicted mean')
-# plt.fill_between(X.ravel(),
-#                  pred_mean + 2 * pred_std,
-#                  pred_mean - 2 * pred_std,
-#                  color='pink',
-#                  alpha=0.5,
-#                  label='Predicted uncertainty')
-#
-# plt.xlabel('Input')
-# plt.ylabel('Output')
-# plt.title('Prediction on Training Set')
-# plt.legend()
-# plt.show()
+    model = trainer.fit(X, y)
+    # trainer.plot1()
 
 
 
+    # predictions = []
+    # for i in range(100):
+    #     predictions.append(model.predict(X))
+    #
+    # predictions = np.squeeze(np.asarray(predictions))
+    # pred_mean = np.mean(predictions, 0)
+    # pred_std = np.std(predictions, 0)
+    #
+    # plt.scatter(X, y, marker='+', label='Training data')
+    #
+    # plt.plot(X, pred_mean, 'r-', label='Predicted mean')
+    # plt.fill_between(X.ravel(),
+    #                  pred_mean + 2 * pred_std,
+    #                  pred_mean - 2 * pred_std,
+    #                  color='pink',
+    #                  alpha=0.5,
+    #                  label='Predicted uncertainty')
+    #
+    # plt.xlabel('Input')
+    # plt.ylabel('Output')
+    # plt.title('Prediction on Training Set')
+    # plt.legend()
+    # plt.show()
 
 
 
-X_test = np.linspace(-1.5, 1.5, 100).reshape(-1, 1)
-
-predictions = []
-for i in range(100):
-    predictions.append(model.predict(X_test))
-
-X_test = np.squeeze(X_test)
-predictions = np.squeeze(np.asarray(predictions))
-pred_mean = np.mean(predictions, 0)
-pred_std = np.std(predictions, 0)
 
 
-plt.scatter(X, y, marker='+', label='Training data')
 
-plt.plot(X_test, pred_mean, 'r-', label='Predicted mean')
-plt.fill_between(X_test.ravel(),
-                 pred_mean + 2 * pred_std,
-                 pred_mean - 2 * pred_std,
-                 color='pink',
-                 alpha=0.5,
-                 label='Predicted uncertainty')
+    X_test = np.linspace(-1.5, 1.5, 100).reshape(-1, 1)
 
-plt.xlabel('Input')
-plt.ylabel('Output')
-plt.title('Prediction on Test Set')
-plt.legend()
+    predictions = []
+    for i in range(100):
+        predictions.append(model.predict(X_test))
+
+    X_test = np.squeeze(X_test)
+    predictions = np.squeeze(np.asarray(predictions))
+    pred_mean = np.mean(predictions, 0)
+    pred_std = np.std(predictions, 0)
+    legends = ['prediction 8 train points','prediction 64 train points']
+    color = ['blue', 'red', 'cornflowerblue','pink']
+
+    if iter == 1:
+        plt.scatter(X, y,
+                    marker='+',
+                    color = 'black',
+                    label = 'training data')
+    plt.plot(X_test, pred_mean,
+             color=color[iter],
+             label=legends[iter])
+    plt.fill_between(X_test.ravel(),
+                     pred_mean + 2 * pred_std,
+                     pred_mean - 2 * pred_std,
+                     color=color[iter+2],
+                     alpha=0.5)
+    plt.ylim([-2,2])
+
+    plt.xlabel('Input')
+    plt.ylabel('Output')
+    plt.title('Epistemic Uncertainty')
+    plt.legend()
+plt.savefig('aleatoric complex.png')
 plt.show()

@@ -42,15 +42,15 @@ def GetParser():
                         required = False)
 
     parser.add_argument('--DOTY',
-                        type=str,
+                        type=bool,
                         help='use day of the year data?',
-                        default='False',
+                        default=False,
                         required=False)
 
     parser.add_argument('--Weather',
-                        type=str,
+                        type=bool,
                         help='use weather data?',
-                        default='False',
+                        default=False,
                         required=False)
 
     parser.add_argument('--Save_Model',
@@ -64,6 +64,12 @@ def GetParser():
                         type=int,
                         help='number of iterations',
                         default=1,
+                        required=False)
+
+    parser.add_argument('--Num_Queries',
+                        type=int,
+                        help='number of queries to use',
+                        default=0,
                         required=False)
 
     parser.add_argument('--Epochs', '--E',
@@ -100,6 +106,12 @@ def GetParser():
                         type=int,
                         help='how much far ahead should it forcast? 7, 14, 21, All?',
                         default=14,
+                        required=False)
+
+    parser.add_argument('--MIMO',
+                        type=int,
+                        help='do MIMO? How far to look back/forward on forecasr',
+                        default=7,
                         required=False)
 
     parser.add_argument('--Country',

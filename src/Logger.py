@@ -3,6 +3,7 @@ import numpy as np
 import metrics
 import os
 import time
+import tensorflow as tf
 
 class logger:
     def __init__(self, args):
@@ -46,6 +47,7 @@ class logger:
         self.test_ground_truth = pd.DataFrame()
         self.stddev = pd.DataFrame()
         self.cleanup()
+        self.first=True
 
     def get_inputs(self):
         return self.ret_model, self.ret_look_ahead, self.ret_max_k
@@ -75,6 +77,16 @@ class logger:
             epochs_str = ''
 
         self.save_name = model_str + look_ahead_str + fold_str + iter_str + epochs_str
+
+    def log_pred(self, y_pred, y_true, fold, stddev=None):
+        if self.first:
+            self.first = False
+            self.out_of_sample = pd.DataFrame()
+
+        self.out_of_sample['true' + str(fold)] = y_pred
+        self.out_of_sample['pred' + str(fold)] = y_true
+        self.out_of_sample['std'+str(fold)] = stddev
+        self.out_of_sample.to_csv('out_of_sample_pred.csv')
 
     def log(self, y_pred, y_true, model, stddev=None,save=False, save_weights=False, col_names=None):
 
@@ -114,10 +126,10 @@ class logger:
             self.model_history = pd.DataFrame(model.model.history.history)
 
 
-        if save_weights:
-            final_weights = model.weights[0].numpy()[-167:]
-            weights = pd.DataFrame(columns=['weight'],index = np.asarray(col_names), data = np.squeeze(final_weights))
-            weights.to_csv('weights.csv')
+        # if save_weights:
+        #     final_weights = model.weights[0].numpy()[-167:]
+        #     weights = pd.DataFrame(columns=['weight'],index = np.asarray(col_names), data = np.squeeze(final_weights))
+        #     weights.to_csv('weights.csv')
 
         if save:
             self.save(model)
@@ -145,7 +157,13 @@ class logger:
 
         if model is not None:
             if self.save_model:
-                model.model.save(self.save_name.replace('/', '_'), save_format='tf')
+                # model.model.save(self.save_name.replace('/', '_'), save_format='tf')
+                try:
+                    model.model.save(self.save_name.replace('/', '_'), save_format='h5')
+                    model.model.save_weight
+                    # tf.keras.models.save_model(model.model, self.save_name.replace('/', '_') + '.hdf5')
+                except:
+                    pass
             os.chdir(self.save_directory)
 
 

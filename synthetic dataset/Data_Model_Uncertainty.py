@@ -137,7 +137,7 @@ tfp.layers.DistributionLambda(
 
 model.compile(loss=neg_log_likelihood, optimizer=Adam(lr=0.03), metrics=['mse'])
 
-trainer = Train(model, 2500, 32)
+trainer = Train(model, 500, 32)
 
 
 model = trainer.fit(X, y)
